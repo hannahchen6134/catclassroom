@@ -81,10 +81,16 @@ quizCategories.addEventListener('click', event => {
   resetQuizDeck();
 });
 document.querySelector('#quizReveal').addEventListener('click', revealQuiz);
-document.querySelector('#nextQuiz').addEventListener('click', () => {
+function advanceQuiz() {
   quizPosition += 1;
   if (quizPosition >= quizDeck.length) quizDeck = shuffled(quizDeck), quizPosition = 0;
   renderQuiz();
+}
+document.querySelector('#nextQuiz').addEventListener('click', advanceQuiz);
+document.querySelector('#retryQuiz').addEventListener('click', () => {
+  const insertAt = Math.min(quizPosition + 4, quizDeck.length);
+  quizDeck.splice(insertAt, 0, quizDeck[quizPosition]);
+  advanceQuiz();
 });
 resetQuizDeck();
 

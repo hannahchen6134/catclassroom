@@ -9,7 +9,7 @@
   <link rel="icon" href="assets/logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -31,25 +31,28 @@
 
       <section id="numbers" data-view-panel="numbers" data-search-section="必背數字 時間 訂金 疫苗 驅蟲 結紮">
         <div class="section-head"><span>01</span><div><h2>先背 15 個數字</h2><p>接電話、回 LINE 最常用</p></div></div>
-        <div class="number-grid">
-          <article class="number-card orange"><small>營業時間</small><strong>12–19</strong><b>時</b><p>店面一般營業</p></article>
-          <article class="number-card sage"><small>入住</small><strong>15–19</strong><b>時</b><p>最晚 19:00</p></article>
-          <article class="number-card gold"><small>退房</small><strong>12–14</strong><b>時</b><p>最晚 14:00</p></article>
-          <article class="number-card"><small>一般訂金</small><strong>30</strong><b>%</b><p>付訂才保留房間</p></article>
+        <div class="memory-groups">
+          <details class="memory-group time" open>
+            <summary><span>第一組</span><strong>時間線</strong><small>先背 12、15、19</small></summary>
+            <div class="memory-list">
+              <p><span>營業</span><b>12:00–19:00</b></p><p><span>入住</span><b>15:00–19:00</b></p><p><span>退房</span><b>12:00–14:00</b></p>
+            </div>
+            <p class="memory-cue">口訣：中午開門，下午入住，兩點前退房。</p>
+          </details>
+          <details class="memory-group health">
+            <summary><span>第二組</span><strong>健康門檻</strong><small>3 年、1 月、7 日、6 月</small></summary>
+            <div class="memory-list">
+              <p><span>核心疫苗</span><b>3 年內</b></p><p><span>體外驅蟲</span><b>1 個月內</b></p><p><span>疫苗後</span><b>7 天內不入住</b></p><p><span>結紮</span><b>滿 6 個月原則需完成</b></p>
+            </div>
+            <p class="memory-cue">另外先評估：3–6 個月幼貓、15 歲以上高齡貓。</p>
+          </details>
+          <details class="memory-group money">
+            <summary><span>第三組</span><strong>費用與例外</strong><small>30%、10%、6 小時</small></summary>
+            <div class="memory-list">
+              <p><span>一般訂金</span><b>30%</b></p><p><span>安親每小時</span><b>一晚定價 10%</b></p><p><span>不過夜安親</span><b>最低 6 小時</b></p><p><span>噴尿清潔</span><b>2,000 元／間</b></p><p><span>期滿未退房</span><b>24 小時視同棄養</b></p><p><span>老室友</span><b>累計 10 晚，資格 1 年</b></p>
+            </div>
+          </details>
         </div>
-        <details class="more-numbers">
-          <summary>展開其他重要數字</summary>
-          <div class="number-grid">
-          <article class="number-card"><small>安親費／每小時</small><strong>10</strong><b>% 房價</b><p>不過夜最低 6 小時</p></article>
-          <article class="number-card orange"><small>核心疫苗</small><strong>3</strong><b>年內</b><p>施打後 7 日內不入住</p></article>
-          <article class="number-card sage"><small>體外驅蟲</small><strong>1</strong><b>月內</b><p>入住當日查證明</p></article>
-          <article class="number-card gold"><small>結紮門檻</small><strong>6</strong><b>個月</b><p>滿 6 個月原則需結紮</p></article>
-          <article class="number-card"><small>需先評估</small><strong>3–6</strong><b>月</b><p>幼貓；15 歲以上也要評估</p></article>
-          <article class="number-card"><small>噴尿清潔費</small><strong>2,000</strong><b>元／間</b><p>頻繁噴尿、需特殊清潔</p></article>
-          <article class="number-card wide"><small>住宿期滿</small><strong>24</strong><b>小時</b><p>未退房也未告知續住，視同棄養</p></article>
-          <article class="number-card wide sage"><small>老室友資格</small><strong>10</strong><b>晚</b><p>累計住滿 10 晚，資格 1 年</p></article>
-          </div>
-        </details>
       </section>
 
       <section id="rooms" data-view-panel="rooms" data-search-section="房型 經典 陽光 太空 豪華 價格 尺寸 容量 加貓">
@@ -64,7 +67,7 @@
         <article class="quiz-card" id="quizCard">
           <div class="quiz-meta"><span id="quizCategory">全部題庫</span><span id="quizProgress">第 1 題</span></div>
           <button class="quiz-stage" id="quizReveal" type="button"><img id="quizImage" src="assets/room-space.jpg" alt="房型辨認題照片"><span><b id="quizQuestion">這是哪一種小木屋？</b><small>想好後，點這裡看答案</small></span></button>
-          <div class="quiz-answer"><p id="quizAnswer">答案會顯示在這裡。</p><button id="nextQuiz" type="button">下一題 →</button></div>
+          <div class="quiz-answer"><p id="quizAnswer">答案會顯示在這裡。</p><div class="quiz-actions"><button class="retry" id="retryQuiz" type="button">不熟，稍後再考</button><button id="nextQuiz" type="button">記得，下一題 →</button></div></div>
         </article>
       </section>
 
