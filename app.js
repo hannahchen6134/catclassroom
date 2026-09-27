@@ -1,0 +1,112 @@
+const data = window.CATROOMMATE_DATA;
+const formatPrice = (value) => new Intl.NumberFormat('zh-TW').format(value);
+const roomGrid = document.querySelector('#roomGrid');
+
+roomGrid.innerHTML = data.rooms.map((room) => `
+  <article class="room-card" data-room="${room.name}">
+    <div class="room-photo"><img src="${room.image}" alt="${room.name}官方房型照片" loading="lazy"><span class="room-id">${room.id}</span></div>
+    <div class="room-content">
+      <h3>${room.name}</h3>
+      <div class="room-price"><strong>${formatPrice(room.price)}</strong><small>元／晚</small></div>
+      <dl class="room-facts">
+        <div><dt>上限</dt><dd>${room.capacity} 隻</dd></div>
+      </dl>
+      <button class="memory-btn" type="button" aria-expanded="false">看尺寸、加貓與口訣</button>
+    </div><p class="memory-note"><b>加貓：</b>${room.extra}<br><b>尺寸：</b>${room.size}<br><b>特色：</b>${room.feature}<br><b>口訣：</b>${room.memory}</p>
+  </article>`).join('');
+
+roomGrid.addEventListener('click', (event) => {
+  const button = event.target.closest('.memory-btn'); if (!button) return;
+  const card = button.closest('.room-card'); const open = card.classList.toggle('open');
+  button.setAttribute('aria-expanded', open); button.textContent = open ? '收起詳細資料' : '看尺寸、加貓與口訣';
+});
+
+const priceTabs = document.querySelector('#priceTabs');
+const priceBody = document.querySelector('#priceBody');
+function renderPriceTable(name) {
+  priceBody.innerHTML = data.multiRoom[name].map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('');
+  priceTabs.querySelectorAll('button').forEach(button => button.classList.toggle('active', button.dataset.name === name));
+}
+priceTabs.innerHTML = Object.keys(data.multiRoom).map((name, index) => `<button type="button" role="tab" data-name="${name}" aria-selected="${index === 0}">${name.replace('小木屋','')}</button>`).join('');
+priceTabs.addEventListener('click', (event) => { const button = event.target.closest('button'); if (button) renderPriceTable(button.dataset.name); });
+renderPriceTable(Object.keys(data.multiRoom)[0]);
+
+document.querySelector('#cancelBody').innerHTML = data.cancellation.map(row => `<tr><td>${row[0]}</td><td>${row[1]}</td></tr>`).join('');
+document.querySelector('#faqList').innerHTML = data.faq.map(([q,a], i) => `<details class="faq-item"><summary>${String(i+1).padStart(2,'0')}｜${q}</summary><p>${a}</p></details>`).join('');
+
+const roomQuestions = data.rooms.map(room => ({
+  category: '房型', question: '看照片回答：這是哪一種房型？', image: room.image,
+  answer: `${room.name}｜${formatPrice(room.price)} 元／晚｜最多 ${room.capacity} 隻｜${room.extra}｜${room.size}`
+}));
+const quizQuestions = [...roomQuestions, ...data.quizQuestions];
+const quizCategoryNames = ['全部', '房型', '時間費用', '健康入住', '照顧應變', '取消優惠', '春節'];
+const quizCategories = document.querySelector('#quizCategories');
+const quizCard = document.querySelector('#quizCard');
+const quizImage = document.querySelector('#quizImage');
+const quizQuestion = document.querySelector('#quizQuestion');
+const quizAnswer = document.querySelector('#quizAnswer');
+const quizCategory = document.querySelector('#quizCategory');
+const quizProgress = document.querySelector('#quizProgress');
+let activeQuizCategory = '全部';
+let quizDeck = [];
+let quizPosition = 0;
+
+function shuffled(list) {
+  const copy = [...list];
+  for (let i = copy.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+function resetQuizDeck() {
+  const pool = activeQuizCategory === '全部' ? quizQuestions : quizQuestions.filter(item => item.category === activeQuizCategory);
+  quizDeck = shuffled(pool); quizPosition = 0; renderQuiz();
+}
+function renderQuiz() {
+  const item = quizDeck[quizPosition]; if (!item) return;
+  const hasImage = Boolean(item.image);
+  quizCard.classList.remove('revealed'); quizCard.classList.toggle('text-only', !hasImage);
+  quizQuestion.textContent = item.question; quizAnswer.textContent = '答案會顯示在這裡。';
+  quizCategory.textContent = item.category; quizProgress.textContent = `第 ${quizPosition + 1}／${quizDeck.length} 題`;
+  if (hasImage) { quizImage.src = item.image; quizImage.alt = '房型辨認題照片'; } else { quizImage.removeAttribute('src'); quizImage.alt = ''; }
+}
+function revealQuiz(){ quizCard.classList.add('revealed'); quizAnswer.textContent = quizDeck[quizPosition].answer; }
+
+quizCategories.innerHTML = quizCategoryNames.map(name => `<button type="button" data-category="${name}" class="${name === '全部' ? 'active' : ''}">${name}</button>`).join('');
+quizCategories.addEventListener('click', event => {
+  const button = event.target.closest('button'); if (!button) return;
+  activeQuizCategory = button.dataset.category;
+  quizCategories.querySelectorAll('button').forEach(item => item.classList.toggle('active', item === button));
+  resetQuizDeck();
+});
+document.querySelector('#quizReveal').addEventListener('click', revealQuiz);
+document.querySelector('#nextQuiz').addEventListener('click', () => {
+  quizPosition += 1;
+  if (quizPosition >= quizDeck.length) quizDeck = shuffled(quizDeck), quizPosition = 0;
+  renderQuiz();
+});
+resetQuizDeck();
+
+const mobileQuery=window.matchMedia('(max-width: 699px)');
+const viewButtons=[...document.querySelectorAll('.mobile-nav [data-view]')];
+const viewPanels=[...document.querySelectorAll('[data-view-panel]')];
+let activeView='numbers';
+function applyView(){
+  const searching=Boolean(searchInput && normalize(searchInput.value));
+  viewPanels.forEach(panel=>panel.classList.toggle('view-hidden',mobileQuery.matches&&!searching&&panel.dataset.viewPanel!==activeView));
+  viewButtons.forEach(button=>{const active=button.dataset.view===activeView;button.classList.toggle('active',active);button.setAttribute('aria-current',active?'page':'false');});
+}
+viewButtons.forEach(button=>button.addEventListener('click',()=>{activeView=button.dataset.view;applyView();window.scrollTo({top:document.querySelector('main').offsetTop,behavior:'smooth'});}));
+
+const searchInput=document.querySelector('#searchInput'); const clearSearch=document.querySelector('#clearSearch'); const searchStatus=document.querySelector('#searchStatus');
+const searchable=[...document.querySelectorAll('[data-search-section]')];
+function normalize(value){return value.toLowerCase().replace(/\s+/g,'');}
+function runSearch(){
+  const query=normalize(searchInput.value); let count=0;
+  applyView();
+  searchable.forEach(section=>{const match=!query||normalize(section.textContent+' '+section.dataset.searchSection).includes(query);section.classList.toggle('search-hidden',!match);if(match)count++;});
+  searchStatus.textContent=query?(count?`找到 ${count} 個相關區塊；點 × 可回到全部內容。`:'找不到資料，可改搜「疫苗」、「房型」、「春節」或價格。'):'';
+}
+searchInput.addEventListener('input',runSearch); clearSearch.addEventListener('click',()=>{searchInput.value='';runSearch();searchInput.focus();});
+mobileQuery.addEventListener('change',applyView); applyView();
