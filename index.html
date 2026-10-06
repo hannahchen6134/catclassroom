@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261006-sop1">
+  <link rel="stylesheet" href="styles.css?v=20261006-sop2">
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true">
@@ -87,25 +87,31 @@
       <section id="rules" data-view-panel="rules" data-search-section="工作 SOP 值班 時程 清潔 消毒 餵食 鮮食 活動 用藥 備品 入住 退房 參觀 接待 規則 健康 就醫 取消 優惠 春節">
         <div class="section-head"><span>04</span><div><h2>工作 SOP 視覺筆記</h2><p>先看全貌，再展開今天需要的步驟</p></div></div>
 
-        <aside class="privacy-note"><svg class="ui-icon" aria-hidden="true"><use href="#icon-shield"></use></svg><p><strong>公開版安全處理</strong><span>SOP 內的設備密碼與登入資料已全部隱藏；現場請查內部文件。</span></p></aside>
+        <div class="reading-guide" aria-label="這一頁怎麼看">
+          <p><span><svg class="ui-icon" aria-hidden="true"><use href="#icon-eye"></use></svg></span><b>先看圖示</b><small>知道這張卡在做什麼</small></p>
+          <p><span><svg class="ui-icon" aria-hidden="true"><use href="#icon-message"></use></svg></span><b>再記粗體</b><small>先背最重要的一句</small></p>
+          <p><span><svg class="ui-icon" aria-hidden="true"><use href="#icon-door"></use></svg></span><b>需要時展開</b><small>真的要做，再看完整步驟</small></p>
+        </div>
 
         <div class="sop-map" aria-label="值班工作心智圖">
-          <div class="sop-map-center"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg><strong>一個班次</strong><small>先巡、再照護、兩次回報、最後收乾淨</small></div>
+          <div class="sop-map-center"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg><strong>今天上班要顧好 6 件事</strong><small>先看懂每一區，再往下記時間與步驟</small></div>
           <div class="sop-map-branches">
-            <a href="#sop-timeline"><svg class="ui-icon" aria-hidden="true"><use href="#icon-eye"></use></svg><b>開班巡場</b><span>先找異常</span></a>
-            <a href="#sop-care"><svg class="ui-icon" aria-hidden="true"><use href="#icon-bowl"></use></svg><b>照護餵食</b><span>照入住資料</span></a>
-            <a href="#sop-care"><svg class="ui-icon" aria-hidden="true"><use href="#icon-sparkle"></use></svg><b>清潔消毒</b><span>日常／退房</span></a>
-            <a href="#sop-timeline"><svg class="ui-icon" aria-hidden="true"><use href="#icon-message"></use></svg><b>早晚回報</b><span>照片＋觀察</span></a>
-            <a href="#service-flows"><svg class="ui-icon" aria-hidden="true"><use href="#icon-door"></use></svg><b>接待流程</b><span>入住／退房／參觀</span></a>
-            <a href="#policy-reference"><svg class="ui-icon" aria-hidden="true"><use href="#icon-shield"></use></svg><b>規定邊界</b><span>不確定先問</span></a>
+            <a href="#sop-timeline"><svg class="ui-icon" aria-hidden="true"><use href="#icon-eye"></use></svg><b>開班先巡一圈</b><span>找碗破、便尿與健康異常</span></a>
+            <a href="#sop-care"><svg class="ui-icon" aria-hidden="true"><use href="#icon-bowl"></use></svg><b>照資料照顧貓咪</b><span>餵食、藥、點心照紀錄做</span></a>
+            <a href="#sop-care"><svg class="ui-icon" aria-hidden="true"><use href="#icon-sparkle"></use></svg><b>髒污當下清乾淨</b><span>房間、砂盆、碗與地板</span></a>
+            <a href="#sop-timeline"><svg class="ui-icon" aria-hidden="true"><use href="#icon-message"></use></svg><b>早晚都要回報</b><span>照片或影片＋觀察文字</span></a>
+            <a href="#service-flows"><svg class="ui-icon" aria-hidden="true"><use href="#icon-door"></use></svg><b>接待照順序走</b><span>入住、退房、參觀不漏步驟</span></a>
+            <a href="#policy-reference"><svg class="ui-icon" aria-hidden="true"><use href="#icon-shield"></use></svg><b>不確定就先停、先問</b><span>不要自己猜，也不要硬做</span></a>
           </div>
         </div>
 
-        <div class="sop-subhead" id="sop-timeline"><span>01</span><div><h3>一日工作時間線</h3><p>從 11:30 到 20:30，照順序走就不容易漏</p></div></div>
+        <aside class="privacy-note"><svg class="ui-icon" aria-hidden="true"><use href="#icon-shield"></use></svg><p><strong>公開版沒有放設備密碼</strong><span>登入資料請看店內文件，不要從這個公開網站尋找。</span></p></aside>
+
+        <div class="sop-subhead" id="sop-timeline"><span>01</span><div><h3>今天先做什麼、再做什麼？</h3><p>從 11:30 到 20:30，照這條時間線往下做</p></div></div>
         <ol class="sop-timeline" id="sopTimeline"></ol>
         <aside class="safety-strip"><svg class="ui-icon" aria-hidden="true"><use href="#icon-shield"></use></svg><p><strong>輪休安全口訣</strong><span>一人離區＝公共區只留同一家；其他房門全部上鎖。</span></p></aside>
 
-        <div class="sop-subhead" id="sop-care"><span>02</span><div><h3>照護與清潔操作卡</h3><p>先背每張卡的一句口訣，細節需要時再打開</p></div></div>
+        <div class="sop-subhead" id="sop-care"><span>02</span><div><h3>遇到這件事，要怎麼做？</h3><p>先讀卡片上的「先記這句」，操作時再展開細節</p></div></div>
         <div class="sop-module-grid" id="sopModuleGrid"></div>
 
         <div class="decision-map" aria-label="共同活動判斷圖">
@@ -114,7 +120,7 @@
           <div class="decision-outcomes"><p class="yes"><b>四關都通過</b><span>可陪同嘗試共同活動</span></p><p class="no"><b>任何一關未通過</b><span>改為單獨活動</span></p></div>
         </div>
 
-        <div class="sop-subhead" id="service-flows"><span>03</span><div><h3>入住、退房、參觀</h3><p>按現場順序排列，可直接當檢查清單使用</p></div></div>
+        <div class="sop-subhead" id="service-flows"><span>03</span><div><h3>有客人來，照哪個順序？</h3><p>選「入住、退房或參觀」，做完一項再看下一項</p></div></div>
         <div class="service-flow-list" id="serviceFlowList"></div>
 
         <details class="policy-reference" id="policy-reference">
@@ -149,6 +155,6 @@
     <footer><img src="assets/logo.png" alt=""><div><b>做貓的好室友</b><p>SOP 更新 2026-10-06・供新人上班複習與現場速查</p></div></footer>
   </div>
   <nav class="mobile-nav" aria-label="手機主題切換"><button class="active" type="button" data-view="numbers"><span>15</span>重點</button><button type="button" data-view="rooms"><span>⌂</span>房型</button><button type="button" data-view="rules"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg>SOP</button><button type="button" data-view="quiz"><span>?</span>抽考</button><button type="button" data-view="faq"><span>Q</span>話術</button></nav>
-  <script src="data.js?v=20261006-sop1"></script><script src="app.js?v=20261006-sop1"></script>
+  <script src="data.js?v=20261006-sop2"></script><script src="app.js?v=20261006-sop2"></script>
 </body>
 </html>

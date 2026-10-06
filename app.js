@@ -38,16 +38,16 @@ const icon = (name) => `<svg class="ui-icon" aria-hidden="true"><use href="#icon
 document.querySelector('#sopTimeline').innerHTML = data.sopTimeline.map((item, index) => `
   <li class="timeline-item">
     <div class="timeline-mark">${icon(item.icon)}<span>${String(index + 1).padStart(2, '0')}</span></div>
-    <div class="timeline-copy"><time>${item.time}</time><h3>${item.title}</h3><ul>${item.points.map(point => `<li>${point}</li>`).join('')}</ul></div>
+    <div class="timeline-copy"><time>${item.time}</time><span class="timeline-label">這段要做</span><h3>${item.title}</h3><ul>${item.points.map(point => `<li>${point}</li>`).join('')}</ul></div>
   </li>`).join('');
 document.querySelector('#sopModuleGrid').innerHTML = data.sopModules.map(module => `
   <details class="sop-module ${module.tone || ''}">
-    <summary><span class="sop-module-icon">${icon(module.icon)}</span><span><small>${module.code}</small><strong>${module.title}</strong><em>${module.cue}</em></span></summary>
+    <summary><span class="sop-module-icon">${icon(module.icon)}</span><span><small>${module.code}｜${module.title}</small><strong><i>先記這句</i>${module.cue}</strong><em>點開看完整做法</em></span></summary>
     <ul>${module.items.map(item => `<li>${item}</li>`).join('')}</ul>
   </details>`).join('');
 document.querySelector('#serviceFlowList').innerHTML = data.serviceFlows.map(flow => `
   <details class="service-flow">
-    <summary><span>${icon(flow.icon)}</span><span><strong>${flow.title}</strong><small>${flow.note}</small></span></summary>
+    <summary><span>${icon(flow.icon)}</span><span><strong>${flow.title}</strong><small>${flow.note}。點開後照 1、2、3 往下做。</small></span></summary>
     <ol>${flow.steps.map((step, index) => `<li><i>${index + 1}</i><span>${step}</span></li>`).join('')}</ol>
   </details>`).join('');
 
