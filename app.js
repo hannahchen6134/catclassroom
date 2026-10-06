@@ -112,15 +112,26 @@ document.querySelector('#retryQuiz').addEventListener('click', () => {
 resetQuizDeck();
 
 const mobileQuery=window.matchMedia('(max-width: 699px)');
-const viewButtons=[...document.querySelectorAll('.mobile-nav [data-view]')];
+const viewButtons=[...document.querySelectorAll('.jump-nav [data-view], .mobile-nav [data-view]')];
 const viewPanels=[...document.querySelectorAll('[data-view-panel]')];
-let activeView='numbers';
+const availableViews=viewPanels.map(panel=>panel.dataset.viewPanel);
+let activeView=availableViews.includes(location.hash.slice(1))?location.hash.slice(1):'numbers';
 function applyView(){
   const searching=Boolean(searchInput && normalize(searchInput.value));
-  viewPanels.forEach(panel=>panel.classList.toggle('view-hidden',mobileQuery.matches&&!searching&&panel.dataset.viewPanel!==activeView));
+  viewPanels.forEach(panel=>panel.classList.toggle('view-hidden',!searching&&panel.dataset.viewPanel!==activeView));
   viewButtons.forEach(button=>{const active=button.dataset.view===activeView;button.classList.toggle('active',active);button.setAttribute('aria-current',active?'page':'false');});
 }
-viewButtons.forEach(button=>button.addEventListener('click',()=>{activeView=button.dataset.view;applyView();window.scrollTo({top:document.querySelector('main').offsetTop,behavior:'smooth'});}));
+function switchView(nextView,{updateHistory=true,scroll=true}={}){
+  if(!availableViews.includes(nextView))return;
+  activeView=nextView;
+  if(searchInput)searchInput.value='';
+  if(searchStatus)searchStatus.textContent='';
+  searchable.forEach(section=>section.classList.remove('search-hidden'));
+  applyView();
+  if(updateHistory)history.pushState(null,'',`#${activeView}`);
+  if(scroll)window.scrollTo({top:document.querySelector('main').offsetTop,behavior:'smooth'});
+}
+viewButtons.forEach(button=>button.addEventListener('click',event=>{event.preventDefault();switchView(button.dataset.view);}));
 
 const searchInput=document.querySelector('#searchInput'); const clearSearch=document.querySelector('#clearSearch'); const searchStatus=document.querySelector('#searchStatus');
 const searchable=[...document.querySelectorAll('[data-search-section]')];
@@ -132,4 +143,5 @@ function runSearch(){
   searchStatus.textContent=query?(count?`找到 ${count} 個相關區塊；點 × 可回到全部內容。`:'找不到資料，可改搜「疫苗」、「房型」、「春節」或價格。'):'';
 }
 searchInput.addEventListener('input',runSearch); clearSearch.addEventListener('click',()=>{searchInput.value='';runSearch();searchInput.focus();});
+window.addEventListener('popstate',()=>switchView(location.hash.slice(1),{updateHistory:false,scroll:false}));
 mobileQuery.addEventListener('change',applyView); applyView();

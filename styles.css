@@ -20,6 +20,7 @@ section{margin-top:56px}
 .section-head{margin-bottom:22px}
 .section-head h2,.hero h1,.room-content h3,.table-drawer>summary,.spring-card>summary,.rule-card summary,.contact-card h2{font-family:"Noto Serif TC","PMingLiU",serif;font-weight:700}
 .eyebrow,.stamp,.number-card small,.room-id,.jump-nav a,.search input,.search-status{font-weight:600}
+.jump-nav a.active{color:#fff;background:var(--dark);box-shadow:2px 2px 0 var(--orange)}
 .number-grid{gap:16px}
 .number-card{padding:15px;box-shadow:4px 4px 0 var(--dark)}
 .number-card strong{font-weight:800}
@@ -278,8 +279,6 @@ body,button,input{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",
 /* 2026-10-07｜24 小時入住退房時間帶：整日等比例呈現非營業／正常／加費區間 */
 .time-visual-group{grid-column:1/-1}
 .time-visual{padding:16px;border-top:1px solid var(--dark);background:#fff}
-.time-day-label{margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:.03em;color:#66574e}
-.overnight-note{display:grid;grid-template-columns:160px 1fr;gap:10px;align-items:center;margin:0 0 12px;padding:10px 12px;border:2px solid var(--dark);background:#d9e8e7}.overnight-note b{font-size:14px}.overnight-note span{font-size:12px;line-height:1.6}
 .time-legend{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
 .time-legend span{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border:1px solid var(--dark);font-size:11px;font-weight:650}
 .time-legend span:before{content:"";width:12px;height:12px;border:1px solid var(--dark)}
@@ -312,6 +311,6 @@ body,button,input{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",
 .outside-hours strong{color:#ffd6b7;font-size:14px}.outside-hours span{font-size:12px;line-height:1.6}
 @media(min-width:700px){.memory-groups{grid-template-columns:repeat(2,1fr)}.time-visual-group{grid-column:1/-1}.time-track{min-height:52px}.time-track>span{font-size:12px}}
 @media(max-width:699px){
-  .time-visual{padding:13px 10px}.time-day-label{font-size:11px}.overnight-note{grid-template-columns:1fr;gap:2px;padding:9px 10px}.overnight-note b{font-size:13px}.overnight-note span{font-size:11px}.time-axis{grid-template-columns:1fr;font-size:8px}.time-axis>i{display:none}.time-subtitle{font-size:15px}.time-subtitle span,.fee-heading-letter{width:24px;height:24px;font-size:11px}.time-row{grid-template-columns:1fr;gap:4px;margin-top:12px}.time-row-label{display:flex;align-items:baseline;gap:8px}.time-row-label b{font-size:12px}.time-row-label small{font-size:9px}.time-track{min-height:52px}.combined-duty-track{min-height:78px}.combined-duty-track .combined-shift{font-size:8px}.time-track>span{overflow:hidden;padding:4px 1px;white-space:nowrap}.segment-copy b{font-size:8px;letter-spacing:-.04em}.segment-copy small{font-size:7px}.checkout-normal.segment-copy b{font-size:7px}.time-memory-cue{font-size:12px;line-height:1.65}
+  .time-visual{padding:13px 10px}.time-axis{grid-template-columns:1fr;font-size:8px}.time-axis>i{display:none}.time-subtitle{font-size:15px}.time-subtitle span,.fee-heading-letter{width:24px;height:24px;font-size:11px}.time-row{grid-template-columns:1fr;gap:4px;margin-top:12px}.time-row-label{display:flex;align-items:baseline;gap:8px}.time-row-label b{font-size:12px}.time-row-label small{font-size:9px}.time-track{min-height:52px}.combined-duty-track{min-height:78px}.combined-duty-track .combined-shift{font-size:8px}.time-track>span{overflow:hidden;padding:4px 1px;white-space:nowrap}.segment-copy b{font-size:8px;letter-spacing:-.04em}.segment-copy small{font-size:7px}.checkout-normal.segment-copy b{font-size:7px}.time-memory-cue{font-size:12px;line-height:1.65}
   .fee-visual{padding:15px 10px}.fee-visual h3{font-size:17px}.fee-steps{gap:6px}.fee-steps p{padding:9px 3px}.fee-steps b{font-size:14px}.fee-steps strong{font-size:10px}.fee-examples{grid-template-columns:1fr}.outside-hours{grid-template-columns:1fr;gap:3px}.outside-hours strong{font-size:13px}.outside-hours span{font-size:11px}
 }
