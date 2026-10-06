@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261006-sop3">
+  <link rel="stylesheet" href="styles.css?v=20261006-time1">
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true">
@@ -42,15 +42,30 @@
 
       <nav class="jump-nav" aria-label="頁面重點"><a href="#numbers">必背數字</a><a href="#rooms">房型</a><a href="#rules">工作 SOP</a><a href="#quiz">抽考</a><a href="#faq">話術</a></nav>
 
-      <section id="numbers" data-view-panel="numbers" data-search-section="必背數字 時間 訂金 疫苗 驅蟲 結紮">
-        <div class="section-head"><span>01</span><div><h2>先背 15 個數字</h2><p>接電話、回 LINE 最常用</p></div></div>
+      <section id="numbers" data-view-panel="numbers" data-search-section="必背數字 時間 入住 退房 營業 安親 提前 延後 收費 訂金 疫苗 驅蟲 結紮">
+        <div class="section-head"><span>01</span><div><h2>先看時間，再背數字</h2><p>綠色是正常時段，橘色代表會加收費用</p></div></div>
         <div class="memory-groups">
-          <details class="memory-group time" open>
-            <summary><span>第一組</span><strong>時間線</strong><small>先背 12、15、19</small></summary>
-            <div class="memory-list">
-              <p><span>營業</span><b>12:00–19:00</b></p><p><span>入住</span><b>15:00–19:00</b></p><p><span>退房</span><b>12:00–14:00</b></p>
+          <details class="memory-group time time-visual-group" open>
+            <summary><span>先看圖</span><strong>入住、退房時間帶</strong><small>正常時段與加費時段分開看</small></summary>
+            <div class="time-visual">
+              <div class="time-legend"><span class="normal">正常時段</span><span class="charged">加收安親費</span><span class="business">營業範圍</span></div>
+              <div class="time-axis" aria-hidden="true"><i></i><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span></div>
+              <div class="time-row"><div class="time-row-label"><b>營業</b><small>可接待</small></div><div class="time-track"><span class="business-segment">12:00–19:00</span></div></div>
+              <div class="time-row"><div class="time-row-label"><b>入住</b><small>15點後正常</small></div><div class="time-track"><span class="charged-segment checkin-early">提早・加費</span><span class="normal-segment checkin-normal">正常 15–19</span></div></div>
+              <div class="time-row"><div class="time-row-label"><b>退房</b><small>14點前正常</small></div><div class="time-track"><span class="normal-segment checkout-normal">正常 12–14</span><span class="charged-segment checkout-late">延後・加費</span></div></div>
+              <p class="time-memory-cue"><b>一句記住：</b>中午開門、下午三點入住、下午兩點前退房。</p>
             </div>
-            <p class="memory-cue">口訣：中午開門，下午入住，兩點前退房。</p>
+            <div class="fee-visual">
+              <h3>提早入住／延後退房，怎麼算？</h3>
+              <p class="fee-base">計算基準＝入住房型的「一晚定價」</p>
+              <div class="fee-steps">
+                <p><small>未滿</small><b>30 分鐘</b><strong>不計費</strong></p>
+                <p><small>滿</small><b>30 分鐘</b><strong>房價 × 5%</strong></p>
+                <p><small>滿</small><b>60 分鐘</b><strong>房價 × 10%</strong></p>
+              </div>
+              <div class="fee-examples"><p><b>例 1</b><span>14:30 入住</span><em>提早 30 分 → 加 5%</em></p><p><b>例 2</b><span>15:00 退房</span><em>延後 1 小時 → 加 10%</em></p></div>
+              <aside class="outside-hours"><strong>12:00 前／19:00 後</strong><span>不是一般安親加費範圍，不要直接答應。先問夥伴，再依訂房狀況決定時間外費或是否多住一晚。</span></aside>
+            </div>
           </details>
           <details class="memory-group health">
             <summary><span>第二組</span><strong>健康門檻</strong><small>3 年、1 月、7 日、6 月</small></summary>
@@ -151,6 +166,6 @@
     <footer><img src="assets/logo.png" alt=""><div><b>做貓的好室友</b><p>SOP 更新 2026-10-06・供新人上班複習與現場速查</p></div></footer>
   </div>
   <nav class="mobile-nav" aria-label="手機主題切換"><button class="active" type="button" data-view="numbers"><span>15</span>重點</button><button type="button" data-view="rooms"><span>⌂</span>房型</button><button type="button" data-view="rules"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg>SOP</button><button type="button" data-view="quiz"><span>?</span>抽考</button><button type="button" data-view="faq"><span>Q</span>話術</button></nav>
-  <script src="data.js?v=20261006-sop3"></script><script src="app.js?v=20261006-sop3"></script>
+  <script src="data.js?v=20261006-time1"></script><script src="app.js?v=20261006-time1"></script>
 </body>
 </html>
