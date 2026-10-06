@@ -34,12 +34,29 @@ renderPriceTable(Object.keys(data.multiRoom)[0]);
 document.querySelector('#cancelBody').innerHTML = data.cancellation.map(row => `<tr><td>${row[0]}</td><td>${row[1]}</td></tr>`).join('');
 document.querySelector('#faqList').innerHTML = data.faq.map(([q,a], i) => `<details class="faq-item"><summary>${String(i+1).padStart(2,'0')}｜${q}</summary><p>${a}</p></details>`).join('');
 
+const icon = (name) => `<svg class="ui-icon" aria-hidden="true"><use href="#icon-${name}"></use></svg>`;
+document.querySelector('#sopTimeline').innerHTML = data.sopTimeline.map((item, index) => `
+  <li class="timeline-item">
+    <div class="timeline-mark">${icon(item.icon)}<span>${String(index + 1).padStart(2, '0')}</span></div>
+    <div class="timeline-copy"><time>${item.time}</time><h3>${item.title}</h3><ul>${item.points.map(point => `<li>${point}</li>`).join('')}</ul></div>
+  </li>`).join('');
+document.querySelector('#sopModuleGrid').innerHTML = data.sopModules.map(module => `
+  <details class="sop-module ${module.tone || ''}">
+    <summary><span class="sop-module-icon">${icon(module.icon)}</span><span><small>${module.code}</small><strong>${module.title}</strong><em>${module.cue}</em></span></summary>
+    <ul>${module.items.map(item => `<li>${item}</li>`).join('')}</ul>
+  </details>`).join('');
+document.querySelector('#serviceFlowList').innerHTML = data.serviceFlows.map(flow => `
+  <details class="service-flow">
+    <summary><span>${icon(flow.icon)}</span><span><strong>${flow.title}</strong><small>${flow.note}</small></span></summary>
+    <ol>${flow.steps.map((step, index) => `<li><i>${index + 1}</i><span>${step}</span></li>`).join('')}</ol>
+  </details>`).join('');
+
 const roomQuestions = data.rooms.map(room => ({
   category: '房型', question: '看照片回答：這是哪一種房型？', image: room.image,
   answer: `${room.name}｜${formatPrice(room.price)} 元／晚｜最多 ${room.capacity} 隻｜${room.extra}｜${room.size}`
 }));
 const quizQuestions = [...roomQuestions, ...data.quizQuestions];
-const quizCategoryNames = ['全部', '房型', '時間費用', '健康入住', '照顧應變', '取消優惠', '春節'];
+const quizCategoryNames = ['全部', '房型', '值班SOP', '接待流程', '時間費用', '健康入住', '照顧應變', '取消優惠', '春節'];
 const quizCategories = document.querySelector('#quizCategories');
 const quizCard = document.querySelector('#quizCard');
 const quizImage = document.querySelector('#quizImage');

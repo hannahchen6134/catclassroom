@@ -175,3 +175,55 @@ body,button,input{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",
   .room-facts div{border-top-width:1px}
   .rule-card,.faq-item,.table-drawer,.spring-card,.more-numbers{box-shadow:2px 2px 0 var(--dark)}
 }
+
+/* 2026-10-06｜SOP 視覺筆記：心智圖、流程線與操作卡 */
+.icon-sprite{position:absolute;width:0;height:0;overflow:hidden}
+.ui-icon{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.privacy-note,.safety-strip{display:flex;gap:12px;align-items:flex-start;margin:0 0 22px;padding:13px 14px;border:1px solid var(--dark);background:#edf4ee;box-shadow:2px 2px 0 var(--dark)}
+.privacy-note .ui-icon,.safety-strip .ui-icon{flex:0 0 auto;margin-top:2px}
+.privacy-note p,.safety-strip p{display:grid;gap:2px;margin:0;font-size:13px;line-height:1.6}
+.privacy-note strong,.safety-strip strong{font-size:14px}.privacy-note span,.safety-strip span{color:#5d5148}
+.sop-map{position:relative;padding:18px;border:2px solid var(--dark);background:var(--paper);box-shadow:4px 4px 0 var(--dark)}
+.sop-map-center{position:relative;z-index:2;display:grid;justify-items:center;gap:4px;width:min(270px,100%);margin:0 auto 24px;padding:17px;border:2px solid var(--dark);background:var(--gold);text-align:center}
+.sop-map-center .ui-icon{width:30px;height:30px}.sop-map-center strong{font:600 21px/1.3 "Noto Serif TC","PMingLiU",serif}.sop-map-center small{font-size:12px;line-height:1.55}
+.sop-map-branches{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.sop-map-branches:before{content:"";position:absolute;right:12%;bottom:calc(100% + 11px);left:12%;height:14px;border-top:2px solid var(--dark);border-right:2px solid var(--dark);border-left:2px solid var(--dark)}
+.sop-map-branches a{display:grid;grid-template-columns:28px 1fr;gap:1px 8px;align-items:center;min-height:68px;padding:10px;border:1px solid var(--dark);background:#fff;text-decoration:none}
+.sop-map-branches a:nth-child(2n){background:#f5e3ce}.sop-map-branches a:nth-child(3n){background:#e6efe7}
+.sop-map-branches .ui-icon{grid-row:1/3;width:25px;height:25px}.sop-map-branches b{font-size:14px}.sop-map-branches span{font-size:11px;color:#6f6258}
+.sop-subhead{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:center;margin:42px 0 17px}
+.sop-subhead>span{display:grid;width:38px;height:38px;place-items:center;border:1px solid var(--dark);background:var(--orange);font-size:12px;font-weight:700;box-shadow:2px 2px 0 var(--dark)}
+.sop-subhead h3{margin:0;font:600 23px/1.25 "Noto Serif TC","PMingLiU",serif}.sop-subhead p{margin:3px 0 0;font-size:13px;color:#6f6258}
+.sop-timeline{position:relative;display:grid;gap:0;margin:0;padding:0;list-style:none}
+.sop-timeline:before{content:"";position:absolute;top:24px;bottom:24px;left:23px;width:2px;background:var(--dark)}
+.timeline-item{position:relative;display:grid;grid-template-columns:48px 1fr;gap:12px;padding:0 0 16px}
+.timeline-mark{position:relative;z-index:2;display:grid;width:48px;height:48px;place-items:center;border:2px solid var(--dark);background:var(--paper);box-shadow:2px 2px 0 var(--dark)}
+.timeline-mark .ui-icon{width:20px;height:20px}.timeline-mark span{position:absolute;right:-7px;bottom:-7px;padding:1px 4px;border:1px solid var(--dark);background:var(--orange);font-size:9px;font-weight:700}
+.timeline-copy{padding:12px 14px;border:1px solid var(--dark);background:#fff}
+.timeline-copy time{display:inline-block;padding:2px 7px;background:var(--dark);color:#fff;font-size:11px;font-weight:600;font-variant-numeric:tabular-nums}.timeline-copy h3{margin:5px 0 4px;font:600 17px/1.35 "Noto Serif TC","PMingLiU",serif}.timeline-copy ul{margin:0;padding-left:18px;font-size:13px;line-height:1.7}.timeline-copy li+li{margin-top:2px}
+.safety-strip{margin:3px 0 0;background:#f6dbc8}.safety-strip strong{color:#7a2f22}
+.sop-module-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sop-module{border:1px solid var(--dark);background:var(--paper);box-shadow:2px 2px 0 var(--dark)}
+.sop-module summary{display:grid;grid-template-columns:47px 1fr;align-items:stretch;min-height:76px;cursor:pointer;list-style:none}
+.sop-module summary::-webkit-details-marker{display:none}.sop-module summary:after{content:"+";position:absolute;right:12px;align-self:center;font-size:20px}.sop-module[open] summary:after{content:"−"}
+.sop-module-icon{display:grid;place-items:center;border-right:1px solid var(--dark);background:var(--gold)}.sop-module.urgent .sop-module-icon{background:var(--orange)}
+.sop-module summary>span:last-child{display:grid;align-content:center;padding:9px 35px 9px 11px}.sop-module summary small{font-size:10px;color:#74675e}.sop-module summary strong{font:600 16px/1.35 "Noto Serif TC","PMingLiU",serif}.sop-module summary em{margin-top:2px;color:#6d5e53;font-size:11px;font-style:normal;line-height:1.45}
+.sop-module>ul{margin:0;padding:12px 17px 15px 34px;border-top:1px solid var(--dark);background:#fff;font-size:13px;line-height:1.75}.sop-module>ul li+li{margin-top:6px}
+.decision-map{margin-top:24px;border:2px solid var(--dark);background:#fff;box-shadow:3px 3px 0 var(--dark)}
+.decision-title{display:flex;gap:12px;align-items:center;padding:14px;background:var(--gold)}.decision-title .ui-icon{flex:0 0 auto;width:32px;height:32px}.decision-title div{display:grid}.decision-title strong{font:600 18px/1.4 "Noto Serif TC","PMingLiU",serif}.decision-title span{font-size:12px}
+.decision-map>ol{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:0;padding:0;list-style:none;border-top:2px solid var(--dark)}.decision-map>ol li{position:relative;display:grid;grid-template-columns:28px 1fr;gap:7px;align-items:center;min-height:82px;padding:10px;font-size:12px;line-height:1.55}.decision-map>ol li+li{border-left:1px solid var(--dark)}.decision-map>ol li+li:before{content:"→";position:absolute;left:-9px;top:50%;z-index:2;transform:translateY(-50%);padding:1px;background:#fff;font-weight:700}.decision-map>ol b{display:grid;width:26px;height:26px;place-items:center;border-radius:50%;background:var(--dark);color:#fff}
+.decision-outcomes{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--dark)}.decision-outcomes p{display:grid;gap:2px;margin:0;padding:11px 14px}.decision-outcomes p+p{border-left:1px solid var(--dark)}.decision-outcomes .yes{background:#dfece1}.decision-outcomes .no{background:#f5d8ca}.decision-outcomes b{font-size:13px}.decision-outcomes span{font-size:12px}
+.service-flow-list{display:grid;gap:12px}.service-flow{border:1px solid var(--dark);background:var(--paper);box-shadow:2px 2px 0 var(--dark)}
+.service-flow summary{display:grid;grid-template-columns:48px 1fr;align-items:center;min-height:66px;cursor:pointer;list-style:none}.service-flow summary::-webkit-details-marker{display:none}.service-flow summary>span:first-child{display:grid;align-self:stretch;place-items:center;border-right:1px solid var(--dark);background:var(--sage)}.service-flow summary>span:last-child{display:grid;padding:9px 38px 9px 11px}.service-flow summary:after{content:"+";position:absolute;right:13px;font-size:20px}.service-flow[open] summary:after{content:"−"}.service-flow summary strong{font:600 17px/1.4 "Noto Serif TC","PMingLiU",serif}.service-flow summary small{font-size:11px;color:#62564e;line-height:1.5}
+.service-flow ol{margin:0;padding:14px;border-top:1px solid var(--dark);background:#fff;list-style:none}.service-flow li{display:grid;grid-template-columns:28px 1fr;gap:9px;align-items:start;font-size:13px;line-height:1.65}.service-flow li+li{margin-top:8px}.service-flow li i{display:grid;width:26px;height:26px;place-items:center;border:1px solid var(--dark);background:var(--cream);font-style:normal;font-size:11px;font-weight:700}
+.policy-reference{margin-top:42px;border:2px solid var(--dark);background:var(--paper);box-shadow:3px 3px 0 var(--dark)}.policy-reference>summary{display:grid;grid-template-columns:54px 1fr;align-items:center;min-height:68px;cursor:pointer;list-style:none}.policy-reference>summary::-webkit-details-marker{display:none}.policy-reference>summary>span{display:grid;align-self:stretch;place-items:center;border-right:2px solid var(--dark);background:var(--orange)}.policy-reference>summary>div{display:grid;padding:10px 42px 10px 12px}.policy-reference>summary:after{content:"+";position:absolute;right:15px;font-size:22px}.policy-reference[open]>summary:after{content:"−"}.policy-reference>summary strong{font:600 18px/1.4 "Noto Serif TC","PMingLiU",serif}.policy-reference>summary small{font-size:11px;color:#62564e}.policy-reference-body{padding:16px;border-top:2px solid var(--dark);background:#f2eadf}.policy-reference-body .rule-grid{margin:0}.policy-reference-body .table-drawer,.policy-reference-body .spring-card{box-shadow:2px 2px 0 var(--dark)}
+.mobile-nav button .ui-icon{width:17px;height:17px;margin-bottom:1px}
+.sop-module summary,.service-flow summary,.policy-reference>summary{position:relative}
+@media(max-width:699px){
+  .sop-map{padding:14px}.sop-map-center{margin-bottom:18px;padding:14px}.sop-map-branches{grid-template-columns:1fr 1fr;gap:8px}.sop-map-branches:before{display:none}.sop-map-branches a{grid-template-columns:24px 1fr;min-height:61px;padding:8px}.sop-map-branches .ui-icon{width:21px;height:21px}.sop-map-branches b{font-size:13px}
+  .sop-subhead{grid-template-columns:34px 1fr;margin-top:36px}.sop-subhead>span{width:32px;height:32px}.sop-subhead h3{font-size:20px}.sop-subhead p{font-size:12px}
+  .sop-timeline:before{left:19px}.timeline-item{grid-template-columns:40px 1fr;gap:10px}.timeline-mark{width:40px;height:40px}.timeline-mark .ui-icon{width:17px;height:17px}.timeline-copy{padding:10px 11px}.timeline-copy h3{font-size:15px}.timeline-copy ul{font-size:12px}
+  .sop-module-grid{grid-template-columns:1fr}.sop-module summary{grid-template-columns:43px 1fr;min-height:70px}.sop-module summary strong{font-size:15px}.sop-module>ul{font-size:12.5px}
+  .decision-title{padding:12px}.decision-title strong{font-size:16px}.decision-map>ol{grid-template-columns:1fr}.decision-map>ol li{grid-template-columns:27px 1fr;min-height:55px;padding:9px 12px}.decision-map>ol li+li{border-top:1px solid var(--dark);border-left:0}.decision-map>ol li+li:before{content:"↓";top:-10px;left:17px;transform:none}.decision-outcomes{grid-template-columns:1fr}.decision-outcomes p+p{border-top:1px solid var(--dark);border-left:0}
+  .policy-reference-body{padding:10px}.privacy-note,.safety-strip{font-size:12px}
+}
