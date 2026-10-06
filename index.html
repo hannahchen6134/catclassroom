@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261006-sop2">
+  <link rel="stylesheet" href="styles.css?v=20261006-sop3">
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true">
@@ -93,16 +93,17 @@
           <p><span><svg class="ui-icon" aria-hidden="true"><use href="#icon-door"></use></svg></span><b>需要時展開</b><small>真的要做，再看完整步驟</small></p>
         </div>
 
-        <div class="sop-map" aria-label="值班工作心智圖">
-          <div class="sop-map-center"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg><strong>今天上班要顧好 6 件事</strong><small>先看懂每一區，再往下記時間與步驟</small></div>
-          <div class="sop-map-branches">
-            <a href="#sop-timeline"><svg class="ui-icon" aria-hidden="true"><use href="#icon-eye"></use></svg><b>開班先巡一圈</b><span>找碗破、便尿與健康異常</span></a>
-            <a href="#sop-care"><svg class="ui-icon" aria-hidden="true"><use href="#icon-bowl"></use></svg><b>照資料照顧貓咪</b><span>餵食、藥、點心照紀錄做</span></a>
-            <a href="#sop-care"><svg class="ui-icon" aria-hidden="true"><use href="#icon-sparkle"></use></svg><b>髒污當下清乾淨</b><span>房間、砂盆、碗與地板</span></a>
-            <a href="#sop-timeline"><svg class="ui-icon" aria-hidden="true"><use href="#icon-message"></use></svg><b>早晚都要回報</b><span>照片或影片＋觀察文字</span></a>
-            <a href="#service-flows"><svg class="ui-icon" aria-hidden="true"><use href="#icon-door"></use></svg><b>接待照順序走</b><span>入住、退房、參觀不漏步驟</span></a>
-            <a href="#policy-reference"><svg class="ui-icon" aria-hidden="true"><use href="#icon-shield"></use></svg><b>不確定就先停、先問</b><span>不要自己猜，也不要硬做</span></a>
-          </div>
+        <div class="sop-flow" aria-label="今日值班七步驟">
+          <div class="sop-flow-title"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg><div><strong>今日值班 7 步驟</strong><small>照號碼走：桌面由左到右，手機由上往下</small></div></div>
+          <ol>
+            <li><b>1</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-eye"></use></svg><time>11:30</time><strong>先巡場</strong><span>找異常、看特殊要求</span></li>
+            <li><b>2</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-bowl"></use></svg><time>12:00</time><strong>第一輪照護</strong><span>餵食、活動、清房</span></li>
+            <li><b>3</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-message"></use></svg><time>13:00</time><strong>早安回報</strong><span>照片或影片＋觀察</span></li>
+            <li><b>4</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg><time>15:00</time><strong>訊息與準備</strong><span>回訊息、準備隔日</span></li>
+            <li><b>5</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-bowl"></use></svg><time>17:00</time><strong>第二輪照護</strong><span>餵食、活動、清房</span></li>
+            <li><b>6</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-message"></use></svg><time>19:20</time><strong>晚安回報</strong><span>詳細寫今天的狀況</span></li>
+            <li><b>7</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-sparkle"></use></svg><time>20:00</time><strong>收班清潔</strong><span>完成清潔再下班</span></li>
+          </ol>
         </div>
 
         <aside class="privacy-note"><svg class="ui-icon" aria-hidden="true"><use href="#icon-shield"></use></svg><p><strong>公開版沒有放設備密碼</strong><span>登入資料請看店內文件，不要從這個公開網站尋找。</span></p></aside>
@@ -147,14 +148,11 @@
         <div class="faq-list" id="faqList"></div>
       </section>
 
-      <section id="contact" data-view-panel="rules" class="contact-card" data-search-section="地址 電話 LINE IG 聯絡 營業時間 許可證"><div><span>值班聯絡卡</span><h2>貓室友 Catroommate</h2></div><dl><div><dt>地址</dt><dd>台北市士林區中山北路五段 716 號 1 樓</dd></div><div><dt>電話</dt><dd><a href="tel:0989935571">0989-935-571</a></dd></div><div><dt>LINE</dt><dd>@catroommate</dd></div><div><dt>IG</dt><dd>catroommate</dd></div><div><dt>營業</dt><dd>12:00–19:00</dd></div><div><dt>許可證</dt><dd>特寵業字第 V1150464-00 號</dd></div></dl></section>
-
-      <aside class="warning" data-view-panel="rules"><strong>值班底線</strong><p>官網仍有舊地址、舊房價頁面。現場回答請以最新內部公告、訂房系統或主管說法為準。</p></aside>
     </main>
 
     <footer><img src="assets/logo.png" alt=""><div><b>做貓的好室友</b><p>SOP 更新 2026-10-06・供新人上班複習與現場速查</p></div></footer>
   </div>
   <nav class="mobile-nav" aria-label="手機主題切換"><button class="active" type="button" data-view="numbers"><span>15</span>重點</button><button type="button" data-view="rooms"><span>⌂</span>房型</button><button type="button" data-view="rules"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg>SOP</button><button type="button" data-view="quiz"><span>?</span>抽考</button><button type="button" data-view="faq"><span>Q</span>話術</button></nav>
-  <script src="data.js?v=20261006-sop2"></script><script src="app.js?v=20261006-sop2"></script>
+  <script src="data.js?v=20261006-sop3"></script><script src="app.js?v=20261006-sop3"></script>
 </body>
 </html>

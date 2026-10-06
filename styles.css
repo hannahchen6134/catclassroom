@@ -255,3 +255,24 @@ body,button,input{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",
   .sop-map-branches a{grid-template-columns:34px 1fr;min-height:84px;padding:9px}.sop-map-branches .ui-icon{width:29px;height:29px}.sop-map-branches b{font-size:12.5px}.sop-map-branches span{font-size:10.5px}
   .sop-module summary{grid-template-columns:54px 1fr;min-height:88px}.sop-module-icon .ui-icon{width:30px;height:30px}.sop-module summary small{font-size:11px}.sop-module summary strong{font-size:12px}.sop-module summary em{font-size:10px}
 }
+
+/* 2026-10-06｜值班順序改為單一路徑，避免分類圖被誤認為流程 */
+.sop-flow{padding:18px;border:2px solid var(--dark);background:var(--paper);box-shadow:4px 4px 0 var(--dark)}
+.sop-flow-title{display:flex;gap:12px;align-items:center;margin-bottom:24px;padding:14px;border:1px solid var(--dark);background:var(--gold)}
+.sop-flow-title>.ui-icon{flex:0 0 auto;width:36px;height:36px;stroke-width:2}
+.sop-flow-title>div{display:grid}.sop-flow-title strong{font:600 21px/1.4 "Noto Serif TC","PMingLiU",serif}.sop-flow-title small{font-size:12px}
+.sop-flow ol{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:18px;margin:0;padding:0;list-style:none}
+.sop-flow li{position:relative;display:grid;justify-items:center;align-content:start;min-width:0;min-height:156px;padding:13px 7px 10px;border:1px solid var(--dark);background:#fff;text-align:center}
+.sop-flow li:nth-child(2n){background:#f5e3ce}.sop-flow li:nth-child(3n){background:#e6efe7}
+.sop-flow li:not(:last-child)::after{content:"→";position:absolute;z-index:3;top:50%;right:-17px;transform:translateY(-50%);width:16px;background:var(--paper);font-size:20px;font-weight:700;line-height:1;text-align:center}
+.sop-flow li>b{display:grid;width:28px;height:28px;place-items:center;margin-bottom:7px;border-radius:50%;background:var(--dark);color:#fff;font-size:12px}
+.sop-flow li>.ui-icon{width:31px;height:31px;margin-bottom:6px;stroke-width:2}
+.sop-flow li time{padding:1px 5px;background:var(--dark);color:#fff;font-size:10px;font-weight:650;font-variant-numeric:tabular-nums}
+.sop-flow li strong{margin-top:6px;font:600 13px/1.45 "Noto Serif TC","PMingLiU",serif}.sop-flow li span{margin-top:3px;color:#6b5d53;font-size:10px;line-height:1.45}
+@media(max-width:699px){
+  .sop-flow{padding:13px}.sop-flow-title{margin-bottom:17px;padding:11px}.sop-flow-title>.ui-icon{width:31px;height:31px}.sop-flow-title strong{font-size:18px}.sop-flow-title small{font-size:11px}
+  .sop-flow ol{grid-template-columns:1fr;gap:15px}
+  .sop-flow li{grid-template-columns:36px 43px 1fr;grid-template-rows:auto auto auto;justify-items:start;align-items:center;min-height:86px;padding:10px 12px;text-align:left}
+  .sop-flow li:not(:last-child)::after{content:"↓";top:auto;right:auto;bottom:-17px;left:50%;transform:translateX(-50%);width:18px;font-size:18px}
+  .sop-flow li>b{grid-row:1/4;align-self:center;margin:0}.sop-flow li>.ui-icon{grid-row:1/4;align-self:center;margin:0;width:29px;height:29px}.sop-flow li time{grid-column:3;grid-row:1}.sop-flow li strong{grid-column:3;grid-row:2;margin-top:3px;font-size:14px}.sop-flow li span{grid-column:3;grid-row:3;margin-top:1px;font-size:11px}
+}
