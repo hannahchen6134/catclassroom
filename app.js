@@ -42,6 +42,23 @@ document.querySelector('#faqList').innerHTML = data.faqGroups.map((group) => `
       </details>`).join('')}</div>
   </section>`).join('');
 
+const faqList = document.querySelector('#faqList');
+const collapseFaqButton = document.querySelector('#collapseFaq');
+function collapseFaqItems() {
+  faqList.querySelectorAll('.faq-item[open]').forEach(item => { item.open = false; });
+}
+faqList.querySelectorAll('.faq-group-list').forEach(groupList => {
+  groupList.addEventListener('toggle', event => {
+    const opened = event.target;
+    if (!opened.matches('.faq-item') || !opened.open) return;
+    groupList.querySelectorAll('.faq-item[open]').forEach(item => {
+      if (item !== opened) item.open = false;
+    });
+  }, true);
+});
+collapseFaqButton.addEventListener('click', collapseFaqItems);
+window.addEventListener('pageshow', collapseFaqItems);
+
 const icon = (name) => `<svg class="ui-icon" aria-hidden="true"><use href="#icon-${name}"></use></svg>`;
 document.querySelector('#sopTimeline').innerHTML = data.sopTimeline.map((item, index) => `
   <li class="timeline-item">
@@ -50,7 +67,7 @@ document.querySelector('#sopTimeline').innerHTML = data.sopTimeline.map((item, i
   </li>`).join('');
 document.querySelector('#sopModuleGrid').innerHTML = data.sopModules.map(module => `
   <details class="sop-module ${module.tone || ''}">
-    <summary><span class="sop-module-icon">${icon(module.icon)}</span><span><small>${module.code}｜${module.title}</small><strong><i>先記這句</i>${module.cue}</strong><em>點開看完整做法</em></span></summary>
+    <summary><span class="sop-module-icon">${icon(module.icon)}</span><span><small>${module.code}｜${module.title}</small><strong><i>口訣</i>${module.cue}</strong><em>展開看動作與例外</em></span></summary>
     <ul>${module.items.map(item => `<li>${item}</li>`).join('')}</ul>
   </details>`).join('');
 document.querySelector('#serviceFlowList').innerHTML = data.serviceFlows.map(flow => `
@@ -58,6 +75,91 @@ document.querySelector('#serviceFlowList').innerHTML = data.serviceFlows.map(flo
     <summary><span>${icon(flow.icon)}</span><span><strong>${flow.title}</strong><small>${flow.note}。點開後照 1、2、3 往下做。</small></span></summary>
     <ol>${flow.steps.map((step, index) => `<li><i>${index + 1}</i><span>${step}</span></li>`).join('')}</ol>
   </details>`).join('');
+
+function bindExclusiveDetails(containerSelector, itemSelector) {
+  const container = document.querySelector(containerSelector);
+  if (!container) return;
+  container.addEventListener('toggle', event => {
+    const opened = event.target;
+    if (!opened.matches(itemSelector) || !opened.open) return;
+    container.querySelectorAll(`${itemSelector}[open]`).forEach(item => {
+      if (item !== opened) item.open = false;
+    });
+  }, true);
+}
+bindExclusiveDetails('#sopModuleGrid', '.sop-module');
+bindExclusiveDetails('#serviceFlowList', '.service-flow');
+
+const rulesPanel = document.querySelector('#rules');
+const sopModeButtons = [...document.querySelectorAll('[data-sop-mode]')];
+const dutyQuickPanel = document.querySelector('#dutyQuickPanel');
+const dutyStepTabs = document.querySelector('#dutyStepTabs');
+const dutyStepCard = document.querySelector('#dutyStepCard');
+const dutyQuickStatus = document.querySelector('#dutyQuickStatus');
+let activeDutyStep = 0;
+
+function dutyStartMinutes(item) {
+  const match = item.time.match(/(\d{1,2}):(\d{2})/);
+  return match ? Number(match[1]) * 60 + Number(match[2]) : 0;
+}
+function currentDutyStep() {
+  const now = new Date();
+  const minutes = now.getHours() * 60 + now.getMinutes();
+  const shiftStart = dutyStartMinutes(data.sopTimeline[0]);
+  const shiftEnd = 20 * 60 + 30;
+  if (minutes < shiftStart || minutes >= shiftEnd) return { index: 0, onShift: false, now };
+  let index = 0;
+  data.sopTimeline.forEach((item, itemIndex) => {
+    if (dutyStartMinutes(item) <= minutes) index = itemIndex;
+  });
+  return { index, onShift: true, now };
+}
+function renderDutyStep(index, status) {
+  activeDutyStep = index;
+  const item = data.sopTimeline[index];
+  dutyStepTabs.querySelectorAll('button').forEach((button, buttonIndex) => {
+    const active = buttonIndex === index;
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-selected', active ? 'true' : 'false');
+  });
+  dutyStepCard.innerHTML = `<div class="duty-step-heading"><span>第 ${index + 1} 步</span><time>${item.time}</time></div><h3>${item.title}</h3><p class="duty-step-cue">先做：${item.points[0]}</p><ul>${item.points.map(point => `<li>${point}</li>`).join('')}</ul>`;
+  if (status) dutyQuickStatus.textContent = status;
+}
+function refreshDutyStep() {
+  const current = currentDutyStep();
+  const clock = current.now.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', hour12: false });
+  renderDutyStep(current.index, current.onShift ? `${clock}・目前建議看第 ${current.index + 1} 步` : `${clock}・非值班時間，先顯示開班步驟`);
+}
+dutyStepTabs.innerHTML = data.sopTimeline.map((item, index) => `<button type="button" role="tab" aria-selected="false" data-duty-step="${index}"><span>${index + 1}</span><time>${item.time.split('–')[0].split('／')[0]}</time><b>${item.title}</b></button>`).join('');
+dutyStepTabs.addEventListener('click', event => {
+  const button = event.target.closest('[data-duty-step]');
+  if (!button) return;
+  renderDutyStep(Number(button.dataset.dutyStep), `手動查看第 ${Number(button.dataset.dutyStep) + 1} 步`);
+});
+document.querySelector('#dutyRefresh').addEventListener('click', refreshDutyStep);
+
+function setSopMode(mode) {
+  const quick = mode === 'quick';
+  rulesPanel.classList.toggle('quick-mode', quick);
+  dutyQuickPanel.hidden = !quick;
+  sopModeButtons.forEach(button => {
+    const active = button.dataset.sopMode === mode;
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-selected', active ? 'true' : 'false');
+  });
+  if (quick) refreshDutyStep();
+}
+sopModeButtons.forEach(button => button.addEventListener('click', () => setSopMode(button.dataset.sopMode)));
+dutyQuickPanel.querySelectorAll('[data-service-jump]').forEach(button => button.addEventListener('click', () => {
+  setSopMode('learn');
+  const flow = [...document.querySelectorAll('.service-flow')].find(item => item.textContent.includes(button.dataset.serviceJump));
+  document.querySelectorAll('.service-flow[open]').forEach(item => { item.open = false; });
+  if (flow) {
+    flow.open = true;
+    requestAnimationFrame(() => flow.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  }
+}));
+refreshDutyStep();
 
 const roomQuestions = data.rooms.map(room => ({
   category: '房型', question: '看照片回答：這是哪一種房型？', image: room.image,
@@ -131,6 +233,7 @@ function applyView(){
 function switchView(nextView,{updateHistory=true,scroll=true}={}){
   if(!availableViews.includes(nextView))return;
   activeView=nextView;
+  if(nextView==='faq')collapseFaqItems();
   applyView();
   if(updateHistory)history.pushState(null,'',`#${activeView}`);
   if(scroll)window.scrollTo({top:document.querySelector('main').offsetTop,behavior:'smooth'});
