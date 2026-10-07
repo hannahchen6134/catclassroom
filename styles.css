@@ -334,3 +334,27 @@ section{margin-top:52px}
   .time-visual,.fee-visual{padding:16px 12px}
   .time-legend{gap:9px;margin-bottom:24px}
 }
+
+/* 2026-10-07｜夥伴影片：以大圖搭配短步驟，保持手機閱讀留白 */
+.training-guide-grid{display:grid;gap:22px}
+.training-guide{display:grid;grid-template-columns:minmax(220px,36%) 1fr;overflow:hidden;border:2px solid var(--dark);border-radius:var(--radius-card);background:var(--paper);box-shadow:3px 3px 0 var(--dark)}
+.training-guide>img{width:100%;height:100%;min-height:300px;object-fit:cover;border-right:2px solid var(--dark)}
+.training-guide:nth-child(1)>img{object-position:55% 28%}
+.training-guide:nth-child(2)>img{object-position:50% 34%}
+.training-guide:nth-child(3)>img{object-position:50% 58%}
+.training-guide>div{padding:20px 22px}
+.training-guide small{display:inline-block;padding:3px 9px;border-radius:var(--radius-pill);color:#fff;background:var(--dark);font-size:11px;font-weight:650}
+.training-guide h4{margin:10px 0 12px;font:600 21px/1.45 "Noto Serif TC","PMingLiU",serif}
+.training-guide ol{margin:0;padding-left:24px;font-size:14px;line-height:1.85}
+.training-guide li+li{margin-top:7px}
+@media(max-width:699px){
+  .training-guide-grid{gap:20px}
+  .training-guide{grid-template-columns:1fr}
+  .training-guide>img{height:210px;min-height:0;border-right:0;border-bottom:2px solid var(--dark)}
+  .training-guide:nth-child(1)>img{object-position:55% 30%}
+  .training-guide:nth-child(2)>img{object-position:50% 28%}
+  .training-guide:nth-child(3)>img{object-position:50% 48%}
+  .training-guide>div{padding:17px 16px 19px}
+  .training-guide h4{font-size:18px}
+  .training-guide ol{font-size:13px;line-height:1.8}
+}
