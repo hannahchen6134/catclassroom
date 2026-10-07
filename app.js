@@ -117,31 +117,17 @@ const viewPanels=[...document.querySelectorAll('[data-view-panel]')];
 const availableViews=viewPanels.map(panel=>panel.dataset.viewPanel);
 let activeView=availableViews.includes(location.hash.slice(1))?location.hash.slice(1):'numbers';
 function applyView(){
-  const searching=Boolean(searchInput && normalize(searchInput.value));
-  viewPanels.forEach(panel=>panel.classList.toggle('view-hidden',!searching&&panel.dataset.viewPanel!==activeView));
+  viewPanels.forEach(panel=>panel.classList.toggle('view-hidden',panel.dataset.viewPanel!==activeView));
   viewButtons.forEach(button=>{const active=button.dataset.view===activeView;button.classList.toggle('active',active);button.setAttribute('aria-current',active?'page':'false');});
 }
 function switchView(nextView,{updateHistory=true,scroll=true}={}){
   if(!availableViews.includes(nextView))return;
   activeView=nextView;
-  if(searchInput)searchInput.value='';
-  if(searchStatus)searchStatus.textContent='';
-  searchable.forEach(section=>section.classList.remove('search-hidden'));
   applyView();
   if(updateHistory)history.pushState(null,'',`#${activeView}`);
   if(scroll)window.scrollTo({top:document.querySelector('main').offsetTop,behavior:'smooth'});
 }
 viewButtons.forEach(button=>button.addEventListener('click',event=>{event.preventDefault();switchView(button.dataset.view);}));
 
-const searchInput=document.querySelector('#searchInput'); const clearSearch=document.querySelector('#clearSearch'); const searchStatus=document.querySelector('#searchStatus');
-const searchable=[...document.querySelectorAll('[data-search-section]')];
-function normalize(value){return value.toLowerCase().replace(/\s+/g,'');}
-function runSearch(){
-  const query=normalize(searchInput.value); let count=0;
-  applyView();
-  searchable.forEach(section=>{const match=!query||normalize(section.textContent+' '+section.dataset.searchSection).includes(query);section.classList.toggle('search-hidden',!match);if(match)count++;});
-  searchStatus.textContent=query?(count?`找到 ${count} 個相關區塊；點 × 可回到全部內容。`:'找不到資料，可改搜「疫苗」、「房型」、「春節」或價格。'):'';
-}
-searchInput.addEventListener('input',runSearch); clearSearch.addEventListener('click',()=>{searchInput.value='';runSearch();searchInput.focus();});
 window.addEventListener('popstate',()=>switchView(location.hash.slice(1),{updateHistory:false,scroll:false}));
 mobileQuery.addEventListener('change',applyView); applyView();
