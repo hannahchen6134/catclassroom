@@ -344,6 +344,7 @@ section{margin-top:52px}
 .training-guide:nth-child(3)>img{object-position:50% 58%}
 .training-guide:nth-child(4)>img{object-position:50% 56%}
 .training-guide:nth-child(5)>img{object-position:50% 52%}
+.training-guide:nth-child(6)>img{object-position:50% 48%}
 .training-guide>div{padding:20px 22px}
 .training-guide small{display:inline-block;padding:3px 9px;border-radius:var(--radius-pill);color:#fff;background:var(--dark);font-size:11px;font-weight:650}
 .training-guide h4{margin:10px 0 12px;font:600 21px/1.45 "Noto Serif TC","PMingLiU",serif}
@@ -358,6 +359,7 @@ section{margin-top:52px}
   .training-guide:nth-child(3)>img{object-position:50% 48%}
   .training-guide:nth-child(4)>img{height:280px;object-position:50% 54%}
   .training-guide:nth-child(5)>img{height:280px;object-position:50% 50%}
+  .training-guide:nth-child(6)>img{height:280px;object-position:50% 46%}
   .training-guide>div{padding:17px 16px 19px}
   .training-guide h4{font-size:18px}
   .training-guide ol{font-size:13px;line-height:1.8}
