@@ -32,7 +32,15 @@ priceTabs.addEventListener('click', (event) => { const button = event.target.clo
 renderPriceTable(Object.keys(data.multiRoom)[0]);
 
 document.querySelector('#cancelBody').innerHTML = data.cancellation.map(row => `<tr><td>${row[0]}</td><td>${row[1]}</td></tr>`).join('');
-document.querySelector('#faqList').innerHTML = data.faq.map(([q,a], i) => `<details class="faq-item"><summary>${String(i+1).padStart(2,'0')}｜${q}</summary><p>${a}</p></details>`).join('');
+document.querySelector('#faqList').innerHTML = data.faqGroups.map((group) => `
+  <section class="faq-group">
+    <header><h3>${group.title}</h3><p>${group.note}</p></header>
+    <div class="faq-group-list">${group.items.map((item) => `
+      <details class="faq-item">
+        <summary>${item.situation}</summary>
+        <div class="faq-answer"><p><strong>可以這樣說</strong>${item.say}</p><p><strong>同時確認</strong>${item.check}</p></div>
+      </details>`).join('')}</div>
+  </section>`).join('');
 
 const icon = (name) => `<svg class="ui-icon" aria-hidden="true"><use href="#icon-${name}"></use></svg>`;
 document.querySelector('#sopTimeline').innerHTML = data.sopTimeline.map((item, index) => `

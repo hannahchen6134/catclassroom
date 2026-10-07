@@ -364,3 +364,24 @@ section{margin-top:52px}
   .training-guide h4{font-size:18px}
   .training-guide ol{font-size:13px;line-height:1.8}
 }
+
+/* SOP 話術：依現場情境分組，所有內容預設收合，避免手機資訊牆 */
+.faq-list{display:grid;grid-template-columns:1fr!important;gap:30px}
+.faq-group{margin:0}
+.faq-group>header{display:grid;gap:2px;margin-bottom:12px;padding-left:12px;border-left:6px solid var(--orange)}
+.faq-group:nth-child(2n)>header{border-color:var(--sage)}
+.faq-group:nth-child(3n)>header{border-color:var(--gold)}
+.faq-group h3{margin:0;font:600 21px/1.35 "Noto Serif TC","PMingLiU",serif}
+.faq-group>header p{margin:0;color:#6f6258;font-size:12px}
+.faq-group-list{display:grid;gap:12px}
+.faq-item{overflow:hidden;border:1px solid var(--dark);border-radius:var(--radius-card);background:var(--paper);box-shadow:2px 2px 0 var(--dark)}
+.faq-item summary{position:relative;padding:13px 42px 13px 15px;cursor:pointer;list-style:none;font-weight:650}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";position:absolute;right:15px;top:50%;transform:translateY(-50%);font-size:21px}
+.faq-item[open] summary::after{content:"−"}
+.faq-answer{display:grid;border-top:1px solid var(--dark)}
+.faq-answer p{display:grid;gap:4px;margin:0;padding:13px 15px;background:#fff;font-size:14px;line-height:1.8}
+.faq-answer p+p{border-top:1px solid rgba(68,55,47,.2);background:#f5eee3}
+.faq-answer strong{font-size:11px;letter-spacing:.08em;color:#80512e}
+@media(min-width:700px){.faq-group-list{grid-template-columns:1fr 1fr;align-items:start}}
+@media(max-width:699px){.faq-list{gap:34px}.faq-group h3{font-size:19px}.faq-item summary{font-size:14px}.faq-answer p{font-size:13px}}
