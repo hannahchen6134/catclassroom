@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261007-time24l">
+  <link rel="stylesheet" href="styles.css?v=20261007-time24m">
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true">
@@ -46,25 +46,25 @@
           <details class="memory-group time time-visual-group" open>
             <summary><span>24H</span><strong>住宿、工作與接待時間總覽</strong><small>同一條 0–24 點時間尺度</small></summary>
             <div class="time-visual">
-              <div class="time-legend"><span class="staying">住宿進行中</span><span class="working">員工值班</span><span class="closed">不辦交接</span><span class="normal">正常辦理</span><span class="charged">加費辦理</span></div>
+              <div class="time-legend"><span class="staying">住宿進行中</span><span class="working">員工值班</span><span class="closed">營業外・原則不接</span><span class="normal">正常辦理</span><span class="charged">安親費 10%</span></div>
               <div class="time-axis" aria-label="統一時間軸，每六小時一格，從凌晨零點到晚上二十四點"><i>每格 6 小時</i><div class="axis-scale"><span class="at-start">00:00</span><span style="--at:25%">06:00</span><span style="--at:50%">12:00</span><span style="--at:75%">18:00</span><span class="at-end">24:00</span></div></div>
               <h3 class="time-subtitle"><span>A</span>貓咪住宿與員工工作</h3>
               <div class="time-row combined-duty-row"><div class="time-row-label"><b>貓咪住宿</b><small>00:00–24:00</small></div><div class="time-track combined-duty-track"><span class="stay-segment combined-stay">住宿中・00:00–24:00 持續照顧</span><span class="shift-segment combined-shift"><b>員工值班</b><small>11:30–20:30</small></span></div></div>
               <h3 class="time-subtitle reception-subtitle"><span>B</span>入住與退房辦理</h3>
               <div class="time-row"><div class="time-row-label"><b>對外接待</b><small>可辦交接</small></div><div class="time-track"><span class="closed-segment closed-before segment-copy"><b>00–12</b><small>不辦理</small></span><span class="business-segment segment-copy"><b>12–19</b><small>接待</small></span><span class="closed-segment closed-after segment-copy"><b>19–24</b><small>不辦理</small></span></div></div>
-              <div class="time-row"><div class="time-row-label"><b>入住辦理</b><small>綠色才正常</small></div><div class="time-track"><span class="charged-segment checkin-before segment-copy"><b>00–15</b><small>加費</small></span><span class="normal-segment checkin-normal segment-copy"><b>15–19</b><small>正常</small></span><span class="charged-segment checkin-after segment-copy"><b>19–24</b><small>加費</small></span></div></div>
-              <div class="time-row"><div class="time-row-label"><b>退房辦理</b><small>綠色才正常</small></div><div class="time-track"><span class="charged-segment checkout-before segment-copy"><b>00–12</b><small>加費</small></span><span class="normal-segment checkout-normal segment-copy"><b>12–14</b><small>正常</small></span><span class="charged-segment checkout-after segment-copy"><b>14–24</b><small>加費</small></span></div></div>
+              <div class="time-row"><div class="time-row-label"><b>入住辦理</b><small>正常 15–19</small></div><div class="time-track"><span class="closed-segment closed-before segment-copy"><b>00–12</b><small>原則不接</small></span><span class="charged-segment checkin-early segment-copy"><b>12–15</b><small>＋10%</small></span><span class="normal-segment checkin-normal segment-copy"><b>15–19</b><small>正常</small></span><span class="closed-segment closed-after segment-copy"><b>19–24</b><small>原則不接</small></span></div></div>
+              <div class="time-row"><div class="time-row-label"><b>退房辦理</b><small>正常 12–14</small></div><div class="time-track"><span class="closed-segment closed-before segment-copy"><b>00–12</b><small>原則不接</small></span><span class="normal-segment checkout-normal segment-copy"><b>12–14</b><small>正常</small></span><span class="charged-segment checkout-late segment-copy"><b>14–19</b><small>＋10%</small></span><span class="closed-segment closed-after segment-copy"><b>19–24</b><small>原則不接</small></span></div></div>
               <p class="time-memory-cue"><b>順序記住：</b>11:30 員工上班 → 12:00 第一餐／開始接待 → 14:00 前退房 → 15:00 後正常入住。</p>
             </div>
             <div class="fee-visual">
-              <h3><span class="fee-heading-letter">C</span>綠色正常；其他時間加費</h3>
-              <p class="fee-base">計算基準＝入住房型的「一晚定價」</p>
+              <h3><span class="fee-heading-letter">C</span>10% 安親費與時間外 300 元</h3>
+              <p class="fee-base">橘色＝營業時間內提早／延後；灰色＝營業時間外，原則不接</p>
               <div class="fee-steps">
                 <p><small>未滿</small><b>30 分鐘</b><strong>不計費</strong></p>
                 <p><small>滿</small><b>30 分鐘</b><strong>房價 × 5%</strong></p>
                 <p><small>滿</small><b>60 分鐘</b><strong>房價 × 10%</strong></p>
               </div>
-              <div class="fee-examples"><p><b>例 1</b><span>14:30 入住</span><em>提早 30 分 → 加 5%</em></p><p><b>例 2</b><span>15:00 退房</span><em>延後 1 小時 → 加 10%</em></p></div>
+              <div class="fee-examples"><p><b>例 1</b><span>14:30 入住</span><em>提早 30 分 → 加 5%</em></p><p><b>例 2</b><span>15:00 退房</span><em>延後 1 小時 → 加 10%</em></p><p><b>例 3</b><span>11:00／20:00 接送</span><em>原則不接；夥伴核准才＋300 元／小時</em></p></div>
             </div>
           </details>
           <details class="memory-group health">
@@ -136,7 +136,7 @@
           <summary><span><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg></span><div><strong>住宿規定與優惠速查</strong><small>疫苗、費用、取消、春節等對外規則集中在這裡</small></div></summary>
           <div class="policy-reference-body">
         <div class="rule-grid">
-          <details class="rule-card"><summary><i>A</i><span>訂房、入住、退房</span></summary><ol><li>電話、粉專私訊或 LINE 聯繫，先了解貓況。</li><li>收總住宿費 30% 才保留房間；入住日結清。</li><li>入住 15:00–19:00；退房 12:00–14:00。</li><li>提早或延後要先預約並看房況，每小時收一晚定價 10%。</li><li>不過夜最低計 6 小時；超過 19:00 未退房算多住一晚。</li><li>入住、退房限委託人或指定代理人，需核對身分。</li></ol></details>
+          <details class="rule-card"><summary><i>A</i><span>訂房、入住、退房</span></summary><ol><li>電話、粉專私訊或 LINE 聯繫，先了解貓況。</li><li>收總住宿費 30% 才保留房間；入住日結清。</li><li>入住 15:00–19:00；退房 12:00–14:00。</li><li>12:00–19:00 內提早入住或延後退房，按一晚定價每小時 10%、半小時 5%。</li><li>12:00 前／19:00 後原則不接；夥伴核准可行時，每小時加收 300 元。</li><li>入住、退房限委託人或指定代理人，需核對身分。</li></ol></details>
           <details class="rule-card"><summary><i>B</i><span>健康資格與不適合入住</span></summary><ul><li>3 年內核心疫苗、1 個月內體外驅蟲證明。</li><li>疫苗施打後 7 日內不適合入住。</li><li>滿 6 個月原則上需結紮；3–6 個月、15 歲以上先評估。</li><li>未離乳／3 個月以下、術後未康復、需擠便擠尿或定時皮下注射者不適合。</li><li>重大或傳染性疾病、寄生蟲感染不適合。</li><li>頻繁噴尿需特殊清潔，可酌收 2,000 元／間。</li></ul></details>
           <details class="rule-card"><summary><i>C</i><span>家長準備與店內配合</span></summary><ul><li>帶平常食物、熟悉氣味衣物／毯子／玩具；特殊貓砂也可自備。</li><li>交代份量、時間、溫度、營養品與特殊餵食法。</li><li>可配合乾飼料、罐頭、生食、鮮食與每天 2–4 次餵食。</li><li>店內常備皇家 F32、Orijen、礦砂、木屑／松木砂及大小砂盆。</li><li>代購用品、代送美容的商品與交通費由家長負擔。</li></ul></details>
           <details class="rule-card"><summary><i>D</i><span>活動、照顧與回報</span></summary><ul><li>一次只接待一組，參觀／入住／拜訪都先預約。</li><li>共同活動須家長同意，且吃喝排泄正常、願意出房、無明顯緊張或攻擊。</li><li>不適合共同活動則安排單獨活動。</li><li>刷牙、梳毛、塞藥、針筒灌水若引起強烈情緒，可依現場狀況拒絕或轉介。</li><li>以照片、影片、文字回報吃喝、排泄、便便與活動狀況。</li></ul></details>
@@ -161,6 +161,6 @@
     <footer><img src="assets/logo.png" alt=""><div><b>做貓的好室友</b><p>SOP 更新 2026-10-07・供新人上班複習與現場速查</p></div></footer>
   </div>
   <nav class="mobile-nav" aria-label="手機主題切換"><button class="active" type="button" data-view="numbers"><span>15</span>重點</button><button type="button" data-view="rooms"><span>⌂</span>房型</button><button type="button" data-view="rules"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg>SOP</button><button type="button" data-view="quiz"><span>?</span>抽考</button><button type="button" data-view="faq"><span>Q</span>話術</button></nav>
-  <script src="data.js?v=20261007-time24l"></script><script src="app.js?v=20261007-time24l"></script>
+  <script src="data.js?v=20261007-time24m"></script><script src="app.js?v=20261007-time24m"></script>
 </body>
 </html>
