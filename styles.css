@@ -315,6 +315,7 @@ section{margin-top:52px}
 .stamp,.room-id,.time-legend span,.timeline-copy time,.sop-module summary strong i{border-radius:var(--radius-pill)}
 .number-card,.room-card,.table-drawer,.spring-card,.quiz-card,.rule-card,.faq-item,.more-numbers,.memory-group,.privacy-note,.safety-strip,.sop-flow,.sop-detail-drawer,.sop-module,.decision-map,.service-flow,.policy-reference{border-radius:var(--radius-card);overflow:hidden}
 .section-head>span,.sop-subhead>span,.timeline-mark,.timeline-copy,.sop-map-center,.sop-map-branches a,.sop-flow-title,.sop-flow li,.time-track,.time-memory-cue,.fee-steps p,.service-flow li i{border-radius:var(--radius-inner)}
+.time-track{border-radius:0}
 .room-photo{overflow:hidden;border-radius:calc(var(--radius-card) - 2px) 0 0 calc(var(--radius-card) - 2px)}
 .quiz-stage{overflow:hidden;border-radius:calc(var(--radius-card) - 2px) calc(var(--radius-card) - 2px) 0 0}
 .sop-detail-body,.policy-reference-body,.spring-body{padding:20px}
