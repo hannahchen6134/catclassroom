@@ -348,6 +348,11 @@ section{margin-top:52px}
 .training-guide>div{padding:20px 22px}
 .training-guide small{display:inline-block;padding:3px 9px;border-radius:var(--radius-pill);color:#fff;background:var(--dark);font-size:11px;font-weight:650}
 .training-guide h4{margin:10px 0 12px;font:600 21px/1.45 "Noto Serif TC","PMingLiU",serif}
+.cleaning-memory{margin:0 0 16px;padding:13px;border:1px solid var(--dark);border-radius:var(--radius-inner);background:#f2dfc3}
+.cleaning-memory>strong{display:block;margin-bottom:10px;font:700 20px/1.35 "Noto Serif TC","PMingLiU",serif;letter-spacing:.08em;text-align:center}
+.cleaning-memory>div{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.cleaning-memory span{display:grid;gap:2px;padding:7px 4px;border-radius:8px;background:#fff;text-align:center}
+.cleaning-memory b{font-size:13px}.cleaning-memory i{color:#6b5e55;font-size:9px;font-style:normal;white-space:nowrap}
 .training-guide ol{margin:0;padding-left:24px;font-size:14px;line-height:1.85}
 .training-guide li+li{margin-top:7px}
 @media(max-width:699px){
@@ -362,6 +367,7 @@ section{margin-top:52px}
   .training-guide:nth-child(6)>img{height:280px;object-position:50% 46%}
   .training-guide>div{padding:17px 16px 19px}
   .training-guide h4{font-size:18px}
+  .cleaning-memory{padding:11px}.cleaning-memory>strong{font-size:18px}.cleaning-memory>div{grid-template-columns:repeat(2,minmax(0,1fr))}.cleaning-memory span{padding:8px 5px}.cleaning-memory i{font-size:10px}
   .training-guide ol{font-size:13px;line-height:1.8}
 }
 
