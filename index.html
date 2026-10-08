@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261008-care1">
+  <link rel="stylesheet" href="styles.css?v=20261008-clockin1">
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true">
@@ -44,12 +44,12 @@
               <div class="time-legend"><span class="staying">住宿進行中</span><span class="working">員工值班</span><span class="closed">營業外・原則不接</span><span class="normal">正常辦理</span><span class="charged">額外加費</span></div>
               <div class="time-axis" aria-label="統一時間軸，每六小時一格，從凌晨零點到晚上二十四點"><i>每格 6 小時</i><div class="axis-scale"><span class="at-start">00:00</span><span style="--at:25%">06:00</span><span style="--at:50%">12:00</span><span style="--at:75%">18:00</span><span class="at-end">24:00</span></div></div>
               <h3 class="time-subtitle"><span>A</span>貓咪住宿與員工工作</h3>
-              <div class="time-row combined-duty-row"><div class="time-row-label"><b>貓咪住宿</b><small>00:00–24:00</small></div><div class="time-track combined-duty-track"><span class="stay-segment combined-stay">住宿中・00:00–24:00 持續照顧</span><span class="shift-segment combined-shift"><b>員工值班</b><small>11:30–20:30</small></span></div></div>
+              <div class="time-row combined-duty-row"><div class="time-row-label"><b>貓咪住宿</b><small>00:00–24:00</small></div><div class="time-track combined-duty-track"><span class="stay-segment combined-stay">住宿中・00:00–24:00 持續照顧</span><span class="shift-segment combined-shift"><b>11:30 打卡</b><small>巡場 → 值班至 20:30</small></span></div></div>
               <h3 class="time-subtitle reception-subtitle"><span>B</span>入住與退房辦理</h3>
               <div class="time-row"><div class="time-row-label"><b>對外接待</b><small>可辦交接</small></div><div class="time-track"><span class="closed-segment closed-before segment-copy"><b>00–12</b><small>不辦理</small></span><span class="business-segment segment-copy"><b>12–19</b><small>接待</small></span><span class="closed-segment closed-after segment-copy"><b>19–24</b><small>不辦理</small></span></div></div>
               <div class="time-row"><div class="time-row-label"><b>入住辦理</b><small>正常 15–19</small></div><div class="time-track"><span class="closed-segment closed-before segment-copy"><b>00–12</b><small>原則不接</small></span><span class="charged-segment checkin-early segment-copy"><b>12–15</b><small>＋10%</small></span><span class="normal-segment checkin-normal segment-copy"><b>15–19</b><small>正常</small></span><span class="closed-segment closed-after segment-copy"><b>19–24</b><small>原則不接</small></span></div></div>
               <div class="time-row"><div class="time-row-label"><b>退房辦理</b><small>正常 12–14</small></div><div class="time-track"><span class="closed-segment closed-before segment-copy"><b>00–12</b><small>原則不接</small></span><span class="normal-segment checkout-normal segment-copy"><b>12–14</b><small>正常</small></span><span class="charged-segment checkout-late segment-copy"><b>14–19</b><small>＋10%</small></span><span class="closed-segment closed-after segment-copy"><b>19–24</b><small>原則不接</small></span></div></div>
-              <p class="time-memory-cue"><b>順序記住：</b>11:30 員工上班 → 12:00 第一餐／開始接待 → 14:00 前退房 → 15:00 後正常入住。</p>
+              <p class="time-memory-cue"><b>順序記住：</b>11:30 打卡 → 巡場 → 12:00 第一輪照護／開始接待 → 14:00 前退房 → 15:00 後正常入住。</p>
             </div>
             <div class="fee-visual">
               <h3><span class="fee-heading-letter">C</span>10% 安親費與時間外 300 元</h3>
@@ -94,7 +94,7 @@
       </section>
 
       <section id="rules" data-view-panel="rules" data-search-section="工作 SOP 值班 時程 清潔 消毒 餵食 鮮食 活動 用藥 備品 入住 退房 參觀 接待 規則 健康 就醫 取消 優惠 春節">
-        <div class="section-head"><span>04</span><div><h2>工作 SOP 視覺筆記</h2><p>先背 7 步驟；工作時再展開細節</p></div></div>
+        <div class="section-head"><span>04</span><div><h2>工作 SOP 視覺筆記</h2><p>先背 8 步驟；工作時再展開細節</p></div></div>
 
         <div class="sop-mode-switch" role="tablist" aria-label="選擇 SOP 閱讀方式">
           <button class="active" type="button" role="tab" aria-selected="true" data-sop-mode="learn">學習模式<small>完整理解與背誦</small></button>
@@ -103,26 +103,27 @@
 
         <section class="duty-quick-panel" id="dutyQuickPanel" aria-label="值班速查" hidden>
           <header class="duty-quick-head"><div><span>現在要做什麼</span><strong id="dutyQuickStatus">依時間顯示值班步驟</strong></div><button type="button" id="dutyRefresh">更新現在時間</button></header>
-          <div class="duty-step-tabs" id="dutyStepTabs" role="tablist" aria-label="七個值班步驟"></div>
+          <div class="duty-step-tabs" id="dutyStepTabs" role="tablist" aria-label="八個值班步驟"></div>
           <article class="duty-step-card" id="dutyStepCard" aria-live="polite"></article>
           <div class="duty-service-shortcuts"><span>客人到店：</span><button type="button" data-service-jump="入住流程">入住</button><button type="button" data-service-jump="退房流程">退房</button><button type="button" data-service-jump="參觀流程">參觀</button></div>
         </section>
 
-        <div class="sop-flow" aria-label="今日值班七步驟">
-          <div class="sop-flow-title"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg><div><strong>今日值班 7 步驟</strong><small>照號碼走：桌面由左到右，手機由上往下</small></div></div>
+        <div class="sop-flow" aria-label="今日值班八步驟">
+          <div class="sop-flow-title"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg><div><strong>今日值班 8 步驟</strong><small>先打卡，再照號碼走：桌面由左到右，手機由上往下</small></div></div>
           <ol>
-            <li><b>1</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-eye"></use></svg><time>11:30</time><strong>先巡場</strong><span>找異常、看特殊要求</span></li>
-            <li><b>2</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-bowl"></use></svg><time>12:00</time><strong>第一輪照護</strong><span>餵食、活動、清房、洗碗</span></li>
-            <li><b>3</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-message"></use></svg><time>13:00</time><strong>早安回報</strong><span>照片或影片＋觀察</span></li>
-            <li><b>4</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg><time>15:00</time><strong>訊息與準備</strong><span>回訊息、準備隔日</span></li>
-            <li><b>5</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-bowl"></use></svg><time>17:00</time><strong>第二輪照護</strong><span>餵食、活動、清房、洗碗</span></li>
-            <li><b>6</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-message"></use></svg><time>19:20</time><strong>晚安回報</strong><span>詳細寫今天的狀況</span></li>
-            <li><b>7</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-sparkle"></use></svg><time>20:00</time><strong>收班清潔</strong><span>完成清潔再下班</span></li>
+            <li><b>1</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-clock"></use></svg><time>11:30</time><strong>到班打卡</strong><span>先完成打卡</span></li>
+            <li><b>2</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-eye"></use></svg><time>11:30</time><strong>先巡場</strong><span>找異常、看特殊要求</span></li>
+            <li><b>3</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-bowl"></use></svg><time>12:00</time><strong>第一輪照護</strong><span>餵食、活動、清房、洗碗</span></li>
+            <li><b>4</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-message"></use></svg><time>13:00</time><strong>早安回報</strong><span>照片或影片＋觀察</span></li>
+            <li><b>5</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg><time>15:00</time><strong>訊息與準備</strong><span>回訊息、準備隔日</span></li>
+            <li><b>6</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-bowl"></use></svg><time>17:00</time><strong>第二輪照護</strong><span>餵食、活動、清房、洗碗</span></li>
+            <li><b>7</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-message"></use></svg><time>19:20</time><strong>晚安回報</strong><span>詳細寫今天的狀況</span></li>
+            <li><b>8</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-sparkle"></use></svg><time>20:00</time><strong>收班清潔</strong><span>完成清潔再下班</span></li>
           </ol>
         </div>
 
         <details class="sop-detail-drawer" id="sop-timeline">
-          <summary><span>01</span><div><strong>工作時查：7 步驟完整做法</strong><small>做到哪一步，就展開查那一段</small></div></summary>
+          <summary><span>01</span><div><strong>工作時查：8 步驟完整做法</strong><small>做到哪一步，就展開查那一段</small></div></summary>
           <div class="sop-detail-body"><ol class="sop-timeline" id="sopTimeline"></ol><aside class="safety-strip"><svg class="ui-icon" aria-hidden="true"><use href="#icon-shield"></use></svg><p><strong>輪休安全口訣</strong><span>一人離區＝公共區只留同一家；其他房門全部上鎖。</span></p></aside></div>
         </details>
 
@@ -196,6 +197,6 @@
     <footer><img src="assets/logo.png" alt=""><div><b>做貓的好室友</b><p>SOP 更新 2026-10-08・供新人上班複習與現場速查</p></div></footer>
   </div>
   <nav class="mobile-nav" aria-label="手機主題切換"><button class="active" type="button" data-view="numbers"><span>15</span>重點</button><button type="button" data-view="rooms"><span>⌂</span>房型</button><button type="button" data-view="rules"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg>SOP</button><button type="button" data-view="quiz"><span>?</span>抽考</button><button type="button" data-view="faq"><span>Q</span>話術</button></nav>
-  <script src="data.js?v=20261008-care1"></script><script src="app.js?v=20261008-care1"></script>
+  <script src="data.js?v=20261008-clockin1"></script><script src="app.js?v=20261008-clockin1"></script>
 </body>
 </html>

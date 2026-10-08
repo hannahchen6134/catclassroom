@@ -249,7 +249,7 @@ body,button,input{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",
 .sop-flow-title{display:flex;gap:12px;align-items:center;margin-bottom:24px;padding:14px;border:1px solid var(--dark);background:var(--gold)}
 .sop-flow-title>.ui-icon{flex:0 0 auto;width:36px;height:36px;stroke-width:2}
 .sop-flow-title>div{display:grid}.sop-flow-title strong{font:600 21px/1.4 "Noto Serif TC","PMingLiU",serif}.sop-flow-title small{font-size:12px}
-.sop-flow ol{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:18px;margin:0;padding:0;list-style:none}
+.sop-flow ol{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:14px;margin:0;padding:0;list-style:none}
 .sop-flow li{position:relative;display:grid;justify-items:center;align-content:start;min-width:0;min-height:156px;padding:13px 7px 10px;border:1px solid var(--dark);background:#fff;text-align:center}
 .sop-flow li:nth-child(2n){background:#f5e3ce}.sop-flow li:nth-child(3n){background:#e6efe7}
 .sop-flow li:not(:last-child)::after{content:"→";position:absolute;z-index:3;top:50%;right:-17px;transform:translateY(-50%);width:16px;background:var(--paper);font-size:20px;font-weight:700;line-height:1;text-align:center}
@@ -398,7 +398,7 @@ section{margin-top:52px}
 .duty-quick-head{display:flex;justify-content:space-between;gap:12px;align-items:center;padding-bottom:14px;border-bottom:1px solid #baa99b}
 .duty-quick-head>div{display:grid;gap:2px}.duty-quick-head span{font-size:11px;font-weight:700;letter-spacing:.08em;color:#795d44}.duty-quick-head strong{font:600 18px/1.45 "Noto Serif TC","PMingLiU",serif}
 .duty-quick-head button,.duty-service-shortcuts button{padding:8px 11px;border:1px solid var(--dark);border-radius:var(--radius-inner);background:#fff;font:600 11px/1.2 "Noto Sans TC",sans-serif;cursor:pointer}
-.duty-step-tabs{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin:16px 0}
+.duty-step-tabs{display:grid;grid-template-columns:repeat(8,1fr);gap:7px;margin:16px 0}
 .duty-step-tabs button{display:grid;justify-items:center;gap:2px;min-width:0;padding:8px 3px;border:1px solid #9a8a7e;border-radius:var(--radius-inner);color:var(--dark);background:#fff;cursor:pointer}
 .duty-step-tabs button>span{display:grid;width:22px;height:22px;place-items:center;border-radius:50%;color:#fff;background:var(--dark);font-size:10px;font-weight:700}.duty-step-tabs time{font-size:9px;font-weight:700;font-variant-numeric:tabular-nums}.duty-step-tabs b{overflow:hidden;width:100%;font-size:9px;text-overflow:ellipsis;white-space:nowrap}
 .duty-step-tabs button.active{background:var(--gold);box-shadow:2px 2px 0 var(--dark)}
