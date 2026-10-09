@@ -363,6 +363,7 @@ section{margin-top:52px}
 .water-bowl-guide>img{object-position:50% 16%}
 .green-basin-guide>img{object-position:50% 31%}
 .checkout-litter-guide>img{object-position:50% 50%}
+.cleaning-bottle-guide>img{object-position:50% 28%}
 .bag-tag-guide>img{object-position:50% 52%}
 .bag-storage-guide>img{object-position:50% 45%}
 .entry-door-guide>img{object-position:50% 43%}
@@ -413,6 +414,7 @@ section{margin-top:52px}
   .water-bowl-guide>img{height:360px;object-position:50% 12%}
   .green-basin-guide>img{height:300px;object-position:50% 28%}
   .checkout-litter-guide>img{height:280px;object-position:50% 50%}
+  .cleaning-bottle-guide>img{height:360px;object-position:50% 24%}
   .bag-tag-guide>img,.bag-storage-guide>img,.entry-door-guide>img{height:280px}
   .training-guide>div{padding:17px 16px 19px}
   .training-guide h4{font-size:18px}
