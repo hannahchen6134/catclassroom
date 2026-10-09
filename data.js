@@ -81,7 +81,7 @@ window.CATROOMMATE_DATA = {
     { category: "取消優惠", question: "入住前 1 天取消，退多少訂金？", answer: "20%。" },
     { category: "取消優惠", question: "入住當天取消，退多少訂金？", answer: "0%。" },
     { category: "取消優惠", question: "怎麼取得老室友資格？", answer: "累計住滿 10 晚，取得 1 年資格。" },
-    { category: "取消優惠", question: "老室友非連假與連假的折扣？", answer: "非連假 8 折；連續假日 9 折。春節不適用。" },
+    { category: "取消優惠", question: "一般連假可以直接向客人承諾老室友 9 折嗎？", answer: "不可以。官網說法不一致：房型價格頁寫老室友連假 9 折，住宿須知寫連假不適用任何優惠；報價前要查當期公告或詢問夥伴。" },
     { category: "取消優惠", question: "長住 10、20、30 晚各打幾折？", answer: "10 晚 8 折、20 晚 75 折、30 晚 7 折。" },
     { category: "春節", question: "2027 春節住宿期間？", answer: "2027/2/3–2/10，共 8 晚。" },
     { category: "春節", question: "2027 春節至少要住幾晚？", answer: "至少包含連續假期 5 晚。" },
