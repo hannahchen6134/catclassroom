@@ -360,6 +360,7 @@ section{margin-top:52px}
 .training-guide:nth-child(4)>img{object-position:50% 56%}
 .training-guide:nth-child(5)>img{object-position:50% 52%}
 .training-guide:nth-child(6)>img{object-position:50% 48%}
+.water-bowl-guide>img{object-position:50% 16%}
 .bag-tag-guide>img{object-position:50% 52%}
 .bag-storage-guide>img{object-position:50% 45%}
 .entry-door-guide>img{object-position:50% 43%}
@@ -407,6 +408,7 @@ section{margin-top:52px}
   .training-guide:nth-child(4)>img{height:280px;object-position:50% 54%}
   .training-guide:nth-child(5)>img{height:280px;object-position:50% 50%}
   .training-guide:nth-child(6)>img{height:280px;object-position:50% 46%}
+  .water-bowl-guide>img{height:360px;object-position:50% 12%}
   .bag-tag-guide>img,.bag-storage-guide>img,.entry-door-guide>img{height:280px}
   .training-guide>div{padding:17px 16px 19px}
   .training-guide h4{font-size:18px}
