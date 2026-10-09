@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261009-bottlelabels1">
+  <link rel="stylesheet" href="styles.css?v=20261009-roommap1">
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true">
@@ -34,7 +34,7 @@
       <div class="hero-copy"><span class="eyebrow">CATROOMMATE · 新人值班用</span><h1>貓室友<br>上班筆記</h1><span class="stamp">SOP 更新 2026.10.09</span></div>
     </header>
     <main id="main">
-      <nav class="jump-nav" aria-label="學習主題分頁"><a class="active" href="#numbers" data-view="numbers" aria-current="page">必背數字</a><a href="#rooms" data-view="rooms">房型</a><a href="#rules" data-view="rules">工作 SOP</a><a href="#quiz" data-view="quiz">抽考題庫</a><a href="#faq" data-view="faq">話術</a></nav>
+      <nav class="jump-nav" aria-label="學習主題分頁"><a class="active" href="#numbers" data-view="numbers" aria-current="page">必背數字</a><a href="#rooms" data-view="rooms">房型</a><a href="#roommap" data-view="roommap">房號圖</a><a href="#rules" data-view="rules">工作 SOP</a><a href="#quiz" data-view="quiz">抽考題庫</a><a href="#faq" data-view="faq">話術</a></nav>
 
       <section id="numbers" data-view-panel="numbers" data-search-section="必背數字 時間 入住 退房 營業 安親 提前 延後 收費 訂金 疫苗 驅蟲 結紮">
         <div class="section-head"><span>01</span><div><h2>入住退房時間與加費</h2><p>只看何時正常、何時加費</p></div></div>
@@ -99,6 +99,35 @@
           <footer><b>2027/2/3–2/10</b><span>春節期間不適用任何折扣，至少入住 5 晚。</span><a href="https://www.cat-roommate.com/SpringFestival.html" target="_blank" rel="noopener noreferrer">查看官網公告 ↗</a></footer>
         </article>
         <details class="table-drawer"><summary>打開多間房完整價格表</summary><div class="tabs" id="priceTabs" role="tablist"></div><div class="table-scroll"><table><thead><tr><th>房間數</th><th>1 隻</th><th>2 隻</th><th>3 隻</th><th>4 隻</th><th>5 隻</th><th>6 隻</th></tr></thead><tbody id="priceBody"></tbody></table></div><p class="fine-print">四種房型皆不適用春節一般定價；春節另有公告價格。</p></details>
+      </section>
+
+      <section id="roommap" data-view-panel="roommap" data-search-section="房號 房間 位置 地圖 100 101 102 103 104 105 106 107 108 201 202 203 204 205 206 207 208 209 210 211 212 213 214 301 302 303 304 305 306 501 502">
+        <div class="section-head"><span>MAP</span><div><h2>房號位置圖</h2><p>找房時只看位置，不看入住狀態</p></div></div>
+        <div class="room-map-note"><b>固定房號圖</b><span>照片中的貓名、日期與紅綠狀態會變動，因此這裡只保留不會過期的房號位置。</span></div>
+        <div class="room-map-scroll" role="region" aria-label="房號位置圖，手機可左右滑動" tabindex="0">
+          <div class="room-map-board">
+            <div class="room-map-top">
+              <div class="map-room map-room-tall"><strong>100</strong></div>
+              <div class="room-map-200" aria-label="200 系列房間">
+                <div class="map-room"><strong>201</strong></div><div class="map-room"><strong>203</strong></div><div class="map-room"><strong>205</strong></div><div class="map-room"><strong>207</strong></div><div class="map-room"><strong>209</strong></div><div class="map-room"><strong>211</strong></div><div class="map-room"><strong>213</strong></div>
+                <div class="map-room"><strong>202</strong></div><div class="map-room"><strong>204</strong></div><div class="map-room"><strong>206</strong></div><div class="map-room"><strong>208</strong></div><div class="map-room"><strong>210</strong></div><div class="map-room"><strong>212</strong></div><div class="map-room"><strong>214</strong></div>
+              </div>
+            </div>
+            <div class="room-map-side-pair" aria-label="107 與 108 房"><div class="map-room"><strong>107</strong></div><div class="map-room"><strong>108</strong></div></div>
+            <div class="room-map-lower">
+              <div class="room-map-cluster room-map-left" aria-label="301 至 304 房">
+                <div class="map-room"><strong>301</strong></div><div class="map-room"><strong>303</strong></div><div class="map-room"><strong>302</strong></div><div class="map-room"><strong>304</strong></div>
+              </div>
+              <div class="room-map-cluster room-map-center" aria-label="101 至 106 房">
+                <div class="map-room"><strong>103</strong></div><div class="map-room"><strong>104</strong></div><div class="map-room"><strong>102</strong></div><div class="map-room"><strong>105</strong></div><div class="map-room"><strong>101</strong></div><div class="map-room"><strong>106</strong></div>
+              </div>
+              <div class="room-map-cluster room-map-right" aria-label="305、306、501 與 502 房">
+                <div class="map-room"><strong>305</strong></div><div class="map-room"><strong>306</strong></div><div class="map-room"><strong>501</strong></div><div class="map-room"><strong>502</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="room-map-swipe">手機版可左右滑動，完整保留房間的相對位置。</p>
       </section>
 
       <section id="quiz" data-view-panel="quiz" data-search-section="抽考 測驗 背誦 題庫 房型 時間 健康 照顧 取消 優惠 春節 SOP 接待 清潔 入住 退房 參觀">
@@ -249,7 +278,7 @@
 
     <footer><img src="assets/logo.png" alt=""><div><b>做貓的好室友</b><p>SOP 更新 2026-10-09・供新人上班複習與現場速查</p></div></footer>
   </div>
-  <nav class="mobile-nav" aria-label="手機主題切換"><button class="active" type="button" data-view="numbers"><span>15</span>重點</button><button type="button" data-view="rooms"><span>⌂</span>房型</button><button type="button" data-view="rules"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg>SOP</button><button type="button" data-view="quiz"><span>?</span>抽考</button><button type="button" data-view="faq"><span>Q</span>話術</button></nav>
+  <nav class="mobile-nav" aria-label="手機主題切換"><button class="active" type="button" data-view="numbers"><span>15</span>重點</button><button type="button" data-view="rooms"><span>⌂</span>房型</button><button type="button" data-view="roommap"><span>▦</span>房號</button><button type="button" data-view="rules"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg>SOP</button><button type="button" data-view="quiz"><span>?</span>抽考</button><button type="button" data-view="faq"><span>Q</span>話術</button></nav>
   <script src="data.js?v=20261009-catnotes1"></script><script src="app.js?v=20261009-catnotes1"></script>
 </body>
 </html>
