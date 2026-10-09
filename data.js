@@ -1,5 +1,5 @@
 window.CATROOMMATE_DATA = {
-  updated: "2026.10.08",
+  updated: "2026.10.09",
   rooms: [
     { id: "CLS", name: "經典小木屋", image: "assets/room-classic.jpg", price: 750, extra: "第 2 隻起每隻 +150 元", capacity: 2, size: "90×90×150 cm", feature: "雙層跳台、隱密貓窩，上下左右可互通", memory: "入門價 750；最多 2 隻。經典＝最基本、最好先背。" },
     { id: "SUN", name: "陽光小木屋", image: "assets/room-sun.jpg", price: 900, extra: "第 2 隻起每隻 +150 元", capacity: 2, size: "90×90×150 cm", feature: "有專屬對外窗，適合看窗外、曬太陽", memory: "和經典同尺寸、同容量；陽光多一扇對外窗，價格 900。" },

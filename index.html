@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261008-videostills2">
+  <link rel="stylesheet" href="styles.css?v=20261009-holidayrates1">
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true">
@@ -30,7 +30,7 @@
   <div class="site-shell">
     <header class="hero" id="top">
       <div class="hero-mark"><img src="assets/logo.png" alt="貓室友 Catroommate"></div>
-      <div class="hero-copy"><span class="eyebrow">CATROOMMATE · 新人值班用</span><h1>貓室友<br>上班筆記</h1><span class="stamp">SOP 更新 2026.10.08</span></div>
+      <div class="hero-copy"><span class="eyebrow">CATROOMMATE · 新人值班用</span><h1>貓室友<br>上班筆記</h1><span class="stamp">SOP 更新 2026.10.09</span></div>
     </header>
     <main id="main">
       <nav class="jump-nav" aria-label="學習主題分頁"><a class="active" href="#numbers" data-view="numbers" aria-current="page">必背數字</a><a href="#rooms" data-view="rooms">房型</a><a href="#rules" data-view="rules">工作 SOP</a><a href="#quiz" data-view="quiz">抽考題庫</a><a href="#faq" data-view="faq">話術</a></nav>
@@ -74,9 +74,28 @@
         </div>
       </section>
 
-      <section id="rooms" data-view-panel="rooms" data-search-section="房型 經典 陽光 太空 豪華 價格 尺寸 容量 加貓">
+      <section id="rooms" data-view-panel="rooms" data-search-section="房型 經典 陽光 太空 豪華 價格 尺寸 容量 加貓 連假 春節 老室友 折扣">
         <div class="section-head"><span>02</span><div><h2>看照片認房型</h2><p>價格、容量、特色一次記</p></div></div>
         <div class="room-grid" id="roomGrid"></div>
+        <article class="holiday-rate-card" aria-labelledby="holidayRateTitle">
+          <header>
+            <span>先分清楚</span>
+            <div><h3 id="holidayRateTitle">一般連假 ≠ 2027 春節</h3><p>一般連假看優惠；春節才換成特別房價</p></div>
+          </header>
+          <div class="holiday-rate-grid">
+            <div class="regular-holiday-rate">
+              <small>一般連續假日</small>
+              <strong>老室友 9 折</strong>
+              <ul><li>春節不適用老室友折扣。</li><li>連假及前一日不適用長住折扣。</li></ul>
+            </div>
+            <div class="spring-holiday-rate">
+              <small>2027 春節特別價／每晚</small>
+              <dl><div><dt>經典</dt><dd>1,500</dd></div><div><dt>陽光</dt><dd>1,800</dd></div><div><dt>太空</dt><dd>2,400</dd></div><div><dt>豪華</dt><dd>4,200</dd></div></dl>
+              <p>加貓：經典、陽光第 2 隻 +300；太空、豪華第 3 隻起每隻 +300 元。</p>
+            </div>
+          </div>
+          <footer><b>2027/2/3–2/10</b><span>春節期間不適用任何折扣，至少入住 5 晚。</span><a href="https://www.cat-roommate.com/SpringFestival.html" target="_blank" rel="noopener noreferrer">查看官網公告 ↗</a></footer>
+        </article>
         <details class="table-drawer"><summary>打開多間房完整價格表</summary><div class="tabs" id="priceTabs" role="tablist"></div><div class="table-scroll"><table><thead><tr><th>房間數</th><th>1 隻</th><th>2 隻</th><th>3 隻</th><th>4 隻</th><th>5 隻</th><th>6 隻</th></tr></thead><tbody id="priceBody"></tbody></table></div><p class="fine-print">四種房型皆不適用春節一般定價；春節另有公告價格。</p></details>
       </section>
 
@@ -207,9 +226,9 @@
 
     </main>
 
-    <footer><img src="assets/logo.png" alt=""><div><b>做貓的好室友</b><p>SOP 更新 2026-10-08・供新人上班複習與現場速查</p></div></footer>
+    <footer><img src="assets/logo.png" alt=""><div><b>做貓的好室友</b><p>SOP 更新 2026-10-09・供新人上班複習與現場速查</p></div></footer>
   </div>
   <nav class="mobile-nav" aria-label="手機主題切換"><button class="active" type="button" data-view="numbers"><span>15</span>重點</button><button type="button" data-view="rooms"><span>⌂</span>房型</button><button type="button" data-view="rules"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg>SOP</button><button type="button" data-view="quiz"><span>?</span>抽考</button><button type="button" data-view="faq"><span>Q</span>話術</button></nav>
-  <script src="data.js?v=20261008-carecleanup1"></script><script src="app.js?v=20261008-itemlabels1"></script>
+  <script src="data.js?v=20261009-holidayrates1"></script><script src="app.js?v=20261008-itemlabels1"></script>
 </body>
 </html>
