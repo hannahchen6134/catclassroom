@@ -74,9 +74,11 @@ document.querySelector('#coreFlowList').innerHTML = data.coreFlows.map((flow, fl
   <details class="core-flow" ${flowIndex === 0 ? 'open' : ''}>
     <summary><span>${icon(flow.icon)}</span><span><small>流程 ${flowIndex + 1}</small><strong>${flow.title}</strong><em>${flow.cue}</em></span></summary>
     <div class="core-flow-body">
-      ${flow.alert ? `<p class="core-flow-alert"><strong>晚上特別注意</strong>${flow.alert}</p>` : ''}
+      <div class="flow-reading-order" aria-label="流程卡閱讀順序"><span>先做</span><span>實際步驟</span><span>完成確認</span><span>禁止</span></div>
+      ${flow.alert ? `<p class="core-flow-alert"><strong>禁止／特別注意</strong>${flow.alert}</p>` : ''}
       <ol>${flow.phases.map((phase, phaseIndex) => `<li><b>${phaseIndex + 1}</b><div><strong>${phase.title}</strong><ul>${phase.steps.map(step => `<li>${step}</li>`).join('')}</ul></div></li>`).join('')}</ol>
-      ${flow.closing ? `<p class="core-flow-closing"><strong>全部完成後</strong>${flow.closing}</p>` : ''}
+      ${flow.closing ? `<p class="core-flow-closing"><strong>完成確認</strong>${flow.closing}</p>` : ''}
+      <p class="core-flow-guides"><strong>看現場示範</strong>${flow.title.includes('入住') ? '<a href="#rules" data-guide-target="guide-door-marking">房門標名</a><a href="#rules" data-guide-target="video-guides">物品收納</a>' : '<a href="#rules" data-guide-target="guide-room-cleaning">清房現場</a><a href="#rules" data-guide-target="guide-litter-cleaning">清砂方式</a><a href="#rules" data-guide-target="guide-dish-dryer">洗碗烘乾</a>'}</p>
     </div>
   </details>`).join('');
 document.querySelector('#serviceFlowList').innerHTML = data.serviceFlows.map(flow => `
@@ -99,6 +101,13 @@ function bindExclusiveDetails(containerSelector, itemSelector) {
 bindExclusiveDetails('#sopModuleGrid', '.sop-module');
 bindExclusiveDetails('#coreFlowList', '.core-flow');
 bindExclusiveDetails('#serviceFlowList', '.service-flow');
+document.querySelectorAll('.core-flow-guides a').forEach(link => link.addEventListener('click', event => {
+  event.preventDefault();
+  const library = document.querySelector('.guide-library');
+  if (library) library.open = true;
+  const target = document.querySelector(`#${link.dataset.guideTarget}`);
+  if (target) requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+}));
 
 const rulesPanel = document.querySelector('#rules');
 const sopModeButtons = [...document.querySelectorAll('[data-sop-mode]')];
@@ -184,9 +193,41 @@ const quizQuestion = document.querySelector('#quizQuestion');
 const quizAnswer = document.querySelector('#quizAnswer');
 const quizCategory = document.querySelector('#quizCategory');
 const quizProgress = document.querySelector('#quizProgress');
+const quizAnsweredCount = document.querySelector('#quizAnsweredCount');
+const quizWrongCount = document.querySelector('#quizWrongCount');
+const quizWrongOnlyButton = document.querySelector('#quizWrongOnly');
+const quizResetProgressButton = document.querySelector('#quizResetProgress');
+const quizStorageKey = 'catroommate-quiz-progress-v1';
+let quizLearningState = { answered: 0, wrong: {}, streak: {} };
+try { quizLearningState = { ...quizLearningState, ...JSON.parse(localStorage.getItem(quizStorageKey) || '{}') }; } catch (error) { /* 無法儲存時仍可正常抽考 */ }
 let activeQuizCategory = '全部';
 let quizDeck = [];
 let quizPosition = 0;
+let quizWrongOnly = false;
+
+function saveQuizLearningState() {
+  try { localStorage.setItem(quizStorageKey, JSON.stringify(quizLearningState)); } catch (error) { /* 無法儲存時仍可正常抽考 */ }
+  quizAnsweredCount.textContent = quizLearningState.answered;
+  quizWrongCount.textContent = Object.keys(quizLearningState.wrong).length;
+  quizWrongOnlyButton.classList.toggle('active', quizWrongOnly);
+  quizWrongOnlyButton.textContent = quizWrongOnly ? '回到全部題目' : '只考不熟題';
+}
+function markQuizResult(remembered) {
+  const item = quizDeck[quizPosition]; if (!item) return;
+  const key = item.question;
+  quizLearningState.answered += 1;
+  if (!remembered) {
+    quizLearningState.wrong[key] = true;
+    quizLearningState.streak[key] = 0;
+  } else if (quizLearningState.wrong[key]) {
+    quizLearningState.streak[key] = (quizLearningState.streak[key] || 0) + 1;
+    if (quizLearningState.streak[key] >= 3) {
+      delete quizLearningState.wrong[key];
+      delete quizLearningState.streak[key];
+    }
+  }
+  saveQuizLearningState();
+}
 
 function shuffled(list) {
   const copy = [...list];
@@ -197,8 +238,14 @@ function shuffled(list) {
   return copy;
 }
 function resetQuizDeck() {
-  const pool = activeQuizCategory === '全部' ? quizQuestions : quizQuestions.filter(item => item.category === activeQuizCategory);
+  let pool = activeQuizCategory === '全部' ? quizQuestions : quizQuestions.filter(item => item.category === activeQuizCategory);
+  if (quizWrongOnly) pool = pool.filter(item => quizLearningState.wrong[item.question]);
+  if (!pool.length && quizWrongOnly) {
+    quizWrongOnly = false;
+    pool = activeQuizCategory === '全部' ? quizQuestions : quizQuestions.filter(item => item.category === activeQuizCategory);
+  }
   quizDeck = shuffled(pool); quizPosition = 0; renderQuiz();
+  saveQuizLearningState();
 }
 function renderQuiz() {
   const item = quizDeck[quizPosition]; if (!item) return;
@@ -223,13 +270,32 @@ function advanceQuiz() {
   if (quizPosition >= quizDeck.length) quizDeck = shuffled(quizDeck), quizPosition = 0;
   renderQuiz();
 }
-document.querySelector('#nextQuiz').addEventListener('click', advanceQuiz);
+document.querySelector('#nextQuiz').addEventListener('click', () => { markQuizResult(true); advanceQuiz(); });
 document.querySelector('#retryQuiz').addEventListener('click', () => {
+  markQuizResult(false);
   const insertAt = Math.min(quizPosition + 4, quizDeck.length);
   quizDeck.splice(insertAt, 0, quizDeck[quizPosition]);
   advanceQuiz();
 });
+quizWrongOnlyButton.addEventListener('click', () => { quizWrongOnly = !quizWrongOnly; resetQuizDeck(); });
+quizResetProgressButton.addEventListener('click', () => { quizLearningState = { answered: 0, wrong: {}, streak: {} }; quizWrongOnly = false; resetQuizDeck(); });
 resetQuizDeck();
+
+const roomMapDetail = document.querySelector('#roomMapDetail');
+const roomMapTiles = [...document.querySelectorAll('.map-room')];
+function showRoomMapDetail(tile) {
+  roomMapTiles.forEach(item => item.classList.toggle('selected', item === tile));
+  const number = tile.querySelector('strong')?.textContent || '';
+  const cats = tile.querySelector('small')?.textContent || '目前未標示貓咪';
+  roomMapDetail.innerHTML = `<small>房號資料</small><strong>${number} 房</strong><span>${cats}</span>`;
+}
+roomMapTiles.forEach(tile => {
+  tile.setAttribute('role', 'button');
+  tile.setAttribute('tabindex', '0');
+  tile.setAttribute('aria-label', `${tile.querySelector('strong')?.textContent || ''} 房，${tile.querySelector('small')?.textContent || '目前未標示貓咪'}`);
+  tile.addEventListener('click', () => showRoomMapDetail(tile));
+  tile.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showRoomMapDetail(tile); } });
+});
 
 const mobileQuery=window.matchMedia('(max-width: 699px)');
 const viewButtons=[...document.querySelectorAll('.jump-nav [data-view], .mobile-nav [data-view]')];
@@ -239,6 +305,7 @@ let activeView=availableViews.includes(location.hash.slice(1))?location.hash.sli
 function applyView(){
   viewPanels.forEach(panel=>panel.classList.toggle('view-hidden',panel.dataset.viewPanel!==activeView));
   viewButtons.forEach(button=>{const active=button.dataset.view===activeView;button.classList.toggle('active',active);button.setAttribute('aria-current',active?'page':'false');});
+  document.querySelector('#learningLauncher').classList.toggle('view-hidden',activeView!=='numbers');
 }
 function switchView(nextView,{updateHistory=true,scroll=true}={}){
   if(!availableViews.includes(nextView))return;
@@ -249,6 +316,10 @@ function switchView(nextView,{updateHistory=true,scroll=true}={}){
   if(scroll)window.scrollTo({top:document.querySelector('main').offsetTop,behavior:'smooth'});
 }
 viewButtons.forEach(button=>button.addEventListener('click',event=>{event.preventDefault();switchView(button.dataset.view);}));
+document.querySelectorAll('[data-start-view]').forEach(button => button.addEventListener('click', () => {
+  switchView(button.dataset.startView);
+  if (button.dataset.startMode) setSopMode(button.dataset.startMode);
+}));
 
 window.addEventListener('popstate',()=>switchView(location.hash.slice(1),{updateHistory:false,scroll:false}));
 mobileQuery.addEventListener('change',applyView); applyView();

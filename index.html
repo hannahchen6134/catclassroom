@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261009-roommap2">
+  <link rel="stylesheet" href="styles.css?v=20261009-learningux1">
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true">
@@ -34,10 +34,19 @@
       <div class="hero-copy"><span class="eyebrow">CATROOMMATE · 新人值班用</span><h1>貓室友<br>上班筆記</h1><span class="stamp">SOP 更新 2026.10.09</span></div>
     </header>
     <main id="main">
-      <nav class="jump-nav" aria-label="學習主題分頁"><a class="active" href="#numbers" data-view="numbers" aria-current="page">必背數字</a><a href="#rooms" data-view="rooms">房型</a><a href="#roommap" data-view="roommap">房號圖</a><a href="#rules" data-view="rules">工作 SOP</a><a href="#quiz" data-view="quiz">抽考題庫</a><a href="#faq" data-view="faq">話術</a></nav>
+      <nav class="jump-nav" aria-label="學習主題分頁"><a class="active" href="#numbers" data-view="numbers" aria-current="page">先背重點</a><a href="#rooms" data-view="rooms">房型價格</a><a href="#roommap" data-view="roommap">找房號</a><a href="#rules" data-view="rules">今天工作</a><a href="#faq" data-view="faq">情境話術</a><a href="#quiz" data-view="quiz">測驗複習</a></nav>
 
       <section id="numbers" data-view-panel="numbers" data-search-section="必背數字 時間 入住 退房 營業 安親 提前 延後 收費 訂金 疫苗 驅蟲 結紮">
-        <div class="section-head"><span>01</span><div><h2>入住退房時間與加費</h2><p>只看何時正常、何時加費</p></div></div>
+        <div class="learning-launcher" id="learningLauncher" aria-labelledby="learningLauncherTitle">
+          <div class="learning-launcher-head"><span>今天怎麼用</span><div><h2 id="learningLauncherTitle">先選現在的任務</h2><p>不用從頭翻；學習、值班、複習走不同入口。</p></div></div>
+          <div class="learning-paths">
+            <button type="button" data-start-view="numbers"><b>第一次學</b><span>先背時間、費用與安全底線</span><em>從重點開始 →</em></button>
+            <button type="button" data-start-view="rules" data-start-mode="quick"><b>今天值班</b><span>依現在時間直接看該做什麼</span><em>開啟值班速查 →</em></button>
+            <button type="button" data-start-view="quiz"><b>考前複習</b><span>只用回想檢查自己真的會不會</span><em>開始抽考 →</em></button>
+          </div>
+          <div class="priority-key" aria-label="資訊重要度圖例"><span class="must">一定要背</span><span class="lookup">工作時查</span><span class="special">特殊狀況</span></div>
+        </div>
+        <div class="section-head"><span>先背</span><div><h2>入住退房時間與加費</h2><p>一定要背：先分正常時段，再判斷是否加費</p></div></div>
         <div class="memory-groups">
           <details class="memory-group time time-visual-group" open>
             <summary><span>24H</span><strong>退房、入住時間圖</strong><small>同一條 0–24 點時間尺度</small></summary>
@@ -73,10 +82,11 @@
             </div>
           </details>
         </div>
+        <details class="chapter-check"><summary><b>學完立刻回想 3 題</b><span>先不要往上看答案</span></summary><ol><li>正常退房是幾點到幾點？</li><li>正常入住是幾點到幾點？</li><li>滿 30 分鐘與滿 60 分鐘各收多少？</li></ol><button type="button" data-start-view="quiz">去做完整測驗 →</button></details>
       </section>
 
       <section id="rooms" data-view-panel="rooms" data-search-section="房型 經典 陽光 太空 豪華 價格 尺寸 容量 加貓 連假 春節 老室友 折扣">
-        <div class="section-head"><span>02</span><div><h2>看照片認房型</h2><p>價格、容量、特色一次記</p></div></div>
+        <div class="section-head"><span>房型</span><div><h2>看照片認房型</h2><p>工作時查：價格、容量、特色一次確認</p></div></div>
         <div class="room-grid" id="roomGrid"></div>
         <article class="holiday-rate-card" aria-labelledby="holidayRateTitle">
           <header>
@@ -102,8 +112,9 @@
       </section>
 
       <section id="roommap" data-view-panel="roommap" data-search-section="房號 房間 位置 地圖 100 101 102 103 104 105 106 107 108 201 202 203 204 205 206 207 208 209 210 211 212 213 214 301 302 303 304 305 306 501 502">
-        <div class="section-head"><span>MAP</span><div><h2>房號位置圖</h2><p>依照原圖的房號、位置與顏色排列</p></div></div>
-        <div class="room-map-note"><b>房號速查</b><span>保留原圖紅、綠、米白配色；版面縮小，方便一眼對照位置。</span></div>
+        <div class="section-head"><span>房號</span><div><h2>房號位置圖</h2><p>工作時查：先看位置，再點房號放大資料</p></div></div>
+        <div class="room-map-note"><b>最後更新：2026.10.09</b><span>紅、綠、米白沿用原始房況圖；貓咪與房況變動時要同步更新。</span></div>
+        <div class="room-map-legend" aria-label="房號圖顏色說明"><span><i class="red"></i>原圖紅色</span><span><i class="green"></i>原圖綠色</span><span><i class="wait"></i>待換</span></div>
         <div class="room-map-scroll" role="region" aria-label="房號位置圖" tabindex="0">
           <div class="room-map-board">
             <div class="room-map-top">
@@ -127,10 +138,12 @@
             </div>
           </div>
         </div>
+        <aside class="room-map-detail" id="roomMapDetail" aria-live="polite"><small>點一個房號</small><strong>查看放大的房號與貓咪名字</strong><span>空房只會顯示房號。</span></aside>
       </section>
 
       <section id="quiz" data-view-panel="quiz" data-search-section="抽考 測驗 背誦 題庫 房型 時間 健康 照顧 取消 優惠 春節 SOP 接待 清潔 入住 退房 參觀">
-        <div class="section-head"><span>03</span><div><h2>上班全題庫</h2><p>選一類練習，或用「全部」混合抽考</p></div></div>
+        <div class="section-head"><span>測驗</span><div><h2>上班全題庫</h2><p>考前複習：先回想再看答案，錯題會保留下來</p></div></div>
+        <div class="quiz-learning-status"><p><small>今日答題</small><b id="quizAnsweredCount">0</b></p><p><small>不熟題</small><b id="quizWrongCount">0</b></p><button type="button" id="quizWrongOnly">只考不熟題</button><button type="button" id="quizResetProgress">清除紀錄</button></div>
         <div class="quiz-categories" id="quizCategories" aria-label="選擇題目分類"></div>
         <article class="quiz-card" id="quizCard">
           <div class="quiz-meta"><span id="quizCategory">全部題庫</span><span id="quizProgress">第 1 題</span></div>
@@ -140,7 +153,7 @@
       </section>
 
       <section id="rules" data-view-panel="rules" data-search-section="工作 SOP 值班 時程 清潔 消毒 餵食 鮮食 活動 用藥 備品 入住 退房 參觀 接待 規則 健康 就醫 取消 優惠 春節">
-        <div class="section-head"><span>04</span><div><h2>工作 SOP 視覺筆記</h2><p>先背 8 步驟；工作時再展開細節</p></div></div>
+        <div class="section-head"><span>SOP</span><div><h2>今天工作</h2><p>先記四大段，再背 8 步驟；值班時切到速查</p></div></div>
 
         <div class="sop-mode-switch" role="tablist" aria-label="選擇 SOP 閱讀方式">
           <button class="active" type="button" role="tab" aria-selected="true" data-sop-mode="learn">學習模式<small>完整理解與背誦</small></button>
@@ -153,6 +166,10 @@
           <article class="duty-step-card" id="dutyStepCard" aria-live="polite"></article>
           <div class="duty-service-shortcuts"><span>客人到店：</span><button type="button" data-service-jump="入住流程">入住</button><button type="button" data-service-jump="退房流程">退房</button><button type="button" data-service-jump="參觀流程">參觀</button></div>
         </section>
+
+        <div class="shift-chunks" aria-label="四段值班記憶法">
+          <p><b>到班</b><span>打卡・巡場</span></p><p><b>白天</b><span>第一輪・早安回報</span></p><p><b>下午</b><span>活動・第二輪</span></p><p><b>晚上</b><span>晚安回報・收班</span></p>
+        </div>
 
         <div class="sop-flow" aria-label="今日值班八步驟">
           <div class="sop-flow-title"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg><div><strong>今日值班 8 步驟</strong><small>先打卡，再照號碼走：桌面由左到右，手機由上往下</small></div></div>
@@ -168,6 +185,12 @@
           </ol>
         </div>
 
+        <aside class="absolute-rules" aria-labelledby="absoluteRulesTitle">
+          <header><svg class="ui-icon" aria-hidden="true"><use href="#icon-shield"></use></svg><div><small>一定要背</small><h3 id="absoluteRulesTitle">安全底線：這些絕對不能做</h3></div></header>
+          <ul><li>鏡頭前不談清潔問題。</li><li>不拍貓咪睡在貓砂或髒污區域。</li><li>貓砂鏟不放公共區；跟著原房砂盆放回。</li><li>前廳兩道門不能同時打開。</li><li>晚上不任意移動貓咪物品。</li><li>清潔用品用完立即放回儲藏室。</li></ul>
+        </aside>
+        <details class="chapter-check"><summary><b>八步驟看完，先回想 3 題</b><span>能自己說出來才算記得</span></summary><ol><li>上班第一個動作是什麼？</li><li>兩輪照護都要在什麼時候洗碗？</li><li>收班前哪六件事絕對不能漏？</li></ol><button type="button" data-start-view="quiz">只用抽考檢查 →</button></details>
+
         <details class="sop-detail-drawer" id="sop-timeline">
           <summary><span>01</span><div><strong>工作時查：8 步驟完整做法</strong><small>做到哪一步，就展開查那一段</small></div></summary>
           <div class="sop-detail-body"><ol class="sop-timeline" id="sopTimeline"></ol><aside class="safety-strip"><svg class="ui-icon" aria-hidden="true"><use href="#icon-shield"></use></svg><p><strong>輪休安全口訣</strong><span>一人離區＝公共區只留同一家；其他房門全部上鎖。</span></p></aside></div>
@@ -176,21 +199,21 @@
         <div class="sop-subhead" id="core-flows"><span>02</span><div><h3>入住、清房是兩套流程</h3><p>不要混在一起背；先認流程，再照每階段的步驟做</p></div></div>
         <div class="core-flow-list" id="coreFlowList"></div>
 
-        <div class="sop-subhead" id="video-guides"><span>03</span><div><h3>圖片補充</h3><p>搭配現場照片，確認容易做錯的動作</p></div></div>
-        <div class="training-guide-grid">
-          <article class="training-guide cleaning-guide">
+        <div class="sop-subhead" id="video-guides"><span>示範</span><div><h3>步驟旁看示範</h3><p>需要確認動作時再展開，不把整頁變成圖片牆</p></div></div>
+        <details class="guide-library"><summary><b>打開現場圖片示範</b><span>清房、貓砂、洗碗、收納與安全動作</span></summary><div class="training-guide-grid">
+          <article class="training-guide cleaning-guide" id="guide-room-cleaning">
             <img src="assets/training-room-cleaning.jpg" alt="夥伴在木屋貓房門口照護貓咪" loading="lazy">
             <div><small>清房現場</small><h4>先確認能否放風，再開始清理</h4><p class="photo-guide-copy">照片是清房時的操作情境。完整順序請看上方「清房間流程」；現場先確認是否能單獨放風，並留意貓砂、便尿與房門。</p><p class="cleaning-night-note"><strong>晚上清房：</strong>只處理必要髒污，不動貓咪物品。</p></div>
           </article>
-          <article class="training-guide">
+          <article class="training-guide" id="guide-door-marking">
             <img src="assets/training-door-marking.jpg" alt="房門玻璃寫著貓咪名字 Uni 與男生符號" loading="lazy">
             <div><small>入住準備</small><h4>房門姓名與多貓辨識</h4><ol><li>使用白色麥克筆，在房門玻璃寫入住貓咪的名字。</li><li>名字不要寫太大，避免被貓咪的手擦到。</li><li>男生在名字後標示 ♂。</li><li>同一家有多隻貓，要把每隻名字都寫上。</li><li>毛色不同時，至少替其中一隻註明毛色，讓大家能分辨。</li><li>毛色相同或照片難辨認時，另外口頭交接外觀差異。</li><li>需要清除玻璃門文字時，可用酒精擦掉。</li></ol></div>
           </article>
-          <article class="training-guide">
+          <article class="training-guide" id="guide-litter-cleaning">
             <img src="assets/training-pellet-sifting.jpg" alt="木屑砂放在藍色雙層篩盆，粉末落到下層" loading="lazy">
             <div><small>木屑砂清理</small><h4>先撿髒污，再用篩盆分離粉末</h4><ol><li>先準備垃圾桶與藍色雙層篩盆。</li><li>從原砂盆撿出便便與髒污，放進垃圾桶。</li><li>把剩下的木屑砂倒進上層網盆。</li><li>用砂鏟翻動、刮開，讓粉末落到下層。</li><li>抬起上層網盆，確認砂粒與粉末已分開。</li></ol></div>
           </article>
-          <article class="training-guide">
+          <article class="training-guide" id="guide-litter-setup">
             <img src="assets/training-litter-setup.jpg" alt="夥伴將礦砂舀入乾淨砂盆並鋪平" loading="lazy">
             <div><small>礦砂備盆</small><h4>拿乾淨砂盆，分次加砂並鋪平</h4><ol><li>從用品區拿乾淨砂盆與砂鏟。</li><li>打開礦砂收納箱。</li><li>用砂鏟分次把礦砂加入砂盆。</li><li>最後把砂面鋪平，確認盆底均勻覆蓋。</li></ol></div>
           </article>
@@ -202,7 +225,7 @@
             <img src="assets/training-checkout-litter-disposal.jpg" alt="退房時將整盆舊貓砂倒入套袋垃圾桶，並用砂鏟清除殘砂" loading="lazy">
             <div><small>退房清砂</small><h4>砂盆貼近桶口，慢慢倒完所有舊砂</h4><ol><li>垃圾桶先套好袋子，再移到砂盆旁邊。</li><li>把砂盆邊緣靠近桶口，慢慢傾斜，避免貓砂灑到地上。</li><li>用砂鏟把黏住與殘留的舊砂推進垃圾桶，確認整盆清空。</li><li>舊砂全部丟掉後，砂盆要在退房當天洗乾淨。</li></ol></div>
           </article>
-          <article class="training-guide">
+          <article class="training-guide" id="guide-dish-dryer">
             <img src="assets/training-dish-dryer.jpg" alt="碗盤在烘碗機內直立並分開擺放" loading="lazy">
             <div><small>碗具烘乾</small><h4>先倒掉積水，再直立烘 80 分鐘</h4><ol><li>先把上一輪烘好的碗拿出來，放進櫃子。</li><li>把當日用碗與盤子裡的水倒乾淨。</li><li>將碗盤直立、分開擺放，不要整疊平放。</li><li>確認彼此留有空隙後，設定烘 80 分鐘。</li></ol></div>
           </article>
@@ -234,7 +257,7 @@
             <img src="assets/training-water-bowl-corner.png" alt="貓房上層角落的水碗位置標示" loading="lazy">
             <div><small>房內擺放</small><h4>水碗放角落，較不容易撞到</h4><ol><li>整理房間前，先記住水碗原本的位置。</li><li>水碗靠層板角落擺放，減少貓咪活動時撞到的機會。</li><li>清房後放回原本角落，並確認水碗擺放平穩。</li></ol></div>
           </article>
-        </div>
+        </div></details>
 
         <div class="sop-subhead" id="sop-care"><span>04</span><div><h3>遇到這件事，要怎麼做？</h3><p>先背「口訣」，操作時再展開動作與例外</p></div></div>
         <div class="sop-module-grid" id="sopModuleGrid"></div>
@@ -268,7 +291,7 @@
       </section>
 
       <section id="faq" data-view-panel="faq" data-search-section="客人常問 話術 問答 付錢 疫苗 結紮 餵藥 參觀 監視器">
-        <div class="section-head"><span>05</span><div><h2>現場話術・照情境說</h2><p>先選情境，再看「可以這樣說」與現場確認事項</p></div></div>
+        <div class="section-head"><span>話術</span><div><h2>現場話術・照情境說</h2><p>工作時查：先選情境，再看怎麼說與要確認什麼</p></div></div>
         <div class="faq-toolbar"><p>一次只開一題，讀完再看下一題。</p><button type="button" id="collapseFaq">全部收合</button></div>
         <div class="faq-list" id="faqList"></div>
       </section>
@@ -277,7 +300,7 @@
 
     <footer><img src="assets/logo.png" alt=""><div><b>做貓的好室友</b><p>SOP 更新 2026-10-09・供新人上班複習與現場速查</p></div></footer>
   </div>
-  <nav class="mobile-nav" aria-label="手機主題切換"><button class="active" type="button" data-view="numbers"><span>15</span>重點</button><button type="button" data-view="rooms"><span>⌂</span>房型</button><button type="button" data-view="roommap"><span>▦</span>房號</button><button type="button" data-view="rules"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg>SOP</button><button type="button" data-view="quiz"><span>?</span>抽考</button><button type="button" data-view="faq"><span>Q</span>話術</button></nav>
-  <script src="data.js?v=20261009-hygiene1"></script><script src="app.js?v=20261009-catnotes1"></script>
+  <nav class="mobile-nav" aria-label="手機主題切換"><button class="active" type="button" data-view="numbers"><span>15</span>先背</button><button type="button" data-view="rooms"><span>⌂</span>房型</button><button type="button" data-view="roommap"><span>▦</span>房號</button><button type="button" data-view="rules"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg>工作</button><button type="button" data-view="faq"><span>Q</span>話術</button><button type="button" data-view="quiz"><span>?</span>測驗</button></nav>
+  <script src="data.js?v=20261009-learningux1"></script><script src="app.js?v=20261009-learningux1"></script>
 </body>
 </html>
