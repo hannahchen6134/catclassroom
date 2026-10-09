@@ -176,7 +176,7 @@ const roomQuestions = data.rooms.map(room => ({
   answer: `${room.name}｜${formatPrice(room.price)} 元／晚｜最多 ${room.capacity} 隻｜${room.extra}｜${room.size}`
 }));
 const quizQuestions = [...roomQuestions, ...data.quizQuestions];
-const quizCategoryNames = ['全部', '房型', '值班SOP', '接待流程', '時間費用', '健康入住', '照顧應變', '取消優惠', '春節'];
+const quizCategoryNames = ['全部', '住客提醒', '房型', '值班SOP', '接待流程', '時間費用', '健康入住', '照顧應變', '取消優惠', '春節'];
 const quizCategories = document.querySelector('#quizCategories');
 const quizCard = document.querySelector('#quizCard');
 const quizImage = document.querySelector('#quizImage');
