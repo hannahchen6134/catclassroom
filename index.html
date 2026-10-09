@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261009-roommap1">
+  <link rel="stylesheet" href="styles.css?v=20261009-roommap2">
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true">
@@ -102,32 +102,31 @@
       </section>
 
       <section id="roommap" data-view-panel="roommap" data-search-section="房號 房間 位置 地圖 100 101 102 103 104 105 106 107 108 201 202 203 204 205 206 207 208 209 210 211 212 213 214 301 302 303 304 305 306 501 502">
-        <div class="section-head"><span>MAP</span><div><h2>房號位置圖</h2><p>找房時只看位置，不看入住狀態</p></div></div>
-        <div class="room-map-note"><b>固定房號圖</b><span>照片中的貓名、日期與紅綠狀態會變動，因此這裡只保留不會過期的房號位置。</span></div>
-        <div class="room-map-scroll" role="region" aria-label="房號位置圖，手機可左右滑動" tabindex="0">
+        <div class="section-head"><span>MAP</span><div><h2>房號位置圖</h2><p>依照原圖的房號、位置與顏色排列</p></div></div>
+        <div class="room-map-note"><b>房號速查</b><span>保留原圖紅、綠、米白配色；版面縮小，方便一眼對照位置。</span></div>
+        <div class="room-map-scroll" role="region" aria-label="房號位置圖" tabindex="0">
           <div class="room-map-board">
             <div class="room-map-top">
-              <div class="map-room map-room-tall"><strong>100</strong></div>
+              <div class="map-room map-room-red map-room-tall"><strong>100</strong></div>
               <div class="room-map-200" aria-label="200 系列房間">
-                <div class="map-room"><strong>201</strong></div><div class="map-room"><strong>203</strong></div><div class="map-room"><strong>205</strong></div><div class="map-room"><strong>207</strong></div><div class="map-room"><strong>209</strong></div><div class="map-room"><strong>211</strong></div><div class="map-room"><strong>213</strong></div>
-                <div class="map-room"><strong>202</strong></div><div class="map-room"><strong>204</strong></div><div class="map-room"><strong>206</strong></div><div class="map-room"><strong>208</strong></div><div class="map-room"><strong>210</strong></div><div class="map-room"><strong>212</strong></div><div class="map-room"><strong>214</strong></div>
+                <div class="map-room map-room-green"><strong>201</strong></div><div class="map-room map-room-green"><strong>203</strong></div><div class="map-room map-room-green"><strong>205</strong></div><div class="map-room map-room-green"><strong>207</strong></div><div class="map-room map-room-green"><strong>209</strong></div><div class="map-room map-room-green"><strong>211</strong></div><div class="map-room map-room-red"><strong>213</strong></div>
+                <div class="map-room map-room-red"><strong>202</strong></div><div class="map-room map-room-red"><strong>204</strong></div><div class="map-room map-room-wait"><strong>206</strong></div><div class="map-room map-room-red"><strong>208</strong></div><div class="map-room map-room-red"><strong>210</strong></div><div class="map-room map-room-red"><strong>212</strong></div><div class="map-room map-room-wait"><strong>214</strong></div>
               </div>
             </div>
-            <div class="room-map-side-pair" aria-label="107 與 108 房"><div class="map-room"><strong>107</strong></div><div class="map-room"><strong>108</strong></div></div>
+            <div class="room-map-side-pair" aria-label="107 與 108 房"><div class="map-room map-room-red"><strong>107</strong></div><div class="map-room map-room-red"><strong>108</strong></div></div>
             <div class="room-map-lower">
               <div class="room-map-cluster room-map-left" aria-label="301 至 304 房">
-                <div class="map-room"><strong>301</strong></div><div class="map-room"><strong>303</strong></div><div class="map-room"><strong>302</strong></div><div class="map-room"><strong>304</strong></div>
+                <div class="map-room map-room-green"><strong>301</strong></div><div class="map-room map-room-green"><strong>303</strong></div><div class="map-room map-room-red"><strong>302</strong></div><div class="map-room map-room-red"><strong>304</strong></div>
               </div>
               <div class="room-map-cluster room-map-center" aria-label="101 至 106 房">
-                <div class="map-room"><strong>103</strong></div><div class="map-room"><strong>104</strong></div><div class="map-room"><strong>102</strong></div><div class="map-room"><strong>105</strong></div><div class="map-room"><strong>101</strong></div><div class="map-room"><strong>106</strong></div>
+                <div class="map-room map-room-green"><strong>103</strong></div><div class="map-room map-room-green"><strong>104</strong></div><div class="map-room map-room-green"><strong>102</strong></div><div class="map-room map-room-green"><strong>105</strong></div><div class="map-room map-room-red"><strong>101</strong></div><div class="map-room map-room-wait"><strong>106</strong></div>
               </div>
               <div class="room-map-cluster room-map-right" aria-label="305、306、501 與 502 房">
-                <div class="map-room"><strong>305</strong></div><div class="map-room"><strong>306</strong></div><div class="map-room"><strong>501</strong></div><div class="map-room"><strong>502</strong></div>
+                <div class="map-room map-room-green"><strong>305</strong></div><div class="map-room map-room-green"><strong>306</strong></div><div class="map-room map-room-green"><strong>501</strong></div><div class="map-room map-room-green"><strong>502</strong></div>
               </div>
             </div>
           </div>
         </div>
-        <p class="room-map-swipe">手機版可左右滑動，完整保留房間的相對位置。</p>
       </section>
 
       <section id="quiz" data-view-panel="quiz" data-search-section="抽考 測驗 背誦 題庫 房型 時間 健康 照顧 取消 優惠 春節 SOP 接待 清潔 入住 退房 參觀">
