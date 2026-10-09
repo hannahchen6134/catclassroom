@@ -76,6 +76,7 @@ document.querySelector('#coreFlowList').innerHTML = data.coreFlows.map((flow, fl
     <div class="core-flow-body">
       ${flow.alert ? `<p class="core-flow-alert"><strong>晚上特別注意</strong>${flow.alert}</p>` : ''}
       <ol>${flow.phases.map((phase, phaseIndex) => `<li><b>${phaseIndex + 1}</b><div><strong>${phase.title}</strong><ul>${phase.steps.map(step => `<li>${step}</li>`).join('')}</ul></div></li>`).join('')}</ol>
+      ${flow.closing ? `<p class="core-flow-closing"><strong>全部完成後</strong>${flow.closing}</p>` : ''}
     </div>
   </details>`).join('');
 document.querySelector('#serviceFlowList').innerHTML = data.serviceFlows.map(flow => `
