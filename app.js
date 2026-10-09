@@ -70,6 +70,14 @@ document.querySelector('#sopModuleGrid').innerHTML = data.sopModules.map(module 
     <summary><span class="sop-module-icon">${icon(module.icon)}</span><span><small>${module.code}｜${module.title}</small><strong><i>口訣</i>${module.cue}</strong><em>展開看動作與例外</em></span></summary>
     <ul>${module.items.map(item => `<li>${item}</li>`).join('')}</ul>
   </details>`).join('');
+document.querySelector('#coreFlowList').innerHTML = data.coreFlows.map((flow, flowIndex) => `
+  <details class="core-flow" ${flowIndex === 0 ? 'open' : ''}>
+    <summary><span>${icon(flow.icon)}</span><span><small>流程 ${flowIndex + 1}</small><strong>${flow.title}</strong><em>${flow.cue}</em></span></summary>
+    <div class="core-flow-body">
+      ${flow.alert ? `<p class="core-flow-alert"><strong>晚上特別注意</strong>${flow.alert}</p>` : ''}
+      <ol>${flow.phases.map((phase, phaseIndex) => `<li><b>${phaseIndex + 1}</b><div><strong>${phase.title}</strong><ul>${phase.steps.map(step => `<li>${step}</li>`).join('')}</ul></div></li>`).join('')}</ol>
+    </div>
+  </details>`).join('');
 document.querySelector('#serviceFlowList').innerHTML = data.serviceFlows.map(flow => `
   <details class="service-flow">
     <summary><span>${icon(flow.icon)}</span><span><strong>${flow.title}</strong><small>${flow.note}。點開後照 1、2、3 往下做。</small></span></summary>
@@ -88,6 +96,7 @@ function bindExclusiveDetails(containerSelector, itemSelector) {
   }, true);
 }
 bindExclusiveDetails('#sopModuleGrid', '.sop-module');
+bindExclusiveDetails('#coreFlowList', '.core-flow');
 bindExclusiveDetails('#serviceFlowList', '.service-flow');
 
 const rulesPanel = document.querySelector('#rules');
@@ -152,8 +161,8 @@ function setSopMode(mode) {
 sopModeButtons.forEach(button => button.addEventListener('click', () => setSopMode(button.dataset.sopMode)));
 dutyQuickPanel.querySelectorAll('[data-service-jump]').forEach(button => button.addEventListener('click', () => {
   setSopMode('learn');
-  const flow = [...document.querySelectorAll('.service-flow')].find(item => item.textContent.includes(button.dataset.serviceJump));
-  document.querySelectorAll('.service-flow[open]').forEach(item => { item.open = false; });
+  const flow = [...document.querySelectorAll('.core-flow, .service-flow')].find(item => item.textContent.includes(button.dataset.serviceJump));
+  document.querySelectorAll('.core-flow[open], .service-flow[open]').forEach(item => { item.open = false; });
   if (flow) {
     flow.open = true;
     requestAnimationFrame(() => flow.scrollIntoView({ behavior: 'smooth', block: 'start' }));

@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261009-officialaudit1">
+  <link rel="stylesheet" href="styles.css?v=20261009-splitflows1">
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true">
@@ -134,7 +134,7 @@
             <li><b>3</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-bowl"></use></svg><time>12:00</time><strong>第一輪照護</strong><span>餵食、活動、清房、洗碗</span></li>
             <li><b>4</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-message"></use></svg><time>13:00</time><strong>早安回報</strong><span>照片或影片＋觀察</span></li>
             <li><b>5</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-camera"></use></svg><time>15:00</time><strong>下午活動</strong><span>回訊息、拍攝、準備隔日</span></li>
-            <li><b>6</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-bowl"></use></svg><time>17:00</time><strong>第二輪照護</strong><span>餵食、活動、清房、洗碗</span></li>
+            <li><b>6</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-bowl"></use></svg><time>17:00</time><strong>第二輪照護</strong><span>餵食、活動、清房；不動貓咪物品</span></li>
             <li><b>7</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-message"></use></svg><time>19:20</time><strong>晚安回報</strong><span>詳細寫今天的狀況</span></li>
             <li><b>8</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-sparkle"></use></svg><time>20:00</time><strong>收班清潔</strong><span>完成清潔再下班</span></li>
           </ol>
@@ -145,11 +145,14 @@
           <div class="sop-detail-body"><ol class="sop-timeline" id="sopTimeline"></ol><aside class="safety-strip"><svg class="ui-icon" aria-hidden="true"><use href="#icon-shield"></use></svg><p><strong>輪休安全口訣</strong><span>一人離區＝公共區只留同一家；其他房門全部上鎖。</span></p></aside></div>
         </details>
 
-        <div class="sop-subhead" id="video-guides"><span>02</span><div><h3>圖片補充</h3><p>搭配現場照片，照順序確認動作</p></div></div>
+        <div class="sop-subhead" id="core-flows"><span>02</span><div><h3>入住、清房是兩套流程</h3><p>不要混在一起背；先認流程，再照每階段的步驟做</p></div></div>
+        <div class="core-flow-list" id="coreFlowList"></div>
+
+        <div class="sop-subhead" id="video-guides"><span>03</span><div><h3>圖片補充</h3><p>搭配現場照片，確認容易做錯的動作</p></div></div>
         <div class="training-guide-grid">
           <article class="training-guide cleaning-guide">
             <img src="assets/training-room-cleaning.jpg" alt="夥伴在木屋貓房門口照護貓咪" loading="lazy">
-            <div><small>日常照護</small><h4>清房間流程</h4><div class="cleaning-memory" aria-label="清房間順序：一放清、二記報、三交拍、四回鎖"><strong><em>照 1 → 2 → 3 → 4 做</em>放清 → 記報 → 交拍 → 回鎖</strong><ol class="cleaning-memory-steps"><li><b>放清</b><i>放風 → 清理</i></li><li><b>記報</b><i>紀錄 → 通知</i></li><li><b>交拍</b><i>交碗 → 拍攝</i></li><li><b>回鎖</b><i>送回 → 鎖門</i></li></ol></div><ol><li>貓咪放風，先確認是否可以單獨出來。</li><li>檢查貓砂並清理便尿，確認貓砂鏟在房內。</li><li>紀錄便尿與房間狀況。</li><li>通知夥伴。</li><li>把碗盤拿給夥伴。</li><li>拍照；若拍影片，至少 10 秒。</li><li>將碗盤送回房間。</li><li>貓咪回房，確認房門已鎖好。</li></ol></div>
+            <div><small>清房現場</small><h4>先確認能否放風，再開始清理</h4><p class="photo-guide-copy">照片是清房時的操作情境。完整順序請看上方「清房間流程」；現場先確認是否能單獨放風，並留意貓砂、便尿與房門。</p><p class="cleaning-night-note"><strong>晚上清房：</strong>只處理必要髒污，不動貓咪物品。</p></div>
           </article>
           <article class="training-guide">
             <img src="assets/training-door-marking.jpg" alt="房門玻璃寫著貓咪名字 Uni 與男生符號" loading="lazy">
@@ -189,7 +192,7 @@
           </article>
         </div>
 
-        <div class="sop-subhead" id="sop-care"><span>03</span><div><h3>遇到這件事，要怎麼做？</h3><p>先背「口訣」，操作時再展開動作與例外</p></div></div>
+        <div class="sop-subhead" id="sop-care"><span>04</span><div><h3>遇到這件事，要怎麼做？</h3><p>先背「口訣」，操作時再展開動作與例外</p></div></div>
         <div class="sop-module-grid" id="sopModuleGrid"></div>
 
         <div class="decision-map" aria-label="共同活動判斷圖">
@@ -198,7 +201,7 @@
           <div class="decision-outcomes"><p class="yes"><b>四關都通過</b><span>可陪同嘗試共同活動</span></p><p class="no"><b>任何一關未通過</b><span>改為單獨活動</span></p></div>
         </div>
 
-        <div class="sop-subhead" id="service-flows"><span>04</span><div><h3>有客人來，照哪個順序？</h3><p>選「入住、退房或參觀」，做完一項再看下一項</p></div></div>
+        <div class="sop-subhead" id="service-flows"><span>05</span><div><h3>退房、參觀流程</h3><p>入住已獨立放在上方；這裡只查退房與參觀</p></div></div>
         <div class="service-flow-list" id="serviceFlowList"></div>
 
         <details class="policy-reference" id="policy-reference">
@@ -231,6 +234,6 @@
     <footer><img src="assets/logo.png" alt=""><div><b>做貓的好室友</b><p>SOP 更新 2026-10-09・供新人上班複習與現場速查</p></div></footer>
   </div>
   <nav class="mobile-nav" aria-label="手機主題切換"><button class="active" type="button" data-view="numbers"><span>15</span>重點</button><button type="button" data-view="rooms"><span>⌂</span>房型</button><button type="button" data-view="rules"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg>SOP</button><button type="button" data-view="quiz"><span>?</span>抽考</button><button type="button" data-view="faq"><span>Q</span>話術</button></nav>
-  <script src="data.js?v=20261009-pdffull2"></script><script src="app.js?v=20261008-itemlabels1"></script>
+  <script src="data.js?v=20261009-splitflows1"></script><script src="app.js?v=20261009-splitflows1"></script>
 </body>
 </html>
