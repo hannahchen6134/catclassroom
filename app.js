@@ -70,17 +70,26 @@ document.querySelector('#sopModuleGrid').innerHTML = data.sopModules.map(module 
     <summary><span class="sop-module-icon">${icon(module.icon)}</span><span><small>${module.code}｜${module.title}</small><strong><i>口訣</i>${module.cue}</strong><em>展開看動作與例外</em></span></summary>
     <ul>${module.items.map(item => `<li>${item}</li>`).join('')}</ul>
   </details>`).join('');
-document.querySelector('#coreFlowList').innerHTML = data.coreFlows.map((flow, flowIndex) => `
+function coreFlowGuides(flow) {
+  if (flow.title.includes('入住')) return '<a href="#rules" data-guide-target="guide-door-marking">房門標名</a><a href="#rules" data-guide-target="video-guides">物品收納</a>';
+  if (flow.title.includes('退房')) return '<a href="#rules" data-guide-target="guide-checkout-litter">退房清砂</a><a href="#rules" data-guide-target="guide-dish-dryer">洗碗烘乾</a>';
+  return '<a href="#rules" data-guide-target="guide-room-cleaning">清房現場</a><a href="#rules" data-guide-target="guide-litter-cleaning">清砂方式</a><a href="#rules" data-guide-target="guide-dish-dryer">洗碗烘乾</a>';
+}
+function renderCoreFlows(flows, { daily = false } = {}) {
+  return flows.map((flow, flowIndex) => `
   <details class="core-flow" ${flowIndex === 0 ? 'open' : ''}>
-    <summary><span>${icon(flow.icon)}</span><span><small>流程 ${flowIndex + 1}</small><strong>${flow.title}</strong><em>${flow.cue}</em></span></summary>
+    <summary><span>${icon(flow.icon)}</span><span><small>${daily ? '每日清房' : `流程 ${flowIndex + 1}`}</small><strong>${flow.title}</strong><em>${flow.cue}</em></span></summary>
     <div class="core-flow-body">
       <div class="flow-reading-order" aria-label="流程卡閱讀順序"><span>先做</span><span>實際步驟</span><span>完成確認</span><span>禁止</span></div>
       ${flow.alert ? `<p class="core-flow-alert"><strong>禁止／特別注意</strong>${flow.alert}</p>` : ''}
       <ol>${flow.phases.map((phase, phaseIndex) => `<li><b>${phaseIndex + 1}</b><div><strong>${phase.title}</strong><ul>${phase.steps.map(step => `<li>${step}</li>`).join('')}</ul></div></li>`).join('')}</ol>
       ${flow.closing ? `<p class="core-flow-closing"><strong>完成確認</strong>${flow.closing}</p>` : ''}
-      <p class="core-flow-guides"><strong>看現場示範</strong>${flow.title.includes('入住') ? '<a href="#rules" data-guide-target="guide-door-marking">房門標名</a><a href="#rules" data-guide-target="video-guides">物品收納</a>' : '<a href="#rules" data-guide-target="guide-room-cleaning">清房現場</a><a href="#rules" data-guide-target="guide-litter-cleaning">清砂方式</a><a href="#rules" data-guide-target="guide-dish-dryer">洗碗烘乾</a>'}</p>
+      <p class="core-flow-guides"><strong>看現場示範</strong>${coreFlowGuides(flow)}</p>
     </div>
   </details>`).join('');
+}
+document.querySelector('#coreFlowList').innerHTML = renderCoreFlows(data.coreFlows);
+document.querySelector('#dailyCleaningFlowList').innerHTML = renderCoreFlows(data.dailyCleaningFlows, { daily: true });
 document.querySelector('#serviceFlowList').innerHTML = data.serviceFlows.map(flow => `
   <details class="service-flow">
     <summary><span>${icon(flow.icon)}</span><span><strong>${flow.title}</strong><small>${flow.note}。點開後照 1、2、3 往下做。</small></span></summary>
@@ -100,6 +109,7 @@ function bindExclusiveDetails(containerSelector, itemSelector) {
 }
 bindExclusiveDetails('#sopModuleGrid', '.sop-module');
 bindExclusiveDetails('#coreFlowList', '.core-flow');
+bindExclusiveDetails('#dailyCleaningFlowList', '.core-flow');
 bindExclusiveDetails('#serviceFlowList', '.service-flow');
 document.querySelectorAll('.core-flow-guides a').forEach(link => link.addEventListener('click', event => {
   event.preventDefault();
