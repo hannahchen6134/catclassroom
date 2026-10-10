@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261010-roommap-position2">
+  <link rel="stylesheet" href="styles.css?v=20261010-mobile-nav-align1">
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true">
@@ -298,7 +298,14 @@
 
     <footer><img src="assets/logo.png" alt=""><div><b>做貓的好室友</b><p>SOP 更新 2026-10-09・供新人上班複習與現場速查</p></div></footer>
   </div>
-  <nav class="mobile-nav" aria-label="手機主題切換"><button class="active" type="button" data-view="numbers"><span>15</span>先背</button><button type="button" data-view="rooms"><span>⌂</span>房型</button><button type="button" data-view="roommap"><span>▦</span>房號</button><button type="button" data-view="rules"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg>工作</button><button type="button" data-view="faq"><span>Q</span>話術</button><button type="button" data-view="quiz"><span>?</span>測驗</button></nav>
+  <nav class="mobile-nav" aria-label="手機主題切換">
+    <button class="active" type="button" data-view="numbers"><span class="mobile-nav-icon">15</span><span class="mobile-nav-label">先背</span></button>
+    <button type="button" data-view="rooms"><span class="mobile-nav-icon">⌂</span><span class="mobile-nav-label">房型</span></button>
+    <button type="button" data-view="roommap"><span class="mobile-nav-icon">▦</span><span class="mobile-nav-label">房號</span></button>
+    <button type="button" data-view="rules"><span class="mobile-nav-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg></span><span class="mobile-nav-label">工作</span></button>
+    <button type="button" data-view="faq"><span class="mobile-nav-icon">Q</span><span class="mobile-nav-label">話術</span></button>
+    <button type="button" data-view="quiz"><span class="mobile-nav-icon">?</span><span class="mobile-nav-label">測驗</span></button>
+  </nav>
   <script src="data.js?v=20261009-learningux1"></script><script src="app.js?v=20261009-learningux1"></script>
 </body>
 </html>
