@@ -510,9 +510,9 @@ section{margin-top:52px}
   .room-map-scroll{overflow:visible;padding-right:0;padding-bottom:4px}
   .room-map-board{width:100%;min-width:0;padding:0}
   .room-map-board:before{left:14px}
-  .room-map-top{grid-template-columns:9% 1fr;gap:.8%}.room-map-200{gap:3% .8%}.map-room{min-height:0;border-radius:7px}.map-room strong{font-size:12px}.map-room small{font-size:7px}.map-room-tall{min-height:0}
-  .room-map-side-pair{grid-template-columns:repeat(2,minmax(0,1fr));gap:4%;margin:0}
-  .room-map-lower{margin:0;padding:0}.room-map-cluster{gap:3%}.room-map-cluster .map-room{min-height:0}
+  .room-map-top{grid-template-columns:9% 1fr;gap:.8%}.room-map-200{gap:3% .8%}.map-room{min-height:0;gap:0;padding:0;border-radius:7px}.map-room strong{font-size:9px;line-height:1}.map-room small{font-size:5px;line-height:1}.map-room-tall{min-height:0}
+  .room-map-side-pair{grid-template-columns:repeat(2,minmax(0,1fr));gap:4%;height:20%;margin:0}
+  .room-map-lower{margin:0;padding:0}.room-map-cluster{gap:3%}.room-map-cluster .map-room{min-height:0}.room-map-center{height:52%}
 }
 
 /* 2026-10-09｜學習架構重整：先選任務，再分必背、速查與例外 */
