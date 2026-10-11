@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261011-price-calculator2">
+  <link rel="stylesheet" href="styles.css?v=20261011-price-calculator3">
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true">
@@ -92,16 +92,10 @@
       <section id="prices" data-view-panel="prices" data-search-section="價格 房價 經典 陽光 太空 豪華 加貓 多間房 安親 提早入住 延後退房 連假 春節 訂金 優惠 取消 代購 就醫 車馬費">
         <div class="section-head"><div><h2>價格</h2></div></div>
 
-        <aside class="holiday-price-rule" aria-labelledby="holidayPriceRuleTitle">
-          <div><small>官網連假規則</small><h3 id="holidayPriceRuleTitle">前一晚就算連假第一天</h3><span>連假期間不提供安親，應照規定時間入住、退房。</span></div>
-          <p><b>例外：第一天提前入住</b><span>不可自行答應；夥伴確認可安排後，收一個晚上的房費。</span></p>
-          <p><b>例外：最後一天延後退房</b><span>不可自行答應；夥伴確認可安排後，收一個晚上的房費。</span></p>
-        </aside>
-
         <div class="price-room-grid" id="priceRoomGrid" aria-label="一般房型每晚價格"></div>
 
         <section class="price-calculator" aria-labelledby="priceCalculatorTitle">
-          <header class="price-calculator-head"><span>快速估價</span><div><h3 id="priceCalculatorTitle">房價計算小工具</h3><p>單一房間估算；每個費用都會列出計算方式。</p></div></header>
+          <header class="price-calculator-head"><h3 id="priceCalculatorTitle">住宿費試算</h3></header>
           <div class="price-calculator-fields">
             <label>日期類型<select id="calcPeriod"><option value="regular">一般日</option><option value="holiday">一般連假</option><option value="spring">2027 春節</option></select></label>
             <label>房型<select id="calcRoom"></select></label>
@@ -119,10 +113,16 @@
           <p class="calc-footnote">單一房間估算，不含其他費用。折扣先按「房間費＋加貓費」估算；實際折扣計法、連假優惠與特殊安排請向夥伴確認。多間房請查下方完整價格表。</p>
         </section>
 
-        <aside class="long-stay-reminder"><b>多日連住，記得先算優惠</b><span>10 晚 8 折・20 晚 75 折・30 晚 7 折</span><small>連假及前一日、春節不適用。</small></aside>
-
         <details class="table-drawer"><summary>打開多間房完整價格表</summary><div class="tabs" id="priceTabs" role="tablist"></div><div class="table-scroll"><table><thead><tr><th>房間數</th><th>1 隻</th><th>2 隻</th><th>3 隻</th><th>4 隻</th><th>5 隻</th><th>6 隻</th></tr></thead><tbody id="priceBody"></tbody></table></div><p class="fine-print">一般日依房型、房間數與入住貓咪數量查表；春節另依公告特別價。</p></details>
 
+        <details class="price-policy-drawer">
+          <summary>連假、春節、優惠與其他費用</summary>
+          <div class="price-policy-content">
+            <aside class="holiday-price-rule" aria-labelledby="holidayPriceRuleTitle">
+              <div><small>官網連假規則</small><h3 id="holidayPriceRuleTitle">前一晚就算連假第一天</h3><span>連假期間不提供安親，應照規定時間入住、退房。</span></div>
+              <p><b>第一天提前入住</b><span>先確認夥伴可安排，再收一晚房費。</span></p>
+              <p><b>最後一天延後退房</b><span>先確認夥伴可安排，再收一晚房費。</span></p>
+            </aside>
         <div class="price-fee-grid">
           <article class="price-fee-card"><small>一般日接送加費</small><h3>營業時間內按房價比例</h3><ul><li>正常入住 15:00–19:00；正常退房 12:00–14:00。</li><li>提前入住／延後退房須先預約：每小時為一晚定價的 10%。</li><li>內部 SOP 補充：滿 30 分鐘收 5%；未滿 30 分鐘不計。</li><li>不過夜安親最低以 6 小時計。</li><li><b>官網規定：超過 19:00 尚未退房，以多住一日計。</b></li><li>營業時間外不得自行承接或報價；一律先問夥伴。</li></ul></article>
           <article class="price-fee-card"><small>其他費用</small><h3>先說清楚再執行</h3><ul><li>一般訂金：住宿總額 30%。</li><li>不過夜安親：最低 6 小時。</li><li>代購用品：商品費另加 100 元代購費。</li><li>帶貓就醫：診療費、計程車費另加 200 元車馬費。</li><li>頻繁噴尿特殊清潔：可酌收 2,000 元／間。</li></ul></article>
@@ -149,6 +149,8 @@
           <div class="holiday-conflict"><b>接待口徑</b><span>官網說法不一致；報價前查當期公告或詢問夥伴。</span></div>
           <footer><b>2027/2/3–2/10</b><span>至少入住 5 晚且不適用折扣。只有 2/3 可預約提早入住，最早 10:00、每小時 10%；其他日期不能提早或延後。</span><a href="https://www.cat-roommate.com/SpringFestival.html" target="_blank" rel="noopener noreferrer">查看官網公告 ↗</a></footer>
         </article>
+          </div>
+        </details>
 
         <details class="table-drawer"><summary>一般取消退訂比例</summary><div class="table-scroll"><table class="cancel-table"><thead><tr><th>距離入住日</th><th>退還訂金</th></tr></thead><tbody id="cancelBody"></tbody></table></div><p class="fine-print">連續假期原則上不退訂金，可在 1 年內改期；跨行退款手續費由家長負擔。</p></details>
       </section>
@@ -362,6 +364,6 @@
     <button type="button" data-view="faq"><span class="mobile-nav-icon">Q</span><span class="mobile-nav-label">話術</span></button>
     <button type="button" data-view="quiz"><span class="mobile-nav-icon">?</span><span class="mobile-nav-label">測驗</span></button>
   </nav>
-  <script src="data.js?v=20261011-price-calculator2"></script><script src="app.js?v=20261011-price-calculator2"></script>
+  <script src="data.js?v=20261011-price-calculator3"></script><script src="app.js?v=20261011-price-calculator3"></script>
 </body>
 </html>
