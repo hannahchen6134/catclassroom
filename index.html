@@ -95,22 +95,27 @@
         <div class="price-room-grid" id="priceRoomGrid" aria-label="一般房型每晚價格"></div>
 
         <section class="price-calculator" aria-labelledby="priceCalculatorTitle">
-          <header class="price-calculator-head"><h3 id="priceCalculatorTitle">住宿費試算</h3></header>
+          <header class="price-calculator-head"><h3 id="priceCalculatorTitle">價格試算</h3></header>
           <div class="price-calculator-fields">
-            <label>日期類型<select id="calcPeriod"><option value="regular">一般日</option><option value="holiday">一般連假</option><option value="spring">2027 春節</option></select></label>
+            <label>計算方式<select id="calcMethod"><option value="stay">住宿（過夜）</option><option value="daycare">安親（不過夜）</option></select></label>
             <label>房型<select id="calcRoom"></select></label>
             <label>貓咪數量<select id="calcCats"></select></label>
-            <label>住宿晚數<input id="calcNights" type="number" min="1" max="90" value="1" inputmode="numeric"></label>
-            <label id="calcExtraWrap">接送時間安排<select id="calcExtra"></select></label>
-            <label class="calc-eligibility" id="calcOldRoommateWrap"><input id="calcOldRoommate" type="checkbox"><span>有老室友優惠資格（一般日 8 折）</span></label>
+            <label class="calc-stay-only">入住日期<input id="calcCheckinDate" type="date" min="2026-10-12" max="2027-03-31" value="2026-10-12"></label>
+            <label class="calc-stay-only">入住時間<input id="calcCheckinTime" type="time" step="1800" value="15:00"></label>
+            <label class="calc-stay-only">退房日期<input id="calcCheckoutDate" type="date" min="2026-10-13" max="2027-03-31" value="2026-10-13"></label>
+            <label class="calc-stay-only">退房時間<input id="calcCheckoutTime" type="time" step="1800" value="12:00"></label>
+            <label class="calc-daycare-only" hidden>安親日期<input id="calcDaycareDate" type="date" min="2026-10-12" max="2027-03-31" value="2026-10-12"></label>
+            <label class="calc-daycare-only" hidden>開始時間<input id="calcDaycareStart" type="time" step="1800" value="12:00"></label>
+            <label class="calc-daycare-only" hidden>結束時間<input id="calcDaycareEnd" type="time" step="1800" value="18:00"></label>
+            <label class="calc-stay-only calc-eligibility"><input id="calcOldRoommate" type="checkbox"><span>已確認有老室友優惠資格</span></label>
           </div>
           <div class="calc-notice" id="calcNotice" role="status" aria-live="polite"></div>
           <div class="price-calculator-result" aria-live="polite">
-            <div class="calc-breakdown" id="calcBreakdown"></div>
-            <p class="calc-total"><span>預估住宿費</span><strong id="calcTotal">—</strong></p>
+            <div class="calc-breakdown"><h4>計算路徑</h4><ol id="calcBreakdown"></ol></div>
+            <p class="calc-total"><span>預估費用</span><strong id="calcTotal">—</strong></p>
           </div>
-          <p class="calc-formula" id="calcFormula"></p>
-          <p class="calc-footnote">單一房間估算，不含其他費用。折扣先按「房間費＋加貓費」估算；實際折扣計法、連假優惠與特殊安排請向夥伴確認。多間房請查下方完整價格表。</p>
+          <details class="calc-holiday-details"><summary>日期怎麼分一般日、連假與春節？</summary><ul><li>連假前一晚也算連假：2026/10/23–10/26、12/24–12/27、12/31–2027/1/3、2027/2/26–3/1。</li><li>春節特別價：2027/2/3–2/10（依貓室友公告；覆蓋該段一般連假判斷）。</li><li>日期只對照本試算指定範圍 2026/10/12–2027/3/31；退房日不算住宿晚數。</li></ul><p>假期日期對照：<a href="https://www.dgpa.gov.tw/information?pid=12574&uid=82" target="_blank" rel="noopener noreferrer">2026 人事總處行事曆</a>、<a href="https://www.dgpa.gov.tw/information?pid=12983&uid=2" target="_blank" rel="noopener noreferrer">2027 人事總處行事曆</a>；春節特別價依<a href="https://www.cat-roommate.com/SpringFestival.html" target="_blank" rel="noopener noreferrer">貓室友公告</a>。</p></details>
+          <p class="calc-footnote">單一房型估算。安親按房型單晚定價的 10%／小時，最低 6 小時；住宿按每個住宿夜分別分類。一般連假提早／延後須夥伴核准且各加一晚；營業時間外及房況例外請先問夥伴。此工具不含訂金、代購、就醫及其他費用；多間房請查下方價格表。</p>
         </section>
 
         <details class="table-drawer"><summary>打開多間房完整價格表</summary><div class="tabs" id="priceTabs" role="tablist"></div><div class="table-scroll"><table><thead><tr><th>房間數</th><th>1 隻</th><th>2 隻</th><th>3 隻</th><th>4 隻</th><th>5 隻</th><th>6 隻</th></tr></thead><tbody id="priceBody"></tbody></table></div><p class="fine-print">一般日依房型、房間數與入住貓咪數量查表；春節另依公告特別價。</p></details>
@@ -364,6 +369,6 @@
     <button type="button" data-view="faq"><span class="mobile-nav-icon">Q</span><span class="mobile-nav-label">話術</span></button>
     <button type="button" data-view="quiz"><span class="mobile-nav-icon">?</span><span class="mobile-nav-label">測驗</span></button>
   </nav>
-  <script src="data.js?v=20261011-price-calculator3"></script><script src="app.js?v=20261011-price-calculator3"></script>
+  <script src="data.js?v=20261012-price-calculator4"></script><script src="app.js?v=20261012-price-calculator4"></script>
 </body>
 </html>

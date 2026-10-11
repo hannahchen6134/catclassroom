@@ -28,21 +28,41 @@ priceRoomGrid.innerHTML = data.rooms.map((room) => `
     <dl><div><dt>入住上限</dt><dd>${room.capacity} 隻</dd></div><div><dt>加貓</dt><dd>${room.extra}</dd></div></dl>
   </article>`).join('');
 
-const calcPeriod = document.querySelector('#calcPeriod');
+const calcMethod = document.querySelector('#calcMethod');
 const calcRoom = document.querySelector('#calcRoom');
 const calcCats = document.querySelector('#calcCats');
-const calcNights = document.querySelector('#calcNights');
-const calcExtra = document.querySelector('#calcExtra');
-const calcExtraWrap = document.querySelector('#calcExtraWrap');
+const calcCheckinDate = document.querySelector('#calcCheckinDate');
+const calcCheckinTime = document.querySelector('#calcCheckinTime');
+const calcCheckoutDate = document.querySelector('#calcCheckoutDate');
+const calcCheckoutTime = document.querySelector('#calcCheckoutTime');
+const calcDaycareDate = document.querySelector('#calcDaycareDate');
+const calcDaycareStart = document.querySelector('#calcDaycareStart');
+const calcDaycareEnd = document.querySelector('#calcDaycareEnd');
 const calcOldRoommate = document.querySelector('#calcOldRoommate');
-const calcOldRoommateWrap = document.querySelector('#calcOldRoommateWrap');
 const calcNotice = document.querySelector('#calcNotice');
 const calcBreakdown = document.querySelector('#calcBreakdown');
 const calcTotal = document.querySelector('#calcTotal');
-const calcFormula = document.querySelector('#calcFormula');
 const springRoomPrices = { CLS: 1500, SUN: 1800, SPC: 2400, LUX: 4200 };
 const currency = value => `${formatPrice(Math.round(value))} 元`;
 calcRoom.innerHTML = data.rooms.map(room => `<option value="${room.id}">${room.name}</option>`).join('');
+const holidayRanges = [['2026-10-23','2026-10-26'],['2026-12-24','2026-12-27'],['2026-12-31','2027-01-03'],['2027-02-26','2027-03-01']];
+const springStart = '2027-02-03';
+const springEnd = '2027-02-10';
+const dateMs = date => new Date(`${date}T00:00:00Z`).getTime();
+const dateOffset = (date, days) => new Date(dateMs(date) + days * 86400000).toISOString().slice(0,10);
+const dateLabel = date => date.replaceAll('-', '/');
+const isSpring = date => date >= springStart && date <= springEnd;
+const isHoliday = date => holidayRanges.some(([start,end]) => date >= start && date <= end);
+const category = date => isSpring(date) ? '春節' : isHoliday(date) ? '連假' : '一般日';
+const normalNightPrice = room => room.price;
+function perNight(room, cats, date) {
+  const spring = isSpring(date);
+  const roomPrice = spring ? springRoomPrices[room.id] : normalNightPrice(room);
+  const firstExtraCat = spring && ['CLS','SUN'].includes(room.id) ? 2 : Number(room.extra.match(/第\s*(\d+)/)?.[1] || 2);
+  const extraCatCount = Math.max(0, cats - firstExtraCat + 1);
+  const catRate = spring ? 300 : 150;
+  return { roomPrice, extraCatCount, catRate, total: roomPrice + extraCatCount * catRate };
+}
 
 function fillCatOptions() {
   const room = data.rooms.find(item => item.id === calcRoom.value) || data.rooms[0];
@@ -51,106 +71,128 @@ function fillCatOptions() {
   calcCats.value = String(current);
 }
 
-function fillExtraOptions() {
-  const period = calcPeriod.value;
-  calcOldRoommateWrap.hidden = period !== 'regular';
-  calcExtraWrap.hidden = period === 'holiday' || period === 'spring';
-  if (period === 'holiday') {
-    calcExtra.innerHTML = '<option value="none">無特殊安排</option><option value="earlyApproved">提前入住（夥伴已核准）</option><option value="lateApproved">延後退房（夥伴已核准）</option><option value="bothApproved">提前＋延後（夥伴都已核准）</option>';
-  } else if (period === 'spring') {
-    calcExtra.innerHTML = '<option value="none">無特殊安排</option><option value="springEarly">2/3 提前入住（每小時 10%）</option>';
-  } else {
-    calcExtra.innerHTML = '<option value="none">無特殊安排</option><option value="early1">一般日提前入住 1 小時</option><option value="earlyHalf">一般日提前入住 30 分鐘</option><option value="late1">一般日延後退房 1 小時</option><option value="lateHalf">一般日延後退房 30 分鐘</option><option value="after19">超過 19:00 退房（多住 1 日）</option>';
-  }
-  calcNotice.textContent = period === 'holiday'
-    ? '官網規定連假不提供安親、須照時段辦理。只有夥伴確認可安排後才選例外；每項例外加收一晚。'
-    : period === 'spring'
-      ? '春節至少入住 5 晚。只有 2/3 可預約提早入住，最早 10:00、每小時一晚定價 10%；其他日期不可提早或延後。'
-      : '一般日提早入住或延後退房需先預約；每小時收一晚定價 10%，30 分鐘收 5%。';
-}
-
 function updatePriceEstimate() {
   const room = data.rooms.find(item => item.id === calcRoom.value) || data.rooms[0];
   const cats = Number(calcCats.value) || 1;
-  const nights = Math.max(1, Math.min(90, Number(calcNights.value) || 1));
-  const period = calcPeriod.value;
-  const spring = period === 'spring';
-  const baseRate = spring ? springRoomPrices[room.id] : room.price;
-  const firstExtraCat = spring ? 2 : Number(room.extra.match(/第\s*(\d+)/)?.[1] || 2);
-  const extraCatCount = Math.max(0, cats - firstExtraCat + 1);
-  const extraCatRate = spring ? 300 : 150;
-  const roomNights = baseRate * nights;
-  const extraCatNights = extraCatCount * extraCatRate * nights;
-  let adjustment = 0;
-  let adjustmentLabel = '';
-  let adjustmentFormula = '';
-  const extra = calcExtra.value;
-
-  if (period === 'regular') {
-    const extraPercents = { earlyHalf: .05, lateHalf: .05, early1: .10, late1: .10, after19: 1 };
-    adjustment = (baseRate + extraCatCount * extraCatRate) * (extraPercents[extra] || 0);
-    if (extra === 'after19') {
-      adjustmentLabel = '超過 19:00，多住 1 日';
-      adjustmentFormula = `(${currency(baseRate)} 房價 + ${extraCatCount} 隻加貓 × ${currency(extraCatRate)}) × 1 晚`;
-    } else if (extra !== 'none') {
-      const percent = extraPercents[extra];
-      adjustmentLabel = extra.includes('Half') ? '安親費（30 分鐘／5%）' : '安親費（1 小時／10%）';
-      adjustmentFormula = `(${currency(baseRate)} 房價 + ${extraCatCount} 隻加貓 × ${currency(extraCatRate)}) × ${percent * 100}%`;
+  const stayMode = calcMethod.value === 'stay';
+  document.querySelectorAll('.calc-stay-only').forEach(el => { el.hidden = !stayMode; });
+  document.querySelectorAll('.calc-daycare-only').forEach(el => { el.hidden = stayMode; });
+  let total = 0;
+  const steps = [];
+  const notes = [];
+  if (!stayMode) {
+    const date = calcDaycareDate.value;
+    const start = calcDaycareStart.value;
+    const end = calcDaycareEnd.value;
+    if (!date || !start || !end || date < '2026-10-12' || date > '2027-03-31' || end <= start) {
+      calcNotice.textContent = '請選擇範圍內日期，並確認安親結束時間晚於開始時間。';
+      calcBreakdown.innerHTML = '<li>資料未完整，暫不計價。</li>';
+      calcTotal.textContent = '—'; return;
     }
-  } else if (period === 'holiday') {
-    const addedNights = extra === 'bothApproved' ? 2 : ['earlyApproved', 'lateApproved'].includes(extra) ? 1 : 0;
-    adjustment = (baseRate + extraCatCount * extraCatRate) * addedNights;
-    if (addedNights) {
-      adjustmentLabel = `夥伴核准的例外（加 ${addedNights} 晚）`;
-      adjustmentFormula = `(${currency(baseRate)} 房價 + ${extraCatCount} 隻加貓 × ${currency(extraCatRate)}) × ${addedNights} 晚`;
+    if (isHoliday(date) || isSpring(date)) {
+      calcNotice.textContent = `${dateLabel(date)} 判定為${category(date)}；官網規定連假／春節不提供安親，不能直接估價，請問夥伴。`;
+      calcBreakdown.innerHTML = '<li>日期規則不允許一般安親試算，請先向夥伴確認。</li>';
+      calcTotal.textContent = '請確認'; return;
     }
-  } else if (extra === 'springEarly') {
-    adjustment = baseRate * .10;
-    adjustmentLabel = '2/3 提前入住 1 小時安親費（10%）';
-    adjustmentFormula = `${currency(baseRate)} 春節房價 × 10%`;
-  }
-
-  let discountRate = 0;
-  let discountLabel = '';
-  if (period === 'regular') {
-    if (calcOldRoommate.checked) {
-      discountRate = .20;
-      discountLabel = '老室友優惠（8 折）';
-    } else if (nights >= 30) {
-      discountRate = .30;
-      discountLabel = '長住優惠（7 折）';
-    } else if (nights >= 20) {
-      discountRate = .25;
-      discountLabel = '長住優惠（75 折）';
+    const duration = (Number(end.slice(0,2)) * 60 + Number(end.slice(3)) - Number(start.slice(0,2)) * 60 - Number(start.slice(3))) / 60;
+    const billableHours = Math.max(6, duration);
+    const rate = perNight(room, cats, date);
+    const hourRate = rate.total * .10;
+    total = hourRate * billableHours;
+    steps.push(`${dateLabel(date)} 為一般日；安親 ${start}–${end}，共 ${duration} 小時。`);
+    steps.push(`房型每晚基準：${currency(rate.roomPrice)} 房費 + ${rate.extraCatCount} 隻 × ${currency(rate.catRate)} 加貓費 = ${currency(rate.total)}。`);
+    steps.push(`每小時按一晚定價 10%：${currency(rate.total)} × 10% = ${currency(hourRate)}／小時；最低 6 小時，所以按 ${billableHours} 小時計：${currency(hourRate)} × ${billableHours} = ${currency(total)}。`);
+    calcNotice.textContent = duration < 6 ? `未滿 6 小時，依最低 6 小時計；依官網規則，安親限一般日營業時段，仍須預約確認。` : '安親以實際時數計，最低 6 小時；須預約確認。';
+  } else {
+    const start = calcCheckinDate.value;
+    const checkout = calcCheckoutDate.value;
+    const checkinTime = calcCheckinTime.value;
+    const checkoutTime = calcCheckoutTime.value;
+    if (!start || !checkout || !checkinTime || !checkoutTime || start < '2026-10-12' || start > '2027-03-30' || checkout > '2027-03-31' || checkout <= start) {
+      calcNotice.textContent = '入住日須介於 2026/10/12–2027/3/30，退房日須晚於入住日且不超過 2027/3/31。';
+      calcBreakdown.innerHTML = '<li>日期或時間尚未填完整，暫不計價。</li>';
+      calcTotal.textContent = '—'; return;
+    }
+    const dates = [];
+    for (let date = start; date < checkout; date = dateOffset(date, 1)) dates.push(date);
+    if (dates.length > 170) { calcNotice.textContent = '所選住宿區間超出目前試算範圍。'; calcTotal.textContent = '—'; return; }
+    const hasSpecial = dates.some(date => category(date) !== '一般日');
+    const nights = dates.length;
+    const priceRows = dates.map(date => { const rate = perNight(room, cats, date); total += rate.total; return { date, rate }; });
+    steps.push(`入住 ${dateLabel(start)} ${checkinTime}，退房 ${dateLabel(checkout)} ${checkoutTime}；退房日不計住宿晚數，共 ${nights} 晚。`);
+    priceRows.forEach(({date, rate}) => {
+      steps.push(`${dateLabel(date)}｜${category(date)}：${currency(rate.roomPrice)} 房費 + ${rate.extraCatCount} 隻 × ${currency(rate.catRate)} 加貓費 = ${currency(rate.total)}。`);
+    });
+    let timeAdjust = 0;
+    const startRate = perNight(room, cats, start);
+    const endRate = perNight(room, cats, dateOffset(checkout, -1));
+    const holidayCheckin = isHoliday(start);
+    const springCheckin = isSpring(start);
+    if (checkinTime > '19:00') notes.push('入住晚於 19:00，超出一般入住時段；請先問夥伴，不以本工具自動報價。');
+    if (checkinTime < '12:00') notes.push('入住早於 12:00，屬營業時間外安排；請先問夥伴，本工具未估營業外費用。');
+    if (checkoutTime < '12:00') notes.push('退房早於 12:00，屬營業時間外安排；請先問夥伴，本工具未估營業外費用。');
+    if (checkinTime < '15:00') {
+      if (springCheckin) {
+        if (start === springStart && checkinTime >= '10:00') {
+          const hours = (15 * 60 - (Number(checkinTime.slice(0,2))*60 + Number(checkinTime.slice(3)))) / 60;
+          timeAdjust += startRate.total * .10 * hours;
+          steps.push(`春節 2/3 提前入住 ${hours} 小時：${currency(startRate.total)} × 10% × ${hours} = ${currency(startRate.total * .10 * hours)}。`);
+        } else notes.push('春節非 2/3 提前入住，或早於 10:00：不符合公告可試算條件，請問夥伴。');
+      } else if (holidayCheckin) {
+        timeAdjust += startRate.total;
+        steps.push(`連假時段提前入住（須夥伴核准）：加 1 晚 ${currency(startRate.total)}。`);
+      } else {
+        const halfHours = Math.floor((15*60 - (Number(checkinTime.slice(0,2))*60 + Number(checkinTime.slice(3)))) / 30);
+        const fee = startRate.total * .05 * halfHours;
+        timeAdjust += fee;
+        steps.push(`一般日提早 ${halfHours/2} 小時：${currency(startRate.total)} × 5% × ${halfHours} 個半小時 = ${currency(fee)}。`);
+      }
+    }
+    if (checkoutTime > '14:00') {
+      if (isSpring(checkout)) notes.push('春節延後退房不在公告可試算安排內，請問夥伴。');
+      else if (isHoliday(checkout)) {
+        timeAdjust += endRate.total;
+        steps.push(`連假時段延後退房（須夥伴核准）：加 1 晚 ${currency(endRate.total)}。`);
+      } else {
+        const lateMinutes = Number(checkoutTime.slice(0,2))*60 + Number(checkoutTime.slice(3)) - 14*60;
+        if (checkoutTime > '19:00') {
+          timeAdjust += perNight(room, cats, checkout).total;
+          steps.push(`超過 19:00 退房：以多住 1 晚計 ${currency(perNight(room,cats,checkout).total)}。`);
+        } else {
+          const halfHours = Math.floor(lateMinutes / 30);
+          const fee = endRate.total * .05 * halfHours;
+          timeAdjust += fee;
+          steps.push(`一般日延後 ${halfHours/2} 小時：${currency(endRate.total)} × 5% × ${halfHours} 個半小時 = ${currency(fee)}。`);
+        }
+      }
+    }
+    total += timeAdjust;
+    if (timeAdjust > 0) steps.push(`時間安排加費小計：${currency(timeAdjust)}。`);
+    const discountRate = calcOldRoommate.checked ? .20 : nights >= 30 ? .30 : nights >= 20 ? .25 : nights >= 10 ? .20 : 0;
+    const discountLabel = calcOldRoommate.checked ? '老室友 8 折' : nights >= 30 ? '長住 7 折' : nights >= 20 ? '長住 75 折' : nights >= 10 ? '長住 8 折' : '';
+    if (!hasSpecial && discountRate) {
+      const discount = (priceRows.reduce((sum,row) => sum + row.rate.total, 0)) * discountRate;
+      total -= discount;
+      steps.push(`符合${discountLabel}：一般日住宿小計 × ${discountRate*100}% = 折 ${currency(discount)}；${currency(priceRows.reduce((sum,row)=>sum+row.rate.total,0))} − ${currency(discount)} = ${currency(total)}。`);
+    } else if (hasSpecial) {
+      steps.push('優惠檢查：住宿含連假／春節夜，不套用長住或老室友折扣。');
     } else if (nights >= 10) {
-      discountRate = .20;
-      discountLabel = '長住優惠（8 折）';
+      steps.push('優惠檢查：已有老室友優惠資格；長住折扣不與老室友優惠合併。');
+    } else {
+      steps.push(`優惠檢查：${nights} 晚未達長住 10 晚門檻，無長住折扣。`);
     }
+    if (nights >= 10) notes.push('長住優惠：10 晚 8 折、20 晚 75 折、30 晚 7 折；不能與老室友優惠合併。連假／春節折扣規則依官網公告，請夥伴覆核。');
+    if (dates.some(isSpring) && nights < 5) notes.push('春節公告最低入住 5 晚；目前未達門檻，請先問夥伴。');
+    calcNotice.textContent = notes.length ? notes.join(' ') : '日期已逐晚分類；本結果為單房估算，特殊時段仍須先經夥伴確認。';
   }
-  const discount = (roomNights + extraCatNights) * discountRate;
-  const total = Math.max(0, roomNights + extraCatNights + adjustment - discount);
-  const rows = [
-    `<p><span>房間費 <small>${currency(baseRate)} × ${nights} 晚</small></span><b>${currency(roomNights)}</b></p>`,
-    `<p><span>加貓費 <small>${extraCatCount} 隻 × ${currency(extraCatRate)} × ${nights} 晚</small></span><b>${currency(extraCatNights)}</b></p>`
-  ];
-  if (adjustmentLabel) rows.push(`<p><span>${adjustmentLabel}<small>${adjustmentFormula}</small></span><b>＋${currency(adjustment)}</b></p>`);
-  if (discountLabel) rows.push(`<p class="discount"><span>${discountLabel}<small>(${currency(roomNights)} 房間費 + ${currency(extraCatNights)} 加貓費) × ${discountRate * 100}%</small></span><b>－${currency(discount)}</b></p>`);
-  calcBreakdown.innerHTML = rows.join('');
-  calcTotal.textContent = currency(total);
-  calcFormula.textContent = `計算邏輯：房間費 ${currency(roomNights)} ＋加貓費 ${currency(extraCatNights)}${adjustment ? ` ＋接送／加收 ${currency(adjustment)}` : ''}${discount ? ` －優惠 ${currency(discount)}` : ''} ＝ ${currency(total)}。`;
-  if (period === 'spring' && nights < 5) calcNotice.textContent += ' 目前少於春節官網最低 5 晚，請調整晚數。';
-  if (period === 'regular' && calcOldRoommate.checked && nights >= 10) calcNotice.textContent += ' 老室友優惠與長住優惠不可合併，本工具按老室友 8 折估算。';
+  calcBreakdown.innerHTML = steps.map(step => `<li>${step}</li>`).join('');
+  calcTotal.textContent = currency(Math.max(0, total));
 }
 
-calcPeriod.addEventListener('change', () => { fillExtraOptions(); updatePriceEstimate(); });
+document.querySelectorAll('#prices input, #prices select').forEach(input => input.addEventListener('input', updatePriceEstimate));
+document.querySelectorAll('#prices input, #prices select').forEach(input => input.addEventListener('change', updatePriceEstimate));
 calcRoom.addEventListener('change', () => { fillCatOptions(); updatePriceEstimate(); });
-calcCats.addEventListener('change', updatePriceEstimate);
-calcNights.addEventListener('input', updatePriceEstimate);
-calcNights.addEventListener('change', () => { calcNights.value = String(Math.max(1, Math.min(90, Number(calcNights.value) || 1))); updatePriceEstimate(); });
-calcExtra.addEventListener('change', updatePriceEstimate);
-calcOldRoommate.addEventListener('change', updatePriceEstimate);
 fillCatOptions();
-fillExtraOptions();
 updatePriceEstimate();
 
 const priceTabs = document.querySelector('#priceTabs');
