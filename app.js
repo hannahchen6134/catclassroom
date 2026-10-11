@@ -7,19 +7,26 @@ roomGrid.innerHTML = data.rooms.map((room) => `
     <div class="room-photo"><img src="${room.image}" alt="${room.name}官方房型照片" loading="lazy"><span class="room-id">${room.id}</span></div>
     <div class="room-content">
       <h3>${room.name}</h3>
-      <div class="room-price"><strong>${formatPrice(room.price)}</strong><small>元／晚</small></div>
       <dl class="room-facts">
         <div><dt>上限</dt><dd>${room.capacity} 隻</dd></div>
       </dl>
-      <button class="memory-btn" type="button" aria-expanded="false">看尺寸、加貓與口訣</button>
-    </div><p class="memory-note"><b>加貓：</b>${room.extra}<br><b>尺寸：</b>${room.size}<br><b>特色：</b>${room.feature}<br><b>口訣：</b>${room.memory}</p>
+      <button class="memory-btn" type="button" aria-expanded="false">看尺寸、特色與口訣</button>
+    </div><p class="memory-note"><b>尺寸：</b>${room.size}<br><b>特色：</b>${room.feature}<br><b>口訣：</b>${room.memory}</p>
   </article>`).join('');
 
 roomGrid.addEventListener('click', (event) => {
   const button = event.target.closest('.memory-btn'); if (!button) return;
   const card = button.closest('.room-card'); const open = card.classList.toggle('open');
-  button.setAttribute('aria-expanded', open); button.textContent = open ? '收起詳細資料' : '看尺寸、加貓與口訣';
+  button.setAttribute('aria-expanded', open); button.textContent = open ? '收起詳細資料' : '看尺寸、特色與口訣';
 });
+
+const priceRoomGrid = document.querySelector('#priceRoomGrid');
+priceRoomGrid.innerHTML = data.rooms.map((room) => `
+  <article class="price-room-card">
+    <small>${room.name}</small>
+    <p><strong>${formatPrice(room.price)}</strong><span>元／晚</span></p>
+    <dl><div><dt>入住上限</dt><dd>${room.capacity} 隻</dd></div><div><dt>加貓</dt><dd>${room.extra}</dd></div></dl>
+  </article>`).join('');
 
 const priceTabs = document.querySelector('#priceTabs');
 const priceBody = document.querySelector('#priceBody');

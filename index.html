@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261010-roommap-mobile-text1">
+  <link rel="stylesheet" href="styles.css?v=20261011-price-page1">
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true">
@@ -34,7 +34,7 @@
       <div class="hero-copy"><span class="eyebrow">CATROOMMATE · 新人值班用</span><h1>貓室友<br>上班筆記</h1><span class="stamp">SOP 更新 2026.10.11</span></div>
     </header>
     <main id="main">
-      <nav class="jump-nav" aria-label="學習主題分頁"><a class="active" href="#numbers" data-view="numbers" aria-current="page">先背重點</a><a href="#rooms" data-view="rooms">房型價格</a><a href="#roommap" data-view="roommap">找房號</a><a href="#rules" data-view="rules">今天工作</a><a href="#faq" data-view="faq">情境話術</a><a href="#quiz" data-view="quiz">測驗複習</a></nav>
+      <nav class="jump-nav" aria-label="學習主題分頁"><a class="active" href="#numbers" data-view="numbers" aria-current="page">先背重點</a><a href="#rooms" data-view="rooms">認房型</a><a href="#prices" data-view="prices">價格</a><a href="#roommap" data-view="roommap">找房號</a><a href="#rules" data-view="rules">今天工作</a><a href="#faq" data-view="faq">情境話術</a><a href="#quiz" data-view="quiz">測驗複習</a></nav>
 
       <section id="numbers" data-view-panel="numbers" data-search-section="必背數字 時間 入住 退房 營業 安親 提前 延後 收費 訂金 疫苗 驅蟲 結紮">
         <div class="learning-launcher" id="learningLauncher" aria-labelledby="learningLauncherTitle">
@@ -56,7 +56,7 @@
               <div class="time-row"><div class="time-row-label"><b>對外接待</b><small>可辦交接</small></div><div class="time-track"><span class="closed-segment closed-before segment-copy"><b>00–12</b><small>不辦理</small></span><span class="business-segment segment-copy"><b>12–19</b><small>接待</small></span><span class="closed-segment closed-after segment-copy"><b>19–24</b><small>不辦理</small></span></div></div>
               <div class="time-row"><div class="time-row-label"><b>退房辦理</b><small>正常 12–14</small></div><div class="time-track"><span class="closed-segment closed-before segment-copy"><b>00–12</b><small>原則不接</small></span><span class="normal-segment checkout-normal segment-copy"><b>12–14</b><small>正常</small></span><span class="charged-segment checkout-late segment-copy"><b>14–19</b><small>＋10%</small></span><span class="closed-segment closed-after segment-copy"><b>19–24</b><small>原則不接</small></span></div></div>
               <div class="time-row"><div class="time-row-label"><b>入住辦理</b><small>正常 15–19</small></div><div class="time-track"><span class="closed-segment closed-before segment-copy"><b>00–12</b><small>原則不接</small></span><span class="charged-segment checkin-early segment-copy"><b>12–15</b><small>＋10%</small></span><span class="normal-segment checkin-normal segment-copy"><b>15–19</b><small>正常</small></span><span class="closed-segment closed-after segment-copy"><b>19–24</b><small>原則不接</small></span></div></div>
-              <p class="time-memory-cue"><b>只背兩段：</b>退房 12–14 正常；入住 15–19 正常。其他營業時段為加費。</p>
+              <p class="time-memory-cue"><b>一般日只背兩段：</b>退房 12–14 正常；入住 15–19 正常。其他營業時段為加費；連假改到「價格」分頁查。</p>
             </div>
             <div class="fee-visual">
               <h3>10% 安親費與時間外 300 元</h3>
@@ -84,9 +84,32 @@
         </div>
       </section>
 
-      <section id="rooms" data-view-panel="rooms" data-search-section="房型 經典 陽光 太空 豪華 價格 尺寸 容量 加貓 連假 春節 老室友 折扣">
-        <div class="section-head"><span>房型</span><div><h2>看照片認房型</h2><p>工作時查：價格、容量、特色一次確認</p></div></div>
+      <section id="rooms" data-view-panel="rooms" data-search-section="房型 經典 陽光 太空 豪華 照片 尺寸 容量 特色">
+        <div class="section-head"><span>房型</span><div><h2>看照片認房型</h2><p>先認外觀、容量與特色；價錢統一到「價格」分頁查</p></div></div>
         <div class="room-grid" id="roomGrid"></div>
+      </section>
+
+      <section id="prices" data-view-panel="prices" data-search-section="價格 房價 經典 陽光 太空 豪華 加貓 多間房 安親 提早入住 延後退房 連假 春節 訂金 優惠 取消 代購 就醫 車馬費">
+        <div class="section-head"><span>價格</span><div><h2>所有價格都在這裡</h2><p>先判斷一般日、連假或春節，再看房價與加費</p></div></div>
+
+        <aside class="holiday-price-rule" aria-labelledby="holidayPriceRuleTitle">
+          <div><small>官網連假規則</small><h3 id="holidayPriceRuleTitle">前一晚就算連假第一天</h3><span>連假期間不提供安親，應照規定時間入住、退房。</span></div>
+          <p><b>例外：第一天提前入住</b><span>不可自行答應；夥伴確認可安排後，收一個晚上的房費。</span></p>
+          <p><b>例外：最後一天延後退房</b><span>不可自行答應；夥伴確認可安排後，收一個晚上的房費。</span></p>
+        </aside>
+
+        <div class="price-room-grid" id="priceRoomGrid" aria-label="一般房型每晚價格"></div>
+
+        <aside class="long-stay-reminder"><b>多日連住，記得先算優惠</b><span>10 晚 8 折・20 晚 75 折・30 晚 7 折</span><small>連假及前一日、春節不適用。</small></aside>
+
+        <details class="table-drawer"><summary>打開多間房完整價格表</summary><div class="tabs" id="priceTabs" role="tablist"></div><div class="table-scroll"><table><thead><tr><th>房間數</th><th>1 隻</th><th>2 隻</th><th>3 隻</th><th>4 隻</th><th>5 隻</th><th>6 隻</th></tr></thead><tbody id="priceBody"></tbody></table></div><p class="fine-print">一般日依房型、房間數與入住貓咪數量查表；春節另依公告特別價。</p></details>
+
+        <div class="price-fee-grid">
+          <article class="price-fee-card"><small>一般日接送加費</small><h3>營業時間內按房價比例</h3><ul><li>正常入住 15:00–19:00；正常退房 12:00–14:00。</li><li>提前入住／延後退房須先預約：每小時為一晚定價的 10%。</li><li>內部 SOP 補充：滿 30 分鐘收 5%；未滿 30 分鐘不計。</li><li>不過夜安親最低以 6 小時計。</li><li><b>官網規定：超過 19:00 尚未退房，以多住一日計。</b></li><li>營業時間外不得自行承接或報價；一律先問夥伴。</li></ul></article>
+          <article class="price-fee-card"><small>其他費用</small><h3>先說清楚再執行</h3><ul><li>一般訂金：住宿總額 30%。</li><li>不過夜安親：最低 6 小時。</li><li>代購用品：商品費另加 100 元代購費。</li><li>帶貓就醫：診療費、計程車費另加 200 元車馬費。</li><li>頻繁噴尿特殊清潔：可酌收 2,000 元／間。</li></ul></article>
+          <article class="price-fee-card"><small>優惠</small><h3>長住與老室友</h3><ul><li>長住 10 晚 8 折、20 晚 75 折、30 晚 7 折。</li><li>老室友：累計住滿 10 晚，取得 1 年資格；非連假 8 折。</li><li>官網「房型價格」寫老室友一般連假 9 折，但「住宿須知」寫連假不適用優惠；<b>不可直接承諾，先問夥伴。</b></li><li>連假及前一晚不適用長住優惠。</li><li>春節不適用老室友優惠，且所有優惠不可合併。</li></ul></article>
+        </div>
+
         <article class="holiday-rate-card" aria-labelledby="holidayRateTitle">
           <header>
             <span>先分清楚</span>
@@ -105,9 +128,10 @@
             </div>
           </div>
           <div class="holiday-conflict"><b>接待口徑</b><span>官網說法不一致；報價前查當期公告或詢問夥伴。</span></div>
-          <footer><b>2027/2/3–2/10</b><span>春節期間不適用任何折扣，至少入住 5 晚。</span><a href="https://www.cat-roommate.com/SpringFestival.html" target="_blank" rel="noopener noreferrer">查看官網公告 ↗</a></footer>
+          <footer><b>2027/2/3–2/10</b><span>至少入住 5 晚且不適用折扣。只有 2/3 可預約提早入住，最早 10:00、每小時 10%；其他日期不能提早或延後。</span><a href="https://www.cat-roommate.com/SpringFestival.html" target="_blank" rel="noopener noreferrer">查看官網公告 ↗</a></footer>
         </article>
-        <details class="table-drawer"><summary>打開多間房完整價格表</summary><div class="tabs" id="priceTabs" role="tablist"></div><div class="table-scroll"><table><thead><tr><th>房間數</th><th>1 隻</th><th>2 隻</th><th>3 隻</th><th>4 隻</th><th>5 隻</th><th>6 隻</th></tr></thead><tbody id="priceBody"></tbody></table></div><p class="fine-print">四種房型皆不適用春節一般定價；春節另有公告價格。</p></details>
+
+        <details class="table-drawer"><summary>一般取消退訂比例</summary><div class="table-scroll"><table class="cancel-table"><thead><tr><th>距離入住日</th><th>退還訂金</th></tr></thead><tbody id="cancelBody"></tbody></table></div><p class="fine-print">連續假期原則上不退訂金，可在 1 年內改期；跨行退款手續費由家長負擔。</p></details>
       </section>
 
       <section id="roommap" data-view-panel="roommap" data-search-section="房號 房間 位置 地圖 100 101 102 103 104 105 106 107 108 201 202 203 204 205 206 207 208 209 210 211 212 213 214 301 302 303 304 305 306 501 502">
@@ -288,17 +312,14 @@
           <summary><span><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg></span><div><strong>住宿規定與優惠速查</strong><small>疫苗、費用、取消、春節等對外規則集中在這裡</small></div></summary>
           <div class="policy-reference-body">
         <div class="rule-grid">
-          <details class="rule-card"><summary><i>A</i><span>訂房、入住、退房</span></summary><ol><li>電話、粉專私訊或 LINE 聯繫，先了解貓況。</li><li>收總住宿費 30% 才保留房間；入住日結清。</li><li>入住 15:00–19:00；退房 12:00–14:00。</li><li>12:00–19:00 內提早入住或延後退房，按一晚定價每小時 10%、半小時 5%。</li><li>12:00 前／19:00 後原則不接；夥伴核准可行時，每小時加收 300 元。</li><li>館內有 24 小時視訊設備，但營業時間外沒有人員駐店；需要全日有人照護時，建議另找獸醫院或全日保母旅館。</li><li>入住、退房限委託人或指定代理人，需核對身分。</li><li>不可超過房型人數上限：房內通常只能放一個砂盆，也要保留躲藏空間；超收容易造成壓力或打架。</li></ol></details>
+          <details class="rule-card"><summary><i>A</i><span>訂房、入住、退房</span></summary><ol><li>電話、粉專私訊或 LINE 聯繫，先了解貓況。</li><li>收總住宿費 30% 才保留房間；入住日結清。</li><li>入住 15:00–19:00；退房 12:00–14:00。</li><li>一般日 12:00–19:00 內提早入住或延後退房，按一晚定價每小時 10%、半小時 5%；連假例外改到「價格」分頁查。</li><li>12:00 前／19:00 後原則不接；夥伴核准可行時，每小時加收 300 元。</li><li>館內有 24 小時視訊設備，但營業時間外沒有人員駐店；需要全日有人照護時，建議另找獸醫院或全日保母旅館。</li><li>入住、退房限委託人或指定代理人，需核對身分。</li><li>不可超過房型人數上限：房內通常只能放一個砂盆，也要保留躲藏空間；超收容易造成壓力或打架。</li></ol></details>
           <details class="rule-card"><summary><i>B</i><span>健康資格與不適合入住</span></summary><ul><li>3 年內核心疫苗、1 個月內體外驅蟲證明。</li><li>SOP 備註：幼貓約滿 1 個月可開始接種，第二劑約在 3 個月左右；實際仍依疫苗紀錄與現場評估。</li><li>因年齡或健康因素不適合施打疫苗，需提供健康檢查報告再評估。</li><li>疫苗施打後 7 日內不適合入住。</li><li>滿 6 個月原則上需結紮；未結紮成貓須個別評估；3–6 個月、15 歲以上先評估。</li><li>未離乳／3 個月以下、術後未康復、需擠便擠尿或定時皮下注射者不適合。</li><li>重大或傳染性疾病、寄生蟲感染不適合。</li><li>未事前溝通、當日臨時要求入住，可依評估拒絕。</li><li>頻繁噴尿需特殊清潔，可酌收 2,000 元／間。</li></ul></details>
           <details class="rule-card"><summary><i>C</i><span>家長準備與店內配合</span></summary><ul><li>帶平常食物、熟悉氣味衣物／毯子／玩具；特殊貓砂也可自備。</li><li>若使用店內砂，可帶少量正在使用、帶熟悉氣味的舊砂混入；不用帶結塊或崩解粉末。</li><li>交代份量、時間、溫度、營養品與特殊餵食法。</li><li>可配合乾飼料、罐頭、生食、鮮食與每天 2–4 次餵食。</li><li>貓咪沒有排便、但吃喝正常時，可先與夥伴確認是否用無調味雞胸肉湯水協助補水；蒸雞肉與湯水不能取代完整主食。</li><li>店內常備皇家 F32、Orijen、礦砂、木屑／松木砂，砂盆有大、中、小尺寸可依貓咪選擇。</li><li>可代收網購包裹或就近代買；代購用品、代送美容的商品與交通費由家長負擔。</li></ul></details>
           <details class="rule-card"><summary><i>D</i><span>活動、照顧與回報</span></summary><ul><li>一次只接待一組，參觀／入住／拜訪都先預約。</li><li>共同活動須家長同意，且吃喝排泄正常、願意出房、無明顯緊張或攻擊。</li><li>不適合共同活動則安排單獨活動。</li><li>刷牙、梳毛、塞藥、針筒灌水若引起強烈情緒，可依現場狀況拒絕或轉介。</li><li>嚴重不適應或影響其他貓咪住宿權益時，可調整活動時間、範圍，必要時拒絕住宿。</li><li>以照片、影片、文字回報吃喝、排泄、便便與活動狀況。</li></ul></details>
           <details class="rule-card"><summary><i>E</i><span>就醫與緊急應變</span></summary><ul><li>需要就醫時先通知委託人。</li><li>送往家長指定醫院或鄰近醫院。</li><li>醫療費與交通費由委託人負擔。</li><li>住宿期滿後 24 小時未退房且未告知續住，視為棄養並依法處理。</li></ul></details>
-          <details class="rule-card"><summary><i>F</i><span>優惠與一般連假</span></summary><ul><li>老室友：累計 10 晚，資格 1 年；非連假 8 折。</li><li>一般連假折扣的官網說法互相矛盾，不可直接承諾 9 折；先查當期公告或詢問夥伴。</li><li>長住：10 晚 8 折、20 晚 75 折、30 晚 7 折；連假及前一日不適用。</li><li>假期前一晚視為連假第一天；期間不開放參觀或安親，須按規定時間入住、退房。</li><li>官網載明連假取消原則上不退訂金、可於一年內改期；實際退款仍先確認當期規則。</li></ul></details>
+          <details class="rule-card"><summary><i>F</i><span>優惠與一般連假</span></summary><ul><li>所有房價、加貓費、長住優惠、連假與春節價格，統一到「價格」分頁查。</li><li>連假前一晚視為連假第一天。</li><li>連假期間不開放參觀或安親，須按規定時間入住、退房。</li><li>一般連假優惠說法不一致，不可自行承諾；先查當期公告或詢問夥伴。</li><li>連假取消原則上不退訂金、可於一年內改期；實際退款仍先確認當期規則。</li></ul></details>
         </div>
 
-        <details class="table-drawer"><summary>一般取消退訂比例</summary><div class="table-scroll"><table class="cancel-table"><thead><tr><th>距離入住日</th><th>退還訂金</th></tr></thead><tbody id="cancelBody"></tbody></table></div><p class="fine-print">連續假期原則上不退訂金，可在 1 年內改期；跨行退款手續費由家長負擔。</p></details>
-
-        <details class="spring-card"><summary><span>2027 春節特別規則</span><b>時效資料</b></summary><div class="spring-body"><div class="spring-numbers"><p><b>2/3–2/10</b><span>共 8 晚</span></p><p><b>至少 5 晚</b><span>春節入住</span></p><p><b>訂金 50%</b><span>3 日內付款</span></p></div><ul><li>營業 10:00–19:00；除夕 9:00–18:00。</li><li>入住 14:00–18:00；退房 10:00–12:00。</li><li>經典 1,500／陽光 1,800／太空 2,400／豪華 4,200 元。</li><li>經典、陽光第 2 隻 +300；太空、豪華第 3 隻起 +300／隻。</li><li>期間不開放參觀或家人探訪；不適用任何折扣。</li><li>取消：2026/11/30 前全退；12 月退 50%；2027/1/1 起不退。</li></ul></div></details>
           </div>
         </details>
       </section>
@@ -316,11 +337,12 @@
   <nav class="mobile-nav" aria-label="手機主題切換">
     <button class="active" type="button" data-view="numbers"><span class="mobile-nav-icon">15</span><span class="mobile-nav-label">先背</span></button>
     <button type="button" data-view="rooms"><span class="mobile-nav-icon">⌂</span><span class="mobile-nav-label">房型</span></button>
+    <button type="button" data-view="prices"><span class="mobile-nav-icon">元</span><span class="mobile-nav-label">價格</span></button>
     <button type="button" data-view="roommap"><span class="mobile-nav-icon">▦</span><span class="mobile-nav-label">房號</span></button>
     <button type="button" data-view="rules"><span class="mobile-nav-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg></span><span class="mobile-nav-label">工作</span></button>
     <button type="button" data-view="faq"><span class="mobile-nav-icon">Q</span><span class="mobile-nav-label">話術</span></button>
     <button type="button" data-view="quiz"><span class="mobile-nav-icon">?</span><span class="mobile-nav-label">測驗</span></button>
   </nav>
-  <script src="data.js?v=20261011-photo-audit1"></script><script src="app.js?v=20261010-checkin-checkout-order1"></script>
+  <script src="data.js?v=20261011-price-page1"></script><script src="app.js?v=20261011-price-page1"></script>
 </body>
 </html>
