@@ -40,6 +40,7 @@ const calcDaycareStart = document.querySelector('#calcDaycareStart');
 const calcDaycareEnd = document.querySelector('#calcDaycareEnd');
 const calcOldRoommate = document.querySelector('#calcOldRoommate');
 const calcNotice = document.querySelector('#calcNotice');
+const calcDateStatus = document.querySelector('#calcDateStatus');
 const calcBreakdown = document.querySelector('#calcBreakdown');
 const calcTotal = document.querySelector('#calcTotal');
 const springRoomPrices = { CLS: 1500, SUN: 1800, SPC: 2400, LUX: 4200 };
@@ -54,6 +55,34 @@ const dateLabel = date => date.replaceAll('-', '/');
 const isSpring = date => date >= springStart && date <= springEnd;
 const isHoliday = date => holidayRanges.some(([start,end]) => date >= start && date <= end);
 const category = date => isSpring(date) ? '春節' : isHoliday(date) ? '連假' : '一般日';
+const categoryName = type => type === '一般日' ? '非連續假期（一般日）' : type === '連假' ? '連續假期' : '春節特別價';
+function setDateStatus(title, badge, rows, tone = 'regular') {
+  calcDateStatus.className = `calc-date-status is-${tone}`;
+  calcDateStatus.innerHTML = `<div class="calc-date-status-head"><b>日期判定</b><strong>${title}</strong><span>${badge}</span></div><ul>${rows.map(row => `<li>${row}</li>`).join('')}</ul>`;
+}
+function groupDateSegments(dates) {
+  return dates.reduce((groups, date) => {
+    const type = category(date);
+    const current = groups[groups.length - 1];
+    if (current && current.type === type && dateOffset(current.end, 1) === date) current.end = date;
+    else groups.push({ type, start: date, end: date });
+    return groups;
+  }, []);
+}
+function showStayDateStatus(dates, checkout) {
+  const types = new Set(dates.map(category));
+  const hasHolidayDates = types.has('連假');
+  const hasSpringDates = types.has('春節');
+  const allSpecial = !types.has('一般日');
+  const title = hasHolidayDates && hasSpringDates ? '跨連續假期與春節' : hasSpringDates ? (types.size > 1 ? '含春節特別價' : '春節特別價') : hasHolidayDates ? (allSpecial ? '連續假期' : '含連續假期') : '非連續假期（一般日）';
+  const tone = hasSpringDates ? 'spring' : hasHolidayDates ? 'holiday' : 'regular';
+  const rows = groupDateSegments(dates).map(group => {
+    const count = dates.filter(date => date >= group.start && date <= group.end).length;
+    return `<b>${categoryName(group.type)}</b>：${dateLabel(group.start)}${group.end !== group.start ? `–${dateLabel(group.end)}` : ''}（${count} 個住宿夜）`;
+  });
+  rows.push(`<b>退房日</b>：${dateLabel(checkout)}（${categoryName(category(checkout))}；不計住宿晚數）`);
+  setDateStatus(title, `${dates.length} 個住宿夜`, rows, tone);
+}
 const normalNightPrice = room => room.price;
 function perNight(room, cats, date) {
   const spring = isSpring(date);
@@ -85,10 +114,13 @@ function updatePriceEstimate() {
     const start = calcDaycareStart.value;
     const end = calcDaycareEnd.value;
     if (!date || !start || !end || date < '2026-10-12' || date > '2027-03-31' || end <= start) {
+      setDateStatus('請確認日期與時段', '尚未完成', ['安親日期需在 2026/10/12–2027/3/31，結束時間須晚於開始時間。'], 'invalid');
       calcNotice.textContent = '請選擇範圍內日期，並確認安親結束時間晚於開始時間。';
       calcBreakdown.innerHTML = '<li>資料未完整，暫不計價。</li>';
       calcTotal.textContent = '—'; return;
     }
+    const daycareCategory = category(date);
+    setDateStatus(categoryName(daycareCategory), `${dateLabel(date)} 安親`, [`選定日期為${categoryName(daycareCategory)}。${daycareCategory === '一般日' ? '安親僅依一般日規則試算。' : '此日依連假／春節規則處理，不能直接按一般安親估價。'}`], daycareCategory === '春節' ? 'spring' : daycareCategory === '連假' ? 'holiday' : 'regular');
     if (isHoliday(date) || isSpring(date)) {
       calcNotice.textContent = `${dateLabel(date)} 判定為${category(date)}；官網規定連假／春節不提供安親，不能直接估價，請問夥伴。`;
       calcBreakdown.innerHTML = '<li>日期規則不允許一般安親試算，請先向夥伴確認。</li>';
@@ -109,6 +141,7 @@ function updatePriceEstimate() {
     const checkinTime = calcCheckinTime.value;
     const checkoutTime = calcCheckoutTime.value;
     if (!start || !checkout || !checkinTime || !checkoutTime || start < '2026-10-12' || start > '2027-03-30' || checkout > '2027-03-31' || checkout <= start) {
+      setDateStatus('請先選擇有效日期', '尚未判定', ['住宿日期需介於 2026/10/12–2027/3/31，退房日須晚於入住日。'], 'invalid');
       calcNotice.textContent = '入住日須介於 2026/10/12–2027/3/30，退房日須晚於入住日且不超過 2027/3/31。';
       calcBreakdown.innerHTML = '<li>日期或時間尚未填完整，暫不計價。</li>';
       calcTotal.textContent = '—'; return;
@@ -117,6 +150,7 @@ function updatePriceEstimate() {
     for (let date = start; date < checkout; date = dateOffset(date, 1)) dates.push(date);
     if (dates.length > 170) { calcNotice.textContent = '所選住宿區間超出目前試算範圍。'; calcTotal.textContent = '—'; return; }
     const hasSpecial = dates.some(date => category(date) !== '一般日');
+    showStayDateStatus(dates, checkout);
     const nights = dates.length;
     const priceRows = dates.map(date => { const rate = perNight(room, cats, date); total += rate.total; return { date, rate }; });
     steps.push(`入住 ${dateLabel(start)} ${checkinTime}，退房 ${dateLabel(checkout)} ${checkoutTime}；退房日不計住宿晚數，共 ${nights} 晚。`);
