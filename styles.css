@@ -359,6 +359,7 @@ section{margin-top:52px}
 /* 2026-10-07｜夥伴影片：以大圖搭配短步驟，保持手機閱讀留白 */
 .training-guide-grid{display:grid;gap:22px}
 .training-guide{display:grid;grid-template-columns:minmax(220px,36%) 1fr;overflow:hidden;border:2px solid var(--dark);border-radius:var(--radius-card);background:var(--paper);box-shadow:3px 3px 0 var(--dark)}
+.training-guide.text-only-guide{grid-template-columns:1fr}
 .training-guide>img{width:100%;height:100%;min-height:300px;object-fit:cover;border-right:2px solid var(--dark)}
 .training-guide:nth-child(1)>img{object-position:55% 28%}
 .training-guide:nth-child(2)>img{object-position:50% 34%}
