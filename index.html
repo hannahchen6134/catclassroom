@@ -123,22 +123,28 @@
           <header class="price-calculator-head"><h3 id="priceCalculatorTitle">價格試算</h3></header>
           <div class="price-calculator-fields">
             <section class="calc-field-group calc-step-choice">
-              <h4><span>1</span>選服務與房型</h4>
+              <h4><span>1</span>先選房型與貓咪數量</h4>
               <div class="calc-field-grid">
-                <label>計算方式<select id="calcMethod"><option value="stay">住宿（過夜）</option><option value="daycare">安親（不過夜）</option></select></label>
                 <label>房型<select id="calcRoom"></select></label>
                 <label class="calc-cats-field">入住貓咪數量<select id="calcCats" aria-describedby="calcCatsHint"></select><small id="calcCatsHint">可選多隻，依房型入住上限；加貓費會自動納入試算。</small></label>
               </div>
             </section>
+            <section class="calc-field-group calc-step-mode">
+              <h4><span>2</span>再選計算方式</h4>
+              <div class="calc-field-grid">
+                <label>服務方式<select id="calcMethod"><option value="stay">住宿（過夜）</option><option value="daycare">安親（不過夜）</option></select></label>
+                <p class="calc-mode-hint">安親與住宿是兩種分開計算的服務；選好後，下方只會顯示該服務需要填寫的日期與時間。</p>
+              </div>
+            </section>
             <section class="calc-field-group calc-step-dates calc-stay-only">
-              <h4><span>2</span>設定入住與退房</h4>
+              <h4><span>3</span>設定入住與退房日期、時間</h4>
               <div class="calc-stay-date-grid">
                 <fieldset class="calc-date-pair"><legend>入住</legend><label>入住日期<input id="calcCheckinDate" type="date" min="2026-10-12" max="2027-03-31" value="2026-10-12"></label><label>入住時間<input id="calcCheckinTime" type="time" step="1800" value="15:00"></label></fieldset>
                 <fieldset class="calc-date-pair"><legend>退房</legend><label>退房日期<input id="calcCheckoutDate" type="date" min="2026-10-13" max="2027-03-31" value="2026-10-13"></label><label>退房時間<input id="calcCheckoutTime" type="time" step="1800" value="12:00"></label></fieldset>
               </div>
             </section>
             <section class="calc-field-group calc-step-daycare calc-daycare-only" hidden>
-              <h4><span>2</span>設定安親時間</h4>
+              <h4><span>3</span>設定安親日期與時段</h4>
               <div class="calc-field-grid">
                 <label>安親日期<input id="calcDaycareDate" type="date" min="2026-10-12" max="2027-03-31" value="2026-10-12"></label>
                 <label>開始時間<input id="calcDaycareStart" type="time" step="1800" value="12:00"></label>
@@ -146,18 +152,18 @@
               </div>
             </section>
             <section class="calc-field-group calc-step-discount calc-stay-only">
-              <h4><span>3</span>確認優惠資格</h4>
+              <h4><span>4</span>確認住宿優惠資格</h4>
               <label class="calc-eligibility"><input id="calcOldRoommate" type="checkbox"><span>已確認有老室友優惠資格</span></label>
             </section>
           </div>
-          <div class="calc-result-step-heading"><span>4</span>查看日期判定與計算結果</div>
+          <div class="calc-result-step-heading"><span>5</span>查看費用明細</div>
           <aside class="calc-date-status" id="calcDateStatus" aria-live="polite" aria-atomic="true"></aside>
           <div class="calc-notice" id="calcNotice" role="status" aria-live="polite"></div>
           <div class="price-calculator-result" aria-live="polite">
-            <div class="calc-breakdown"><h4>計算路徑</h4><ol id="calcBreakdown"></ol></div>
+            <div class="calc-breakdown"><h4>計算明細（按順序）</h4><ol id="calcBreakdown"></ol></div>
             <p class="calc-total"><span>預估費用</span><strong id="calcTotal">—</strong></p>
           </div>
-          <p class="calc-footnote">單一房型估算。安親按房型單晚定價的 10%／小時，最低 6 小時；住宿按每個住宿夜分別分類。長住折扣先以「房費＋加貓費」住宿小計估算；官網未明列折扣基數，請夥伴覆核。一般連假提早／延後須夥伴核准且各加一晚；營業時間外及房況例外請先問夥伴。此工具不含訂金、代購、就醫及其他費用；多間房請查上方價格表。</p>
+          <p class="calc-footnote">試算順序：房型與貓數 → 住宿或安親 → 日期與時段 → 住宿優惠 → 費用明細。安親按房型單晚定價的 10%／小時，最低 6 小時；住宿按每個住宿夜分別分類。長住折扣先以「房費＋加貓費」住宿小計估算；官網未明列折扣基數，請夥伴覆核。一般連假提早／延後須夥伴核准且各加一晚；營業時間外及房況例外請先問夥伴。此工具不含訂金、代購、就醫及其他費用；多間房請查上方價格表。</p>
         </section>
       </section>
 

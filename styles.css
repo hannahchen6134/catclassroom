@@ -576,6 +576,7 @@ body{min-width:0}
 .calc-field-group>h4,.calc-result-step-heading{display:flex;align-items:center;gap:8px;margin:0 0 10px;font-size:13px;font-weight:750}
 .calc-field-group>h4>span,.calc-result-step-heading>span{display:grid;place-items:center;flex:0 0 22px;width:22px;height:22px;border-radius:50%;color:#fff;background:var(--dark);font-size:11px}
 .calc-field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}
+.calc-mode-hint{align-self:center;margin:0;color:#574b43;font-size:11px;line-height:1.6}
 .calc-field-grid>label,.calc-date-pair>label{display:grid;min-width:0;gap:5px;font-size:12px;font-weight:700}
 .calc-stay-date-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .calc-date-pair{display:grid;grid-template-columns:1fr;gap:9px;min-width:0;margin:0;padding:10px 12px 12px;border:1px solid #ded4ca;border-radius:7px;background:#fbf8f3}
