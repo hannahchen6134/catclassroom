@@ -107,8 +107,12 @@ function updatePriceEstimate() {
   document.querySelectorAll('.calc-stay-only').forEach(el => { el.hidden = !stayMode; });
   document.querySelectorAll('.calc-daycare-only').forEach(el => { el.hidden = stayMode; });
   let total = 0;
+  let baseFee = 0;
+  let timeFee = 0;
+  let discountFee = 0;
   const steps = [];
   const notes = [];
+  steps.push(`步驟 1｜房型與貓數：${room.name}，${cats} 隻（房型上限 ${room.capacity} 隻）；每晚按所選日期套用房價與加貓規則。`);
   if (!stayMode) {
     const date = calcDaycareDate.value;
     const start = calcDaycareStart.value;
@@ -120,6 +124,8 @@ function updatePriceEstimate() {
       calcTotal.textContent = '—'; return;
     }
     const daycareCategory = category(date);
+    steps.push(`步驟 2｜服務方式：安親（不過夜）。`);
+    steps.push(`步驟 3｜日期：${dateLabel(date)}，${categoryName(daycareCategory)}；安親不計住宿晚數。`);
     setDateStatus(categoryName(daycareCategory), `${dateLabel(date)} 安親`, [`選定日期為${categoryName(daycareCategory)}。${daycareCategory === '一般日' ? '安親僅依一般日規則試算。' : '此日依連假／春節規則處理，不能直接按一般安親估價。'}`], daycareCategory === '春節' ? 'spring' : daycareCategory === '連假' ? 'holiday' : 'regular');
     if (isHoliday(date) || isSpring(date)) {
       calcNotice.textContent = `${dateLabel(date)} 判定為${category(date)}；官網規定連假／春節不提供安親，不能直接估價，請問夥伴。`;
@@ -130,10 +136,11 @@ function updatePriceEstimate() {
     const billableHours = Math.max(6, duration);
     const rate = perNight(room, cats, date);
     const hourRate = rate.total * .10;
-    total = hourRate * billableHours;
-    steps.push(`${dateLabel(date)} 為一般日；安親 ${start}–${end}，共 ${duration} 小時。`);
-    steps.push(`房型每晚基準：${currency(rate.roomPrice)} 房費 + ${rate.extraCatCount} 隻 × ${currency(rate.catRate)} 加貓費 = ${currency(rate.total)}。`);
-    steps.push(`每小時按一晚定價 10%：${currency(rate.total)} × 10% = ${currency(hourRate)}／小時；最低 6 小時，所以按 ${billableHours} 小時計：${currency(hourRate)} × ${billableHours} = ${currency(total)}。`);
+    baseFee = hourRate * billableHours;
+    total = baseFee;
+    steps.push(`步驟 4｜安親時段：${start}–${end}，實際 ${duration} 小時；計費時數 max(${duration}, 6) = ${billableHours} 小時。`);
+    steps.push(`安親基準：${currency(rate.roomPrice)} 房型價 + ${rate.extraCatCount} 隻 × ${currency(rate.catRate)} 加貓費 = ${currency(rate.total)}／晚。`);
+    steps.push(`安親費＝${currency(rate.total)} × 10% × ${billableHours} 小時 = ${currency(baseFee)}。安親沒有住宿折扣；日期不合規時不估價。`);
     calcNotice.textContent = duration < 6 ? `未滿 6 小時，依最低 6 小時計；依官網規則，安親限一般日營業時段，仍須預約確認。` : '安親以實際時數計，最低 6 小時；須預約確認。';
   } else {
     const start = calcCheckinDate.value;
@@ -152,16 +159,21 @@ function updatePriceEstimate() {
     const hasSpecial = dates.some(date => category(date) !== '一般日');
     showStayDateStatus(dates, checkout);
     const nights = dates.length;
-    const priceRows = dates.map(date => { const rate = perNight(room, cats, date); total += rate.total; return { date, rate }; });
-    steps.push(`入住 ${dateLabel(start)} ${checkinTime}，退房 ${dateLabel(checkout)} ${checkoutTime}；退房日不計住宿晚數，共 ${nights} 晚。`);
+    steps.push(`步驟 2｜服務方式：住宿（過夜）。`);
+    steps.push(`步驟 3｜入住 ${dateLabel(start)}，退房 ${dateLabel(checkout)}；入住日計入、退房日不計，共 ${nights} 晚。系統已逐晚判別一般日／連假／春節。`);
+    const priceRows = dates.map(date => { const rate = perNight(room, cats, date); baseFee += rate.total; return { date, rate }; });
+    total = baseFee;
     priceRows.forEach(({date, rate}) => {
-      steps.push(`${dateLabel(date)}｜${category(date)}：${currency(rate.roomPrice)} 房費 + ${rate.extraCatCount} 隻 × ${currency(rate.catRate)} 加貓費 = ${currency(rate.total)}。`);
+      steps.push(`${dateLabel(date)}｜${categoryName(category(date))}：${currency(rate.roomPrice)} 房費 + ${rate.extraCatCount} 隻 × ${currency(rate.catRate)} 加貓費 = ${currency(rate.total)}／晚。`);
     });
+    steps.push(`住宿小計＝各晚房費與加貓費相加 = ${currency(baseFee)}。`);
     let timeAdjust = 0;
     const startRate = perNight(room, cats, start);
     const endRate = perNight(room, cats, dateOffset(checkout, -1));
+    const extraNightRate = perNight(room, cats, checkout);
     const holidayCheckin = isHoliday(start);
     const springCheckin = isSpring(start);
+    steps.push(`步驟 4｜時段：入住 ${checkinTime}；退房 ${checkoutTime}。正常時段入住 15:00–19:00、退房 12:00–14:00。`);
     if (checkinTime > '19:00') notes.push('入住晚於 19:00，超出一般入住時段；請先問夥伴，不以本工具自動報價。');
     if (checkinTime < '12:00') notes.push('入住早於 12:00，屬營業時間外安排；請先問夥伴，本工具未估營業外費用。');
     if (checkoutTime < '12:00') notes.push('退房早於 12:00，屬營業時間外安排；請先問夥伴，本工具未估營業外費用。');
@@ -185,8 +197,8 @@ function updatePriceEstimate() {
     if (checkoutTime > '14:00') {
       if (isSpring(checkout)) notes.push('春節延後退房不在公告可試算安排內，請問夥伴。');
       else if (isHoliday(checkout)) {
-        timeAdjust += endRate.total;
-        steps.push(`連假時段延後退房（須夥伴核准）：加 1 晚 ${currency(endRate.total)}。`);
+        timeAdjust += extraNightRate.total;
+        steps.push(`連假時段延後退房（須夥伴核准）：以退房日期 ${dateLabel(checkout)} 的房價加 1 晚 ${currency(extraNightRate.total)}。`);
       } else {
         const lateMinutes = Number(checkoutTime.slice(0,2))*60 + Number(checkoutTime.slice(3)) - 14*60;
         if (checkoutTime > '19:00') {
@@ -200,25 +212,39 @@ function updatePriceEstimate() {
         }
       }
     }
-    total += timeAdjust;
+    timeFee = timeAdjust;
+    total += timeFee;
     if (timeAdjust > 0) steps.push(`時間安排加費小計：${currency(timeAdjust)}。`);
+    else steps.push('時段費：入住與退房都在正常時段，本次為 0 元。');
     const discountRate = calcOldRoommate.checked ? .20 : nights >= 30 ? .30 : nights >= 20 ? .25 : nights >= 10 ? .20 : 0;
     const discountLabel = calcOldRoommate.checked ? '老室友 8 折' : nights >= 30 ? '長住 7 折' : nights >= 20 ? '長住 75 折' : nights >= 10 ? '長住 8 折' : '';
     if (!hasSpecial && discountRate) {
-      const discount = (priceRows.reduce((sum,row) => sum + row.rate.total, 0)) * discountRate;
-      total -= discount;
-      steps.push(`符合${discountLabel}：一般日住宿小計 × ${discountRate*100}% = 折 ${currency(discount)}；${currency(priceRows.reduce((sum,row)=>sum+row.rate.total,0))} − ${currency(discount)} = ${currency(total)}。`);
+      discountFee = priceRows.reduce((sum,row) => sum + row.rate.total, 0) * discountRate;
+      total -= discountFee;
+      steps.push(`步驟 5｜優惠：符合${discountLabel}；住宿小計 ${currency(baseFee)} × ${discountRate*100}% = 折 ${currency(discountFee)}。時間費與其他加價不折。`);
     } else if (hasSpecial) {
-      steps.push('優惠檢查：住宿含連假／春節夜，不套用長住或老室友折扣。');
+      steps.push('步驟 5｜優惠：住宿含連假／春節夜；依保守規則不自動套用折扣。連假老室友折扣的官網說法互有衝突，請問夥伴。');
     } else if (nights >= 10) {
-      steps.push('優惠檢查：已有老室友優惠資格；長住折扣不與老室友優惠合併。');
+      steps.push('步驟 5｜優惠：已勾選老室友資格；長住折扣不合併，請確認本次老室友折扣是否核准。');
     } else {
-      steps.push(`優惠檢查：${nights} 晚未達長住 10 晚門檻，無長住折扣。`);
+      steps.push(`步驟 5｜優惠：${nights} 晚未達長住 10 晚門檻，且未勾選老室友資格，折扣 0 元。`);
     }
     if (nights >= 10) notes.push('長住優惠：10 晚 8 折、20 晚 75 折、30 晚 7 折；不能與老室友優惠合併。連假／春節折扣規則依官網公告，請夥伴覆核。');
     if (dates.some(isSpring) && nights < 5) notes.push('春節公告最低入住 5 晚；目前未達門檻，請先問夥伴。');
     calcNotice.textContent = notes.length ? notes.join(' ') : '日期已逐晚分類；本結果為單房估算，特殊時段仍須先經夥伴確認。';
   }
+  const addOns = [];
+  if (document.querySelector('#calcAddPurchase')?.checked) addOns.push(['代購服務費', 100]);
+  if (document.querySelector('#calcAddVetTrip')?.checked) addOns.push(['就醫車馬費', 200]);
+  const approvedOutOfHours = Math.min(24, Math.max(0, Number(document.querySelector('#calcOutOfHours')?.value) || 0));
+  if (approvedOutOfHours > 0) addOns.push([`已核准營業外安排 ${approvedOutOfHours} 小時`, 300 * approvedOutOfHours]);
+  if (stayMode && document.querySelector('#calcAddCleaning')?.checked) addOns.push(['特殊清潔（每間）', 2000]);
+  const addOnTotal = addOns.reduce((sum, [, amount]) => sum + amount, 0);
+  total += addOnTotal;
+  if (addOns.length) steps.push(`步驟 6｜已確認加價：${addOns.map(([label, amount]) => `${label} + ${currency(amount)}`).join('；')}；合計 + ${currency(addOnTotal)}。商品、診療與實際交通費另計。`);
+  else steps.push('步驟 6｜其他加價：未勾選已確認項目，本次 0 元。');
+  if (stayMode) steps.push(`步驟 7｜應收總額＝住宿小計 ${currency(baseFee)} + 時段費 ${currency(timeFee)} − 折扣 ${currency(discountFee)} + 已確認加價 ${currency(addOnTotal)} = ${currency(total)}。`);
+  else steps.push(`步驟 7｜安親應收＝安親費 ${currency(baseFee)} + 已確認加價 ${currency(addOnTotal)} = ${currency(total)}。`);
   calcBreakdown.innerHTML = steps.map(step => `<li>${step}</li>`).join('');
   calcTotal.textContent = currency(Math.max(0, total));
 }

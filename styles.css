@@ -570,14 +570,21 @@ body{min-width:0}
 .price-policy-content{display:block;padding:12px;border-top:0}.price-rule-list{margin:0;padding:0;overflow:hidden;border:1px solid #cfc2b6;border-radius:8px;background:#fff;list-style:none}.price-rule-list>li{display:grid;grid-template-columns:145px minmax(0,1fr)}.price-rule-list>li+li{border-top:1px solid #ded5cd}.price-rule-label{display:flex;align-items:flex-start;gap:9px;padding:13px 12px;background:#f6f0e7}.price-rule-label>span{display:grid;place-items:center;flex:0 0 23px;width:23px;height:23px;border-radius:50%;color:#fff;background:var(--dark);font-size:11px;font-weight:800}.price-rule-label h3{margin:2px 0 0;font:700 14px/1.45 "Noto Serif TC","PMingLiU",serif}.price-rule-list>li>div+div{padding:12px 15px}.price-rule-list ul{margin:0;padding-left:18px;font-size:12px;line-height:1.65}.price-rule-list li li+li{margin-top:4px}.price-rule-source{margin:7px 0 0;color:#665950;font-size:10px;line-height:1.5}.price-rule-warning{margin:8px 0 0;padding:7px 9px;border-left:3px solid var(--orange);background:#fbf2e8;font-size:11px;line-height:1.6}
 #prices .table-drawer,#prices .price-policy-drawer{margin:12px 0;border:1px solid #b9aa9e;border-radius:8px;background:#fff;box-shadow:none}#prices .table-drawer>summary,#prices .price-policy-drawer>summary{min-height:0;padding:11px 13px;font:700 14px/1.4 "Noto Serif TC","PMingLiU",serif}#prices .price-policy-drawer[open]>summary{border-bottom:1px solid #e5ddd6}
 
-/* Price calculator follows the same four steps as the actual pricing decision. */
+/* Price calculator follows the same seven steps as the actual pricing decision. */
 .price-calculator-fields{display:grid;grid-template-columns:1fr;padding:8px 18px 14px;gap:0}
 .calc-field-group{min-width:0;padding:13px 0;border-bottom:1px solid #e7ded6}
 .calc-field-group>h4,.calc-result-step-heading{display:flex;align-items:center;gap:8px;margin:0 0 10px;font-size:13px;font-weight:750}
 .calc-field-group>h4>span,.calc-result-step-heading>span{display:grid;place-items:center;flex:0 0 22px;width:22px;height:22px;border-radius:50%;color:#fff;background:var(--dark);font-size:11px}
 .calc-field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}
 .calc-mode-hint{align-self:center;margin:0;color:#574b43;font-size:11px;line-height:1.6}
-.calc-field-grid>label,.calc-date-pair>label{display:grid;min-width:0;gap:5px;font-size:12px;font-weight:700}
+.calc-field-grid>label,.calc-stay-date-grid>label,.calc-date-pair>label{display:grid;min-width:0;gap:5px;font-size:12px;font-weight:700}
+.calc-addon-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.calc-addon-list>label{display:flex;align-items:flex-start;gap:8px;min-width:0;padding:9px;border:1px solid #ded4ca;border-radius:7px;background:#fbf8f3;font-size:11px;line-height:1.45;cursor:pointer}
+.calc-addon-list input[type=checkbox]{flex:0 0 auto;width:16px;height:16px;margin:1px 0 0;accent-color:var(--dark)}
+.calc-addon-list input[type=number]{flex:0 0 56px;width:56px;min-height:34px;padding:5px;border:1px solid #74645a;border-radius:5px;font-size:12px}
+.calc-addon-list span{display:grid;gap:2px}
+.calc-addon-list b{font-size:11px}
+.calc-addon-list small{color:#665950;font-size:10px}
 .calc-stay-date-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .calc-date-pair{display:grid;grid-template-columns:1fr;gap:9px;min-width:0;margin:0;padding:10px 12px 12px;border:1px solid #ded4ca;border-radius:7px;background:#fbf8f3}
 .calc-date-pair legend{padding:0 5px;font-size:12px;font-weight:750}
@@ -587,5 +594,5 @@ body{min-width:0}
 .calc-field-group[hidden]{display:none!important}
 .price-calculator-fields .calc-field-grid select,.price-calculator-fields .calc-field-grid input[type=date],.price-calculator-fields .calc-field-grid input[type=time],.price-calculator-fields .calc-date-pair input{width:100%;min-width:0;min-height:40px;padding:7px 8px;border:1px solid #74645a;border-radius:6px;color:var(--ink);background:#fff;font:inherit;font-size:13px}
 .calc-result-step-heading{margin:13px 18px 9px}
-@media(max-width:699px){.price-calculator-fields{padding:6px 12px 10px}.calc-field-group{padding:11px 0}.calc-field-grid{grid-template-columns:1fr 1fr;gap:9px}.calc-stay-date-grid{grid-template-columns:1fr;gap:9px}.calc-date-pair{grid-template-columns:1fr 1fr;align-items:end;gap:8px;padding:9px}.calc-date-pair legend{grid-column:1/-1}.calc-date-pair>label{font-size:11px}.calc-result-step-heading{margin:12px 12px 8px}}
+@media(max-width:699px){.price-calculator-fields{padding:6px 12px 10px}.calc-field-group{padding:11px 0}.calc-field-grid{grid-template-columns:1fr 1fr;gap:9px}.calc-stay-date-grid{grid-template-columns:1fr 1fr;gap:9px}.calc-date-pair{grid-template-columns:1fr 1fr;align-items:end;gap:8px;padding:9px}.calc-date-pair legend{grid-column:1/-1}.calc-date-pair>label{font-size:11px}.calc-addon-list{grid-template-columns:1fr}.calc-result-step-heading{margin:12px 12px 8px}}
 @media(max-width:699px){.price-policy-content{padding:9px}.price-rule-list>li{grid-template-columns:1fr}.price-rule-label{align-items:center;padding:8px 10px}.price-rule-label h3{margin:0;font-size:14px}.price-rule-list>li>div+div{padding:9px 12px 11px}.price-rule-list ul{font-size:12px}}
