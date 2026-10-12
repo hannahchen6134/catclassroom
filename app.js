@@ -561,7 +561,9 @@ function switchView(nextView,{updateHistory=true,scroll=true}={}){
 }
 viewButtons.forEach(button=>button.addEventListener('click',event=>{event.preventDefault();switchView(button.dataset.view);}));
 document.querySelectorAll('[data-start-view]').forEach(button => button.addEventListener('click', () => {
-  switchView(button.dataset.startView);
+  const targetId = button.dataset.startTarget;
+  switchView(button.dataset.startView, { scroll: !targetId });
+  if (targetId) requestAnimationFrame(() => document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
   if (button.dataset.startMode) setSopMode(button.dataset.startMode);
 }));
 

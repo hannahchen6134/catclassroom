@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261013-price-clean8">
+  <link rel="stylesheet" href="styles.css?v=20261013-learning-route1">
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true">
@@ -31,21 +31,32 @@
   <div class="site-shell">
     <header class="hero" id="top">
       <div class="hero-mark"><img src="assets/logo.png" alt="貓室友 Catroommate"></div>
-      <div class="hero-copy"><span class="eyebrow">CATROOMMATE · 新人值班用</span><h1>貓室友<br>上班筆記</h1><span class="stamp">SOP 更新 2026.10.11</span></div>
+      <div class="hero-copy"><span class="eyebrow">CATROOMMATE · 新人值班用</span><h1>貓室友<br>上班筆記</h1><span class="stamp">SOP 更新 2026.10.13</span></div>
     </header>
     <main id="main">
-      <nav class="jump-nav" aria-label="學習主題分頁"><a class="active" href="#numbers" data-view="numbers" aria-current="page">先背重點</a><a href="#rooms" data-view="rooms">認房型</a><a href="#prices" data-view="prices">價格</a><a href="#roommap" data-view="roommap">找房號</a><a href="#rules" data-view="rules">今天工作</a><a href="#faq" data-view="faq">情境話術</a><a href="#quiz" data-view="quiz">測驗複習</a></nav>
+      <nav class="jump-nav" aria-label="學習主題分頁"><a class="active" href="#numbers" data-view="numbers" aria-current="page">新人上手</a><a href="#rooms" data-view="rooms">認房型</a><a href="#prices" data-view="prices">價格</a><a href="#roommap" data-view="roommap">找房號</a><a href="#rules" data-view="rules">工作速查</a><a href="#faq" data-view="faq">接待話術</a><a href="#quiz" data-view="quiz">複習</a></nav>
 
       <section id="numbers" data-view-panel="numbers" data-search-section="必背數字 時間 入住 退房 營業 安親 提前 延後 收費 訂金 疫苗 驅蟲 結紮">
         <div class="learning-launcher" id="learningLauncher" aria-labelledby="learningLauncherTitle">
           <div class="learning-launcher-head"><span>今天怎麼用</span><div><h2 id="learningLauncherTitle">先選現在的任務</h2><p>不用從頭翻；學習、值班、複習走不同入口。</p></div></div>
           <div class="learning-paths">
-            <button type="button" data-start-view="numbers"><b>第一次學</b><span>先背時間、費用與安全底線</span><em>從重點開始 →</em></button>
+            <button type="button" data-start-view="numbers" data-start-target="learningRoute"><b>第一次學</b><span>照六步路線認識工作與照護</span><em>開始學習 →</em></button>
             <button type="button" data-start-view="rules" data-start-mode="quick"><b>今天值班</b><span>依現在時間直接看該做什麼</span><em>開啟值班速查 →</em></button>
             <button type="button" data-start-view="quiz"><b>考前複習</b><span>只用回想檢查自己真的會不會</span><em>開始抽考 →</em></button>
           </div>
           <div class="priority-key" aria-label="資訊重要度圖例"><span class="must">一定要背</span><span class="lookup">工作時查</span><span class="special">特殊狀況</span></div>
         </div>
+        <section class="learning-route" id="learningRoute" aria-labelledby="learningRouteTitle">
+          <header><div><small>建議依序完成</small><h2 id="learningRouteTitle">新人上手：從認識現場到獨立照護</h2><p>按步驟看一次，不用一開始就背完所有細節。</p></div><a href="previous-version/">查看改版前舊版</a></header>
+          <ol class="learning-route-list">
+            <li><span>01</span><div><b>看懂一天的工作順序</b><small>知道每一輪照護、回報和收班大約在做什麼。</small></div><button type="button" data-start-view="rules" data-start-mode="learn" data-start-target="shiftOverview">看工作全貌 →</button></li>
+            <li><span>02</span><div><b>認識房型與入住上限</b><small>先看房間外觀、特色，再確認最多能住幾隻。</small></div><button type="button" data-start-view="rooms" data-start-target="roomGrid">認房型 →</button></li>
+            <li><span>03</span><div><b>依情境學照護流程</b><small>入住交接、住宿中每日清房；退房交接後接空房清潔。</small></div><button type="button" data-start-view="rules" data-start-mode="learn" data-start-target="core-flows">看流程 →</button></li>
+            <li><span>04</span><div><b>用位置圖找房號與貓咪</b><small>先看房間位置，再點房號核對名字。</small></div><button type="button" data-start-view="roommap" data-start-target="roomMapScroll">找房號 →</button></li>
+            <li><span>05</span><div><b>需要報價時，照順序試算</b><small>先房型與貓數，再日期、時段、優惠和已確認加價。</small></div><button type="button" data-start-view="prices" data-start-target="pricePolicyRules">看價格 →</button></li>
+            <li><span>06</span><div><b>遇到客人提問，先查再回答</b><small>使用常見問答；不確定的例外先請夥伴確認。</small></div><button type="button" data-start-view="faq" data-start-target="faqList">看話術 →</button></li>
+          </ol>
+        </section>
         <div class="section-head"><span>先背</span><div><h2>入住退房時間與加費</h2><p>一定要背：先分正常時段，再判斷是否加費</p></div></div>
         <div class="memory-groups">
           <details class="memory-group time time-visual-group" open>
@@ -98,7 +109,7 @@
         <h3 class="price-subheading">完整計價規則</h3>
         <details class="table-drawer" open><summary>多間房完整價格表</summary><div class="tabs" id="priceTabs" role="tablist"></div><div class="table-scroll"><table><thead><tr><th>房間數</th><th>1 隻</th><th>2 隻</th><th>3 隻</th><th>4 隻</th><th>5 隻</th><th>6 隻</th></tr></thead><tbody id="priceBody"></tbody></table></div><p class="fine-print">一般日依房型、房間數與入住貓咪數量查表；春節另依公告特別價。</p></details>
 
-        <details class="price-policy-drawer" open>
+        <details class="price-policy-drawer" id="pricePolicyRules" open>
           <summary>完整規則｜照順序看</summary>
           <div class="price-policy-content">
             <ol class="price-rule-list">
@@ -191,7 +202,7 @@
         <div class="section-head"><span>房號</span><div><h2>房號位置圖</h2><p>工作時查：先看位置，再點房號放大資料</p></div></div>
         <div class="room-map-note"><b>最後更新：2026.10.11</b><span>紅、綠、米白沿用原始房況圖；貓咪與房況變動時要同步更新。</span></div>
         <div class="room-map-legend" aria-label="房號圖顏色說明"><span><i class="red"></i>原圖紅色</span><span><i class="green"></i>原圖綠色</span><span><i class="wait"></i>待換</span></div>
-        <div class="room-map-scroll" role="region" aria-label="房號位置圖" tabindex="0">
+        <div class="room-map-scroll" id="roomMapScroll" role="region" aria-label="房號位置圖" tabindex="0">
           <div class="room-map-board">
             <div class="room-map-top">
               <div class="map-room map-room-red map-room-tall"><strong>100</strong><small>不踢／不蹦／千杯</small></div>
@@ -247,7 +258,7 @@
           <p><b>到班</b><span>打卡・巡場</span></p><p><b>白天</b><span>第一輪・早安回報</span></p><p><b>下午</b><span>工作日誌・活動・第二輪</span></p><p><b>晚上</b><span>修改日誌・晚安回報・收班</span></p>
         </div>
 
-        <div class="sop-flow" aria-label="今日值班八步驟">
+        <div class="sop-flow" id="shiftOverview" aria-label="今日值班八步驟">
           <div class="sop-flow-title"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg><div><strong>今日值班 8 步驟</strong><small>先打卡，再照號碼走：桌面由左到右，手機由上往下</small></div></div>
           <ol>
             <li><b>1</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-clock"></use></svg><time>11:30</time><strong>到班打卡</strong><span>先完成打卡</span></li>
@@ -267,7 +278,7 @@
         </aside>
 
         <details class="sop-detail-drawer onboarding-drawer" id="onboarding-route">
-          <summary><span>新人</span><div><strong>新人學習路線：先讀懂，再操作，最後實作</strong><small>把照片裡的學習清單整理成 3 段，不用一次硬背全部</small></div></summary>
+          <summary><span>帶訓</span><div><strong>到職帶訓內容：了解規定、練習系統、實際操作</strong><small>這是現場帶訓項目；新人閱讀順序請從首頁六步路線開始</small></div></summary>
           <div class="sop-detail-body onboarding-body">
             <p class="onboarding-cue"><b>記憶口訣</b><span>讀規則 → 會系統 → 做一次</span></p>
             <div class="onboarding-grid">
@@ -388,17 +399,17 @@
 
     </main>
 
-    <footer><img src="assets/logo.png" alt=""><div><b>做貓的好室友</b><p>SOP 更新 2026-10-11・供新人上班複習與現場速查</p></div></footer>
+    <footer><img src="assets/logo.png" alt=""><div><b>做貓的好室友</b><p>SOP 更新 2026-10-13・供新人上班複習與現場速查</p><a href="previous-version/">開啟改版前舊版網站</a></div></footer>
   </div>
   <nav class="mobile-nav" aria-label="手機主題切換">
-    <button class="active" type="button" data-view="numbers"><span class="mobile-nav-icon">15</span><span class="mobile-nav-label">先背</span></button>
+    <button class="active" type="button" data-view="numbers"><span class="mobile-nav-icon">01</span><span class="mobile-nav-label">上手</span></button>
     <button type="button" data-view="rooms"><span class="mobile-nav-icon">⌂</span><span class="mobile-nav-label">房型</span></button>
     <button type="button" data-view="prices"><span class="mobile-nav-icon">元</span><span class="mobile-nav-label">價格</span></button>
     <button type="button" data-view="roommap"><span class="mobile-nav-icon">▦</span><span class="mobile-nav-label">房號</span></button>
     <button type="button" data-view="rules"><span class="mobile-nav-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg></span><span class="mobile-nav-label">工作</span></button>
     <button type="button" data-view="faq"><span class="mobile-nav-icon">Q</span><span class="mobile-nav-label">話術</span></button>
-    <button type="button" data-view="quiz"><span class="mobile-nav-icon">?</span><span class="mobile-nav-label">測驗</span></button>
+    <button type="button" data-view="quiz"><span class="mobile-nav-icon">?</span><span class="mobile-nav-label">複習</span></button>
   </nav>
-  <script src="data.js?v=20261012-price-calculator5"></script><script src="app.js?v=20261013-price-flow7"></script>
+  <script src="data.js?v=20261012-price-calculator5"></script><script src="app.js?v=20261013-learning-route1"></script>
 </body>
 </html>
