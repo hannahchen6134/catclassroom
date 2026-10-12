@@ -576,7 +576,6 @@ body{min-width:0}
 .calc-field-group>h4,.calc-result-step-heading{display:flex;align-items:center;gap:8px;margin:0 0 10px;font-size:13px;font-weight:750}
 .calc-field-group>h4>span,.calc-result-step-heading>span{display:grid;place-items:center;flex:0 0 22px;width:22px;height:22px;border-radius:50%;color:#fff;background:var(--dark);font-size:11px}
 .calc-field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}
-.calc-mode-hint{align-self:center;margin:0;color:#574b43;font-size:11px;line-height:1.6}
 .calc-field-grid>label,.calc-stay-date-grid>label,.calc-date-pair>label{display:grid;min-width:0;gap:5px;font-size:12px;font-weight:700}
 .calc-addon-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .calc-addon-list>label{display:flex;align-items:flex-start;gap:8px;min-width:0;padding:9px;border:1px solid #ded4ca;border-radius:7px;background:#fbf8f3;font-size:11px;line-height:1.45;cursor:pointer}
@@ -590,7 +589,6 @@ body{min-width:0}
 .calc-date-pair legend{padding:0 5px;font-size:12px;font-weight:750}
 .calc-eligibility{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700}
 .calc-eligibility input{width:18px;height:18px;flex:0 0 auto;accent-color:var(--dark)}
-.calc-cats-field>small{color:#665950;font-size:10px;font-weight:400;line-height:1.45}
 .calc-field-group[hidden]{display:none!important}
 .price-calculator-fields .calc-field-grid select,.price-calculator-fields .calc-field-grid input[type=date],.price-calculator-fields .calc-field-grid input[type=time],.price-calculator-fields .calc-date-pair input{width:100%;min-width:0;min-height:40px;padding:7px 8px;border:1px solid #74645a;border-radius:6px;color:var(--ink);background:#fff;font:inherit;font-size:13px}
 .calc-result-step-heading{margin:13px 18px 9px}
