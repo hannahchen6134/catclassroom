@@ -54,6 +54,8 @@ const dateOffset = (date, days) => new Date(dateMs(date) + days * 86400000).toIS
 const dateLabel = date => date.replaceAll('-', '/');
 const isSpring = date => date >= springStart && date <= springEnd;
 const isHoliday = date => holidayRanges.some(([start,end]) => date >= start && date <= end);
+const isHolidayFirstDay = date => holidayRanges.some(([start]) => date === start);
+const isHolidayLastDay = date => holidayRanges.some(([,end]) => date === end);
 const category = date => isSpring(date) ? '春節' : isHoliday(date) ? '連假' : '一般日';
 const categoryName = type => type === '一般日' ? '非連續假期（一般日）' : type === '連假' ? '連續假期' : '春節特別價';
 function setDateStatus(title, badge, rows, tone = 'regular') {
@@ -171,7 +173,7 @@ function updatePriceEstimate() {
     const startRate = perNight(room, cats, start);
     const endRate = perNight(room, cats, dateOffset(checkout, -1));
     const extraNightRate = perNight(room, cats, checkout);
-    const holidayCheckin = isHoliday(start);
+    const holidayCheckin = isHolidayFirstDay(start);
     const springCheckin = isSpring(start);
     steps.push(`步驟 4｜時段：入住 ${checkinTime}；退房 ${checkoutTime}。正常時段入住 15:00–19:00、退房 12:00–14:00。`);
     if (checkinTime > '19:00') notes.push('入住晚於 19:00，超出一般入住時段；請先問夥伴，不以本工具自動報價。');
@@ -196,7 +198,7 @@ function updatePriceEstimate() {
     }
     if (checkoutTime > '14:00') {
       if (isSpring(checkout)) notes.push('春節延後退房不在公告可試算安排內，請問夥伴。');
-      else if (isHoliday(checkout)) {
+      else if (isHolidayLastDay(checkout)) {
         timeAdjust += extraNightRate.total;
         steps.push(`連假時段延後退房（須夥伴核准）：以退房日期 ${dateLabel(checkout)} 的房價加 1 晚 ${currency(extraNightRate.total)}。`);
       } else {

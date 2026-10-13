@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261013-littervideo1">
+  <link rel="stylesheet" href="styles.css?v=20261013-price-visual2">
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true">
@@ -102,6 +102,14 @@
 
       <section id="prices" data-view-panel="prices" data-search-section="價格 房價 經典 陽光 太空 豪華 加貓 多間房 安親 提早入住 延後退房 連假 春節 訂金 優惠 取消 代購 就醫 車馬費">
         <div class="section-head"><div><h2>價格</h2></div></div>
+        <aside class="price-holiday-map" aria-label="連假日期與時段加價圖解">
+          <strong>連假日期與加價，一張圖看懂</strong>
+          <ol class="price-holiday-timeline">
+            <li><span class="holiday-map-mark">起</span><div><b>連假前一天</b><small>從這天開始算連假價<br>就是連假計價第 1 天</small></div></li>
+            <li><span class="holiday-map-mark">早</span><div><b>連假第 1 天提早入住</b><small>夥伴核准後<br>加收 1 晚房費</small></div></li>
+            <li><span class="holiday-map-mark">延</span><div><b>連假最後一天延後退房</b><small>夥伴核准後<br>加收 1 晚房費</small></div></li>
+          </ol>
+        </aside>
 
         <h3 class="price-subheading">一般房型每晚價格</h3>
         <div class="price-room-grid" id="priceRoomGrid" aria-label="一般房型每晚價格"></div>
@@ -300,6 +308,14 @@
         <div class="sop-subhead" id="daily-cleaning-flow"><span>03</span><div><h3>住宿中的每日清房</h3><p>貓咪仍入住時使用；不要套用退房後的全面消毒</p></div></div>
         <div class="core-flow-list" id="dailyCleaningFlowList"></div>
 
+        <div class="sop-subhead" id="cleaning-methods"><span>清洗</span><div><h3>清洗物品方式</h3><p>先找物品，再照對應方式清洗</p></div></div>
+        <div class="cleaning-methods-table-wrap"><table class="cleaning-methods-table"><thead><tr><th scope="col">清洗物品</th><th scope="col">清洗方式</th></tr></thead><tbody>
+          <tr><th scope="row">貓咪毯子</th><td>沒有固定清洗時間；需要清洗時，使用清水＋臭味滾洗劑。</td></tr>
+          <tr><th scope="row">退房砂盆</th><td>清空舊砂 → 清水沖洗 → 菜瓜布加清潔劑刷洗 → 次氯酸水約 20 分鐘 → 清水沖淨 → 晾乾。</td></tr>
+          <tr><th scope="row">貓咪碗盤</th><td>用一般水、上方專用海綿和黃色洗碗精清洗；倒掉積水後直立、分開放入烘碗機，烘 80 分鐘。</td></tr>
+          <tr><th scope="row">001 飲水機</th><td>因螞蟻較多，幾乎每天清理；最後一定用 RO 水沖過。</td></tr>
+        </tbody></table></div>
+
         <div class="sop-subhead" id="video-guides"><span>示範</span><div><h3>影片重點｜洗貓砂盆</h3><p>退房清空舊砂後，照順序拆洗、沖淨、裝回</p></div></div>
         <article class="training-guide text-only-guide featured-video-guide" id="guide-litterbox-washing">
           <div><small>退房後清洗</small><h4>清空 → 拆開 → 刷洗 → 沖淨 → 裝回</h4><ol><li>戴上手套，先清掉盆內剩餘貓砂、便便與結塊。</li><li>把可拆的上蓋、內盆或隔網分開，記住原本方向。</li><li>用水沖洗盆體和配件，再刷洗內壁、邊角與髒污處。</li><li>逐一沖乾淨，確認沒有殘砂或髒污；影片未指定清潔劑，依現場規定用品使用。</li><li>把配件裝回並確認卡好，再將砂盆和砂鏟放回原房間；砂鏟不可放公共區。</li></ol></div>
@@ -410,6 +426,6 @@
     <button type="button" data-view="faq"><span class="mobile-nav-icon">Q</span><span class="mobile-nav-label">話術</span></button>
     <button type="button" data-view="quiz"><span class="mobile-nav-icon">?</span><span class="mobile-nav-label">複習</span></button>
   </nav>
-  <script src="data.js?v=20261012-price-calculator5"></script><script src="app.js?v=20261013-littervideo1"></script>
+  <script src="data.js?v=20261013-cleaning-methods1"></script><script src="app.js?v=20261013-holiday-endpoints1"></script>
 </body>
 </html>
