@@ -311,21 +311,23 @@ function coreFlowGuides(flow) {
   if (flow.title.includes('退房')) return '<a href="#rules" data-guide-target="guide-checkout-litter">退房清砂</a><a href="#rules" data-guide-target="guide-dish-dryer">洗碗烘乾</a>';
   return '<a href="#rules" data-guide-target="guide-room-cleaning">清房現場</a><a href="#rules" data-guide-target="guide-litter-cleaning">清砂方式</a><a href="#rules" data-guide-target="guide-dish-dryer">洗碗烘乾</a>';
 }
-function renderCoreFlows(flows, { daily = false } = {}) {
+function renderCoreFlows(flows, { daily = false, openFirst = true } = {}) {
   return flows.map((flow, flowIndex) => `
-  <details class="core-flow" ${flowIndex === 0 ? 'open' : ''}>
-    <summary><span>${icon(flow.icon)}</span><span><small>${daily ? '每日清房' : `流程 ${flowIndex + 1}`}</small><strong>${flow.title}</strong><em>${flow.cue}</em></span></summary>
+  <details class="core-flow" ${openFirst && flowIndex === 0 ? 'open' : ''}>
+    <summary><span>${icon(flow.icon)}</span><span><small>${daily ? '住宿中' : flow.title.includes('退房') ? '退房後' : '入住時'}</small><strong>${flow.title}</strong><em>${flow.cue}</em></span></summary>
     <div class="core-flow-body">
-      <div class="flow-reading-order" aria-label="流程卡閱讀順序"><span>先做</span><span>實際步驟</span><span>完成確認</span><span>禁止</span></div>
-      ${flow.alert ? `<p class="core-flow-alert"><strong>禁止／特別注意</strong>${flow.alert}</p>` : ''}
+      ${flow.when ? `<p class="core-flow-when"><strong>何時做</strong><span>${flow.when}</span></p>` : ''}
+      ${flow.alert ? `<p class="core-flow-alert"><strong>特別注意</strong>${flow.alert}</p>` : ''}
+      <h4 class="core-flow-steps-label">照順序做</h4>
       <ol>${flow.phases.map((phase, phaseIndex) => `<li><b>${phaseIndex + 1}</b><div><strong>${phase.title}</strong><ul>${phase.steps.map(step => `<li>${step}</li>`).join('')}</ul></div></li>`).join('')}</ol>
       ${flow.closing ? `<p class="core-flow-closing"><strong>完成確認</strong>${flow.closing}</p>` : ''}
       <p class="core-flow-guides"><strong>看現場示範</strong>${coreFlowGuides(flow)}</p>
     </div>
   </details>`).join('');
 }
-document.querySelector('#coreFlowList').innerHTML = renderCoreFlows(data.coreFlows);
-document.querySelector('#dailyCleaningFlowList').innerHTML = renderCoreFlows(data.dailyCleaningFlows, { daily: true });
+document.querySelector('#coreFlowList').innerHTML = renderCoreFlows(data.coreFlows.slice(0, 1));
+document.querySelector('#dailyCleaningFlowList').innerHTML = renderCoreFlows(data.dailyCleaningFlows, { daily: true, openFirst: false });
+document.querySelector('#checkoutFlowList').innerHTML = renderCoreFlows(data.coreFlows.slice(1), { openFirst: false });
 document.querySelector('#serviceFlowList').innerHTML = data.serviceFlows.map(flow => `
   <details class="service-flow">
     <summary><span>${icon(flow.icon)}</span><span><strong>${flow.title}</strong><small>${flow.note}。點開後照 1、2、3 往下做。</small></span></summary>
@@ -346,6 +348,7 @@ function bindExclusiveDetails(containerSelector, itemSelector) {
 bindExclusiveDetails('#sopModuleGrid', '.sop-module');
 bindExclusiveDetails('#coreFlowList', '.core-flow');
 bindExclusiveDetails('#dailyCleaningFlowList', '.core-flow');
+bindExclusiveDetails('#checkoutFlowList', '.core-flow');
 bindExclusiveDetails('#serviceFlowList', '.service-flow');
 document.querySelectorAll('.core-flow-guides a').forEach(link => link.addEventListener('click', event => {
   event.preventDefault();
