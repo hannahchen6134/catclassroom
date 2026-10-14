@@ -299,7 +299,11 @@ const icon = (name) => `<svg class="ui-icon" aria-hidden="true"><use href="#icon
 document.querySelector('#sopTimeline').innerHTML = data.sopTimeline.map((item, index) => `
   <li class="timeline-item">
     <div class="timeline-mark">${icon(item.icon)}<span>${String(index + 1).padStart(2, '0')}</span></div>
-    <div class="timeline-copy"><time>${item.time}</time><span class="timeline-label">這段要做</span><h3>${item.title}</h3><ul>${item.points.map(point => `<li>${point}</li>`).join('')}</ul></div>
+    <details class="timeline-copy">
+      <summary><time>${item.time}</time><h3>${item.title}</h3><span class="timeline-toggle"><span>看細項</span><span>收起</span></span></summary>
+      <ul>${item.points.map(point => `<li>${point}</li>`).join('')}</ul>
+      ${item.image ? `<figure class="timeline-photo"><img src="${item.image}" alt="${item.imageAlt || item.title}" loading="lazy"></figure>` : ''}
+    </details>
   </li>`).join('');
 document.querySelector('#sopModuleGrid').innerHTML = data.sopModules.map(module => `
   <details class="sop-module ${module.tone || ''}">
@@ -357,77 +361,6 @@ document.querySelectorAll('.core-flow-guides a').forEach(link => link.addEventLi
   const target = document.querySelector(`#${link.dataset.guideTarget}`);
   if (target) requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }));
 }));
-
-const rulesPanel = document.querySelector('#rules');
-const sopModeButtons = [...document.querySelectorAll('[data-sop-mode]')];
-const dutyQuickPanel = document.querySelector('#dutyQuickPanel');
-const dutyStepTabs = document.querySelector('#dutyStepTabs');
-const dutyStepCard = document.querySelector('#dutyStepCard');
-const dutyQuickStatus = document.querySelector('#dutyQuickStatus');
-let activeDutyStep = 0;
-
-function dutyStartMinutes(item) {
-  const match = item.time.match(/(\d{1,2}):(\d{2})/);
-  return match ? Number(match[1]) * 60 + Number(match[2]) : 0;
-}
-function currentDutyStep() {
-  const now = new Date();
-  const minutes = now.getHours() * 60 + now.getMinutes();
-  const shiftStart = dutyStartMinutes(data.sopTimeline[0]);
-  const shiftEnd = 20 * 60 + 30;
-  if (minutes < shiftStart || minutes >= shiftEnd) return { index: 0, onShift: false, now };
-  let index = 0;
-  data.sopTimeline.forEach((item, itemIndex) => {
-    if (dutyStartMinutes(item) <= minutes) index = itemIndex;
-  });
-  return { index, onShift: true, now };
-}
-function renderDutyStep(index, status) {
-  activeDutyStep = index;
-  const item = data.sopTimeline[index];
-  dutyStepTabs.querySelectorAll('button').forEach((button, buttonIndex) => {
-    const active = buttonIndex === index;
-    button.classList.toggle('active', active);
-    button.setAttribute('aria-selected', active ? 'true' : 'false');
-  });
-  dutyStepCard.innerHTML = `<div class="duty-step-heading"><span>第 ${index + 1} 步</span><time>${item.time}</time></div><h3>${item.title}</h3><p class="duty-step-cue">先做：${item.points[0]}</p><ul>${item.points.map(point => `<li>${point}</li>`).join('')}</ul>`;
-  if (status) dutyQuickStatus.textContent = status;
-}
-function refreshDutyStep() {
-  const current = currentDutyStep();
-  const clock = current.now.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', hour12: false });
-  renderDutyStep(current.index, current.onShift ? `${clock}・目前建議看第 ${current.index + 1} 步` : `${clock}・非值班時間，先顯示開班步驟`);
-}
-dutyStepTabs.innerHTML = data.sopTimeline.map((item, index) => `<button type="button" role="tab" aria-selected="false" data-duty-step="${index}"><span>${index + 1}</span><time>${item.time.split('–')[0].split('／')[0]}</time><b>${item.title}</b></button>`).join('');
-dutyStepTabs.addEventListener('click', event => {
-  const button = event.target.closest('[data-duty-step]');
-  if (!button) return;
-  renderDutyStep(Number(button.dataset.dutyStep), `手動查看第 ${Number(button.dataset.dutyStep) + 1} 步`);
-});
-document.querySelector('#dutyRefresh').addEventListener('click', refreshDutyStep);
-
-function setSopMode(mode) {
-  const quick = mode === 'quick';
-  rulesPanel.classList.toggle('quick-mode', quick);
-  dutyQuickPanel.hidden = !quick;
-  sopModeButtons.forEach(button => {
-    const active = button.dataset.sopMode === mode;
-    button.classList.toggle('active', active);
-    button.setAttribute('aria-selected', active ? 'true' : 'false');
-  });
-  if (quick) refreshDutyStep();
-}
-sopModeButtons.forEach(button => button.addEventListener('click', () => setSopMode(button.dataset.sopMode)));
-dutyQuickPanel.querySelectorAll('[data-service-jump]').forEach(button => button.addEventListener('click', () => {
-  setSopMode('learn');
-  const flow = [...document.querySelectorAll('.core-flow, .service-flow')].find(item => item.textContent.includes(button.dataset.serviceJump));
-  document.querySelectorAll('.core-flow[open], .service-flow[open]').forEach(item => { item.open = false; });
-  if (flow) {
-    flow.open = true;
-    requestAnimationFrame(() => flow.scrollIntoView({ behavior: 'smooth', block: 'start' }));
-  }
-}));
-refreshDutyStep();
 
 const roomQuestions = data.rooms.map(room => ({
   category: '房型', question: '看照片回答：這是哪一種房型？', image: room.image,
@@ -546,6 +479,24 @@ roomMapTiles.forEach(tile => {
   tile.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showRoomMapDetail(tile); } });
 });
 
+const catInfoSearch = document.querySelector('#catInfoSearch');
+const catInfoCards = [...document.querySelectorAll('[data-cat-card]')];
+const catInfoCount = document.querySelector('#catInfoCount');
+const catInfoEmpty = document.querySelector('#catInfoEmpty');
+function filterCatInfo() {
+  const query = catInfoSearch.value.trim().toLocaleLowerCase().replace(/\s+/g, '');
+  let visibleCount = 0;
+  catInfoCards.forEach(card => {
+    const searchableText = card.textContent.toLocaleLowerCase().replace(/\s+/g, '');
+    const matches = !query || searchableText.includes(query);
+    card.hidden = !matches;
+    if (matches) visibleCount += 1;
+  });
+  catInfoCount.textContent = query ? `找到 ${visibleCount} 隻` : `共 ${visibleCount} 隻貓咪`;
+  catInfoEmpty.hidden = visibleCount !== 0;
+}
+catInfoSearch.addEventListener('input', filterCatInfo);
+
 const mobileQuery=window.matchMedia('(max-width: 699px)');
 const viewButtons=[...document.querySelectorAll('.jump-nav [data-view], .mobile-nav [data-view]')];
 const viewPanels=[...document.querySelectorAll('[data-view-panel]')];
@@ -569,7 +520,6 @@ document.querySelectorAll('[data-start-view]').forEach(button => button.addEvent
   const targetId = button.dataset.startTarget;
   switchView(button.dataset.startView, { scroll: !targetId });
   if (targetId) requestAnimationFrame(() => document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
-  if (button.dataset.startMode) setSopMode(button.dataset.startMode);
 }));
 
 window.addEventListener('popstate',()=>switchView(location.hash.slice(1),{updateHistory:false,scroll:false}));

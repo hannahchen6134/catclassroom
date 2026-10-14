@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261013-flow-waterwipe1">
+  <link rel="stylesheet" href="styles.css?v=20261014-catinfo-search1">
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true">
@@ -31,32 +31,46 @@
   <div class="site-shell">
     <header class="hero" id="top">
       <div class="hero-mark"><img src="assets/logo.png" alt="貓室友 Catroommate"></div>
-      <div class="hero-copy"><span class="eyebrow">CATROOMMATE · 新人值班用</span><h1>貓室友<br>上班筆記</h1><span class="stamp">SOP 更新 2026.10.13</span></div>
+      <div class="hero-copy"><span class="eyebrow">CATROOMMATE · 新人值班用</span><h1>貓室友<br>上班筆記</h1><span class="stamp">SOP 更新 2026.10.14</span></div>
     </header>
     <main id="main">
-      <nav class="jump-nav" aria-label="學習主題分頁"><a class="active" href="#numbers" data-view="numbers" aria-current="page">新人上手</a><a href="#rooms" data-view="rooms">認房型</a><a href="#prices" data-view="prices">價格</a><a href="#roommap" data-view="roommap">找房號</a><a href="#rules" data-view="rules">工作速查</a><a href="#faq" data-view="faq">接待話術</a><a href="#quiz" data-view="quiz">複習</a></nav>
+      <nav class="jump-nav" aria-label="學習主題分頁"><a class="active" href="#numbers" data-view="numbers" aria-current="page">新人上手</a><a href="#rooms" data-view="rooms">認房型</a><a href="#prices" data-view="prices">價格</a><a href="#roommap" data-view="roommap">找房號</a><a href="#catinfo" data-view="catinfo">貓咪資訊</a><a href="#rules" data-view="rules">工作速查</a><a href="#faq" data-view="faq">接待話術</a><a href="#quiz" data-view="quiz">複習</a></nav>
 
-      <section id="numbers" data-view-panel="numbers" data-search-section="必背數字 時間 入住 退房 營業 安親 提前 延後 收費 訂金 疫苗 驅蟲 結紮">
+      <section id="numbers" data-view-panel="numbers" data-search-section="新人上手 安全底線 絕對不能做 必背數字 時間 入住 退房 營業 安親 提前 延後 收費 訂金 疫苗 驅蟲 結紮">
         <div class="learning-launcher" id="learningLauncher" aria-labelledby="learningLauncherTitle">
-          <div class="learning-launcher-head"><span>今天怎麼用</span><div><h2 id="learningLauncherTitle">先選現在的任務</h2><p>不用從頭翻；學習、值班、複習走不同入口。</p></div></div>
+          <div class="learning-launcher-head"><span>工作流程</span><div><h2 id="learningLauncherTitle">從第一步依序完成</h2><p>一條完整流程，按順序看每一步的細項。</p></div></div>
           <div class="learning-paths">
-            <button type="button" data-start-view="numbers" data-start-target="learningRoute"><b>第一次學</b><span>照六步路線認識工作與照護</span><em>開始學習 →</em></button>
-            <button type="button" data-start-view="rules" data-start-mode="quick"><b>今天值班</b><span>依現在時間直接看該做什麼</span><em>開啟值班速查 →</em></button>
+            <button type="button" data-start-view="rules" data-start-target="sop-timeline"><b>查看完整工作流程</b><span>今日工作 8 步驟，接續入住、日常清房與退房細項</span><em>從第一步開始 →</em></button>
             <button type="button" data-start-view="quiz"><b>考前複習</b><span>只用回想檢查自己真的會不會</span><em>開始抽考 →</em></button>
           </div>
           <div class="priority-key" aria-label="資訊重要度圖例"><span class="must">一定要背</span><span class="lookup">工作時查</span><span class="special">特殊狀況</span></div>
         </div>
+        <aside class="absolute-rules" aria-labelledby="absoluteRulesTitle">
+          <header><svg class="ui-icon" aria-hidden="true"><use href="#icon-shield"></use></svg><div><small>一定要背</small><h3 id="absoluteRulesTitle">安全底線：這些絕對不能做</h3></div></header>
+          <ul><li>鏡頭前不談清潔問題。</li><li>不拍貓咪睡在貓砂或髒污區域。</li><li>貓砂鏟不放公共區；跟著原房砂盆放回。</li><li>前廳兩道門不能同時打開。</li><li>退房房間噴完次氯酸鈉後，完成清水擦拭與安全確認前，絕對不能讓貓咪進入。</li><li>晚上不任意移動貓咪物品。</li><li>掃帚與清潔工具盡量收回儲藏室，不留在貓咪可接觸的位置。</li><li>裡面的門及儲藏室的門都要鎖好。</li><li>清潔用品用完立即放回儲藏室。</li></ul>
+        </aside>
         <section class="learning-route" id="learningRoute" aria-labelledby="learningRouteTitle">
           <header><div><small>建議依序完成</small><h2 id="learningRouteTitle">新人上手：從認識現場到獨立照護</h2><p>按步驟看一次，不用一開始就背完所有細節。</p></div><a href="previous-version/">查看改版前舊版</a></header>
           <ol class="learning-route-list">
-            <li><span>01</span><div><b>看懂一天的工作順序</b><small>知道每一輪照護、回報和收班大約在做什麼。</small></div><button type="button" data-start-view="rules" data-start-mode="learn" data-start-target="shiftOverview">看工作全貌 →</button></li>
+            <li><span>01</span><div><b>看懂一天的工作順序</b><small>知道每一輪照護、回報和收班大約在做什麼。</small></div><button type="button" data-start-view="rules" data-start-target="sop-timeline">看完整流程 →</button></li>
             <li><span>02</span><div><b>認識房型與入住上限</b><small>先看房間外觀、特色，再確認最多能住幾隻。</small></div><button type="button" data-start-view="rooms" data-start-target="roomGrid">認房型 →</button></li>
-            <li><span>03</span><div><b>依情境學照護流程</b><small>入住交接、住宿中每日清房；退房交接後接空房清潔。</small></div><button type="button" data-start-view="rules" data-start-mode="learn" data-start-target="core-flows">看流程 →</button></li>
+            <li><span>03</span><div><b>依情境學照護流程</b><small>入住交接、住宿中每日清房；退房交接後接空房清潔。</small></div><button type="button" data-start-view="rules" data-start-target="core-flows">看流程 →</button></li>
             <li><span>04</span><div><b>用位置圖找房號與貓咪</b><small>先看房間位置，再點房號核對名字。</small></div><button type="button" data-start-view="roommap" data-start-target="roomMapScroll">找房號 →</button></li>
             <li><span>05</span><div><b>需要報價時，照順序試算</b><small>先房型與貓數，再日期、時段、優惠和已確認加價。</small></div><button type="button" data-start-view="prices" data-start-target="pricePolicyRules">看價格 →</button></li>
             <li><span>06</span><div><b>遇到客人提問，先查再回答</b><small>使用常見問答；不確定的例外先請夥伴確認。</small></div><button type="button" data-start-view="faq" data-start-target="faqList">看話術 →</button></li>
           </ol>
         </section>
+        <details class="sop-detail-drawer onboarding-drawer" id="onboarding-route">
+          <summary><span>帶訓</span><div><strong>到職帶訓內容：了解規定、練習系統、實際操作</strong><small>現場帶訓清單；新人先依上方六步路線學習</small></div></summary>
+          <div class="sop-detail-body onboarding-body">
+            <p class="onboarding-cue"><b>記憶口訣</b><span>讀規則 → 會系統 → 做一次</span></p>
+            <div class="onboarding-grid">
+              <article><b>1｜先讀懂</b><ul><li>看懂工作時程表每個欄位。</li><li>讀完 SOP「住宿規定事項」。</li><li>熟悉房型、價格、入住隻數與優惠。</li><li>記住入住、退房與接送時間規則。</li></ul></article>
+              <article><b>2｜再會操作</b><ul><li>確認次月份排班。</li><li>完成管理系統每日必做與簽核。</li><li>會切換住宿貓咪。</li><li>會記飲食、便尿與關懷聯絡簿。</li></ul></article>
+              <article><b>3｜最後實作</b><ul><li>實際做一次雞胸肉分裝與鮮食製作。</li><li>實際更換一餐，並完成系統紀錄。</li><li>練習把照護文字、照片與影片完整回報。</li><li>會查房價、加貓與安親規則，不靠猜。</li></ul></article>
+            </div>
+          </div>
+        </details>
         <div class="section-head"><span>先背</span><div><h2>入住退房時間與加費</h2><p>一定要背：先分正常時段，再判斷是否加費</p></div></div>
         <div class="memory-groups">
           <details class="memory-group time time-visual-group" open>
@@ -122,7 +136,7 @@
           <div class="price-policy-content">
             <ol class="price-rule-list">
               <li><div class="price-rule-label"><span aria-hidden="true">1</span><h3>先選房型與貓數</h3></div><div><ul><li>先依入住貓數選房型；不可超過房型上限，多房間請另外看上方價格表。</li><li>一般日每晚：經典 750、陽光 900、太空 1,200、豪華 2,100 元。</li><li>一般日加貓：經典／陽光第 2 隻起每隻 +150 元；太空／豪華第 3 隻起每隻 +150 元。</li><li>春節每晚：經典 1,500、陽光 1,800、太空 2,400、豪華 4,200 元；加貓改為符合門檻後每隻 +300 元。</li></ul></div></li>
-              <li><div class="price-rule-label"><span aria-hidden="true">2</span><h3>選住宿或安親</h3></div><div><ul><li>住宿（過夜）要填入住、退房日期與時間。</li><li>安親（不過夜）是另一種算法：填單日日期、開始與結束時間；不能當成住宿費以外再加一筆。</li><li>連假及春節不提供安親；遇到此類日期請問夥伴，不自動估價。</li></ul></div></li>
+              <li><div class="price-rule-label"><span aria-hidden="true">2</span><h3>選住宿或安親</h3></div><div><ul><li>住宿（過夜）要填入住、退房日期與時間。</li><li>安親（不過夜）是另一種算法：填單日日期、開始與結束時間；不能當成住宿費以外再加一筆。</li><li>連假期間不開放參觀；遇到連假或春節日期，特殊安排先問夥伴，不自行估價。</li></ul></div></li>
               <li><div class="price-rule-label"><span aria-hidden="true">3</span><h3>算日期與住宿晚數</h3></div><div><ul><li>入住日計入，退房日不計；逐晚判定一般日、連假或春節，再把每晚房價相加。</li><li>連假前一天就算連假第一天：2026/10/23–10/26、12/24–12/27、12/31–2027/1/3、2027/2/26–3/1。</li><li>春節特別價期間為 2027/2/3–2/10，至少入住 5 晚。試算範圍：2026/10/12–2027/3/31。</li><li>只有 2/3 可預約提早入住，最早 10:00、每小時一晚房價 10%；其他春節日期提前／延後安排請問夥伴。</li></ul><p class="price-rule-source">日期依<a href="https://www.dgpa.gov.tw/information?pid=12574&uid=82" target="_blank" rel="noopener noreferrer">2026 行事曆</a>、<a href="https://www.dgpa.gov.tw/information?pid=12983&uid=2" target="_blank" rel="noopener noreferrer">2027 行事曆</a>；春節依<a href="https://www.cat-roommate.com/SpringFestival.html" target="_blank" rel="noopener noreferrer">官網公告</a>。</p></div></li>
               <li><div class="price-rule-label"><span aria-hidden="true">4</span><h3>算時段費</h3></div><div><ul><li>正常入住 15:00–19:00；正常退房 12:00–14:00。</li><li>一般日提早入住／延後退房須預約：每小時一晚定價 10%；內部 SOP 補充，滿 30 分鐘 5%，未滿 30 分鐘不計。</li><li>連假第一天核准提早入住、最後一天核准延後退房，各加收 1 晚房價。</li><li>超過 19:00 尚未辦理退房，以多住 1 日計；營業時間外安排須問夥伴。</li></ul></div></li>
               <li><div class="price-rule-label"><span aria-hidden="true">5</span><h3>分開算安親費</h3></div><div><ul><li>公式：房型單晚定價 × 10% × 計費時數；不足 6 小時仍按 6 小時計。</li><li>安親只適用一般日並須先預約；連假期間不提供安親。</li></ul></div></li>
@@ -236,6 +250,42 @@
         <aside class="room-map-detail" id="roomMapDetail" aria-live="polite"><small>點一個房號</small><strong>查看放大的房號與貓咪名字</strong><span>空房只會顯示房號。</span></aside>
       </section>
 
+      <section id="catinfo" data-view-panel="catinfo" data-search-section="貓咪資訊 名字 個性 餵食 中飯 午飯 晚飯 身體狀況 備註 普羅 漿果 小七 小八 帥哥 黑黑 Bear 奶糖">
+        <div class="section-head"><span>貓咪</span><div><h2>貓咪資訊</h2><p>依名字查個別照護；「合計／分開計」沿用交代方式</p></div></div>
+        <div class="cat-info-search"><label for="catInfoSearch">搜尋貓咪資訊</label><input id="catInfoSearch" type="search" placeholder="輸入名字、食物或備註" autocomplete="off"><span id="catInfoCount" aria-live="polite">共 7 隻貓咪</span></div>
+        <p class="cat-info-empty" id="catInfoEmpty" hidden>找不到符合的貓咪，試試其他名字或關鍵字。</p>
+        <div class="cat-info-grid" id="catInfoGrid">
+          <article class="cat-info-card" data-cat-card>
+            <header><div class="cat-info-photo" role="img" aria-label="普羅照片尚未提供"><span>待補照片</span></div><div class="cat-info-title"><h3>普羅</h3><span class="cat-info-badge">合計</span></div></header>
+            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd>尚未提供</dd></div><div><dt>晚飯</dt><dd>尚未提供</dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>濕食、凍乾都先暫停。活動時拉開自家房門，讓牠能回房上廁所。</dd></div></dl>
+          </article>
+          <article class="cat-info-card" data-cat-card>
+            <header><div class="cat-info-photo" role="img" aria-label="漿果照片尚未提供"><span>待補照片</span></div><div class="cat-info-title"><h3>漿果</h3><span class="cat-info-badge">合計</span></div></header>
+            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd>尚未提供</dd></div><div><dt>晚飯</dt><dd>尚未提供</dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>目前暫停濕食。活動時拉開自家房門，讓牠能回房上廁所。</dd></div></dl>
+          </article>
+          <article class="cat-info-card" data-cat-card>
+            <header><div class="cat-info-photo" role="img" aria-label="小七照片尚未提供"><span>待補照片</span></div><div class="cat-info-title"><h3>小七</h3><span class="cat-info-badge">分開計</span></div></header>
+            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd>乾糧 25 g</dd></div><div><dt>晚飯</dt><dd>乾糧 48 g</dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>濕食＋5 顆凍乾；肉泥與水拌勻，水碗放最下層。</dd></div></dl>
+          </article>
+          <article class="cat-info-card" data-cat-card>
+            <header><div class="cat-info-photo" role="img" aria-label="小八照片尚未提供"><span>待補照片</span></div><div class="cat-info-title"><h3>小八</h3><span class="cat-info-badge">分開計</span></div></header>
+            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd>乾糧 20 g</dd></div><div><dt>晚飯</dt><dd>乾糧 37 g</dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>肉泥與水拌勻；水碗放最下層。</dd></div></dl>
+          </article>
+          <article class="cat-info-card" data-cat-card>
+            <header><div class="cat-info-photo" role="img" aria-label="帥哥照片尚未提供"><span>待補照片</span></div><div class="cat-info-title"><h3>帥哥</h3><span class="cat-info-badge">個別照護</span></div></header>
+            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd>尚未提供</dd></div><div><dt>晚飯</dt><dd>尚未提供</dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>使用高腳食物碗；近期都吃罐頭。</dd></div></dl>
+          </article>
+          <article class="cat-info-card" data-cat-card>
+            <header><div class="cat-info-photo" role="img" aria-label="黑黑與 Bear 照片尚未提供"><span>待補照片</span></div><div class="cat-info-title"><h3>黑黑／Bear</h3><span class="cat-info-badge">合計</span></div></header>
+            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd>尚未提供</dd></div><div><dt>晚飯</dt><dd>尚未提供</dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>肉與水合計 120 g；黑黑與 Bear 的肉碗分開擺放，不要放在一起。</dd></div></dl>
+          </article>
+          <article class="cat-info-card" data-cat-card>
+            <header><div class="cat-info-photo" role="img" aria-label="奶糖照片尚未提供"><span>待補照片</span></div><div class="cat-info-title"><h3>奶糖</h3><span class="cat-info-badge">個別照護</span></div></header>
+            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd>尚未提供</dd></div><div><dt>晚飯</dt><dd>尚未提供</dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>不可和其他貓一起活動；放風需單獨安排。</dd></div></dl>
+          </article>
+        </div>
+      </section>
+
       <section id="quiz" data-view-panel="quiz" data-search-section="抽考 測驗 背誦 題庫 房型 時間 健康 照顧 取消 優惠 春節 SOP 接待 清潔 入住 退房 參觀">
         <div class="section-head"><span>測驗</span><div><h2>上班全題庫</h2><p>考前複習：先回想再看答案，錯題會保留下來</p></div></div>
         <div class="quiz-learning-status"><p><small>今日答題</small><b id="quizAnsweredCount">0</b></p><p><small>不熟題</small><b id="quizWrongCount">0</b></p><button type="button" id="quizWrongOnly">只考不熟題</button><button type="button" id="quizResetProgress">清除紀錄</button></div>
@@ -248,57 +298,10 @@
       </section>
 
       <section id="rules" data-view-panel="rules" data-search-section="工作 SOP 值班 時程 清潔 消毒 餵食 鮮食 活動 用藥 備品 入住 退房 參觀 接待 規則 健康 就醫 取消 優惠 春節">
-        <div class="section-head"><span>SOP</span><div><h2>今天工作</h2><p>先記四大段，再背 8 步驟；值班時切到速查</p></div></div>
+        <div class="section-head"><span>SOP</span><div><h2>今天工作</h2><p>依順序完成每日工作；每一步都列出操作細項。</p></div></div>
 
-        <div class="sop-mode-switch" role="tablist" aria-label="選擇 SOP 閱讀方式">
-          <button class="active" type="button" role="tab" aria-selected="true" data-sop-mode="learn">學習模式<small>完整理解與背誦</small></button>
-          <button type="button" role="tab" aria-selected="false" data-sop-mode="quick">值班速查<small>只看現在要做什麼</small></button>
-        </div>
-
-        <section class="duty-quick-panel" id="dutyQuickPanel" aria-label="值班速查" hidden>
-          <header class="duty-quick-head"><div><span>現在要做什麼</span><strong id="dutyQuickStatus">依時間顯示值班步驟</strong></div><button type="button" id="dutyRefresh">更新現在時間</button></header>
-          <div class="duty-step-tabs" id="dutyStepTabs" role="tablist" aria-label="八個值班步驟"></div>
-          <article class="duty-step-card" id="dutyStepCard" aria-live="polite"></article>
-          <div class="duty-service-shortcuts"><span>客人到店：</span><button type="button" data-service-jump="入住流程">入住</button><button type="button" data-service-jump="退房流程">退房</button><button type="button" data-service-jump="參觀流程">參觀</button></div>
-        </section>
-
-        <div class="shift-chunks" aria-label="四段值班記憶法">
-          <p><b>到班</b><span>打卡・巡場</span></p><p><b>白天</b><span>第一輪・早安回報</span></p><p><b>下午</b><span>工作日誌・活動・第二輪</span></p><p><b>晚上</b><span>修改日誌・晚安回報・收班</span></p>
-        </div>
-
-        <div class="sop-flow" id="shiftOverview" aria-label="今日值班八步驟">
-          <div class="sop-flow-title"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg><div><strong>今日值班 8 步驟</strong><small>先打卡，再照號碼走：桌面由左到右，手機由上往下</small></div></div>
-          <ol>
-            <li><b>1</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-clock"></use></svg><time>11:30</time><strong>到班打卡</strong><span>先完成打卡</span></li>
-            <li><b>2</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-eye"></use></svg><time>11:30</time><strong>先巡場</strong><span>找異常、看特殊要求</span></li>
-            <li><b>3</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-bowl"></use></svg><time>12:00</time><strong>第一輪照護</strong><span>全部清完，再統一洗碗</span></li>
-            <li><b>4</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-message"></use></svg><time>13:00</time><strong>早安回報</strong><span>照片或影片＋觀察</span></li>
-            <li><b>5</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-camera"></use></svg><time>約 14:00</time><strong>工作日誌與下午活動</strong><span>先打日誌初稿，晚上再更新</span></li>
-            <li><b>6</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-bowl"></use></svg><time>17:00</time><strong>第二輪照護</strong><span>全部清完，再統一洗碗</span></li>
-            <li><b>7</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-message"></use></svg><time>19:20</time><strong>晚安回報</strong><span>詳細寫今天的狀況</span></li>
-            <li><b>8</b><svg class="ui-icon" aria-hidden="true"><use href="#icon-sparkle"></use></svg><time>20:00</time><strong>收班清潔</strong><span>清潔、送垃圾、逐間拉門確認上鎖</span></li>
-          </ol>
-        </div>
-
-        <aside class="absolute-rules" aria-labelledby="absoluteRulesTitle">
-          <header><svg class="ui-icon" aria-hidden="true"><use href="#icon-shield"></use></svg><div><small>一定要背</small><h3 id="absoluteRulesTitle">安全底線：這些絕對不能做</h3></div></header>
-          <ul><li>鏡頭前不談清潔問題。</li><li>不拍貓咪睡在貓砂或髒污區域。</li><li>貓砂鏟不放公共區；跟著原房砂盆放回。</li><li>前廳兩道門不能同時打開。</li><li>退房房間噴完次氯酸鈉後，完成清水擦拭與安全確認前，絕對不能讓貓咪進入。</li><li>晚上不任意移動貓咪物品。</li><li>掃帚與清潔工具盡量收回儲藏室，不留在貓咪可接觸的位置。</li><li>裡面的門及儲藏室的門都要鎖好。</li><li>清潔用品用完立即放回儲藏室。</li></ul>
-        </aside>
-
-        <details class="sop-detail-drawer onboarding-drawer" id="onboarding-route">
-          <summary><span>帶訓</span><div><strong>到職帶訓內容：了解規定、練習系統、實際操作</strong><small>這是現場帶訓項目；新人閱讀順序請從首頁六步路線開始</small></div></summary>
-          <div class="sop-detail-body onboarding-body">
-            <p class="onboarding-cue"><b>記憶口訣</b><span>讀規則 → 會系統 → 做一次</span></p>
-            <div class="onboarding-grid">
-              <article><b>1｜先讀懂</b><ul><li>看懂工作時程表每個欄位。</li><li>讀完 SOP「住宿規定事項」。</li><li>熟悉房型、價格、入住隻數與優惠。</li><li>記住入住、退房與接送時間規則。</li></ul></article>
-              <article><b>2｜再會操作</b><ul><li>確認次月份排班。</li><li>完成管理系統每日必做與簽核。</li><li>會切換住宿貓咪。</li><li>會記飲食、便尿與關懷聯絡簿。</li></ul></article>
-              <article><b>3｜最後實作</b><ul><li>實際做一次雞胸肉分裝與鮮食製作。</li><li>實際更換一餐，並完成系統紀錄。</li><li>練習把照護文字、照片與影片完整回報。</li><li>會查房價、加貓與安親規則，不靠猜。</li></ul></article>
-            </div>
-          </div>
-        </details>
-
-        <details class="sop-detail-drawer" id="sop-timeline">
-          <summary><span>01</span><div><strong>工作時查：8 步驟完整做法</strong><small>做到哪一步，就展開查那一段</small></div></summary>
+        <details class="sop-detail-drawer" id="sop-timeline" open>
+          <summary><span>01</span><div><strong>今日值班流程｜8 步驟</strong><small>依時間順序排列；點每一步查看細項</small></div></summary>
           <div class="sop-detail-body"><ol class="sop-timeline" id="sopTimeline"></ol><aside class="safety-strip"><svg class="ui-icon" aria-hidden="true"><use href="#icon-shield"></use></svg><p><strong>輪休安全口訣</strong><span>一人離區＝公共區只留同一家；其他房門全部上鎖。</span></p></aside></div>
         </details>
 
@@ -395,15 +398,14 @@
         <div class="service-flow-list" id="serviceFlowList"></div>
 
         <details class="policy-reference" id="policy-reference">
-          <summary><span><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg></span><div><strong>住宿規定與優惠速查</strong><small>疫苗、費用、取消、春節等對外規則集中在這裡</small></div></summary>
+          <summary><span><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg></span><div><strong>住宿規定速查</strong><small>健康、家長準備、照護與緊急應變；價格與優惠請看「價格」分頁</small></div></summary>
           <div class="policy-reference-body">
         <div class="rule-grid">
-          <details class="rule-card"><summary><i>A</i><span>訂房、入住、退房</span></summary><ol><li>電話、粉專私訊或 LINE 聯繫，先了解貓況。</li><li>收總住宿費 30% 才保留房間；入住日結清。</li><li>入住 15:00–19:00；退房 12:00–14:00。</li><li>一般日 12:00–19:00 內提早入住或延後退房，按一晚定價每小時 10%、半小時 5%；連假例外改到「價格」分頁查。</li><li>12:00 前／19:00 後原則不接；夥伴核准可行時，每小時加收 300 元。</li><li>館內有 24 小時視訊設備，但營業時間外沒有人員駐店；需要全日有人照護時，建議另找獸醫院或全日保母旅館。</li><li>入住、退房限委託人或指定代理人，需核對身分。</li><li>不可超過房型人數上限：房內通常只能放一個砂盆，也要保留躲藏空間；超收容易造成壓力或打架。</li></ol></details>
-          <details class="rule-card"><summary><i>B</i><span>健康資格與不適合入住</span></summary><ul><li>3 年內核心疫苗、1 個月內體外驅蟲證明。</li><li>SOP 備註：幼貓約滿 1 個月可開始接種，第二劑約在 3 個月左右；實際仍依疫苗紀錄與現場評估。</li><li>因年齡或健康因素不適合施打疫苗，需提供健康檢查報告再評估。</li><li>疫苗施打後 7 日內不適合入住。</li><li>滿 6 個月原則上需結紮；未結紮成貓須個別評估；3–6 個月、15 歲以上先評估。</li><li>未離乳／3 個月以下、術後未康復、需擠便擠尿或定時皮下注射者不適合。</li><li>重大或傳染性疾病、寄生蟲感染不適合。</li><li>未事前溝通、當日臨時要求入住，可依評估拒絕。</li><li>頻繁噴尿需特殊清潔，可酌收 2,000 元／間。</li></ul></details>
+          <details class="rule-card"><summary><i>A</i><span>訂房、入住、退房</span></summary><ol><li>電話、粉專私訊或 LINE 聯繫，先了解貓況。</li><li>住宿價格、訂金、時段與加價規則請看「價格」分頁，不在此重複列價。</li><li>館內有 24 小時視訊設備，但營業時間外沒有人員駐店；需要全日有人照護時，建議另找獸醫院或全日保母旅館。</li><li>入住、退房限委託人或指定代理人，需核對身分。</li></ol></details>
+          <details class="rule-card"><summary><i>B</i><span>健康資格與不適合入住</span></summary><ul><li>3 年內核心疫苗、1 個月內體外驅蟲證明。</li><li>SOP 備註：幼貓約滿 1 個月可開始接種，第二劑約在 3 個月左右；實際仍依疫苗紀錄與現場評估。</li><li>因年齡或健康因素不適合施打疫苗，需提供健康檢查報告再評估。</li><li>疫苗施打後 7 日內不適合入住。</li><li>滿 6 個月原則上需結紮；未結紮成貓須個別評估；3–6 個月、15 歲以上先評估。</li><li>未離乳／3 個月以下、術後未康復、需擠便擠尿或定時皮下注射者不適合。</li><li>重大或傳染性疾病、寄生蟲感染不適合。</li><li>未事前溝通、當日臨時要求入住，可依評估拒絕。</li></ul></details>
           <details class="rule-card"><summary><i>C</i><span>家長準備與店內配合</span></summary><ul><li>帶平常食物、熟悉氣味衣物／毯子／玩具；特殊貓砂也可自備。</li><li>若使用店內砂，可帶少量正在使用、帶熟悉氣味的舊砂混入；不用帶結塊或崩解粉末。</li><li>交代份量、時間、溫度、營養品與特殊餵食法。</li><li>可配合乾飼料、罐頭、生食、鮮食與每天 2–4 次餵食。</li><li>貓咪沒有排便、但吃喝正常時，可先與夥伴確認是否用無調味雞胸肉湯水協助補水；蒸雞肉與湯水不能取代完整主食。</li><li>店內常備皇家 F32、Orijen、礦砂、木屑／松木砂，砂盆有大、中、小尺寸可依貓咪選擇。</li><li>可代收網購包裹或就近代買；代購用品、代送美容的商品與交通費由家長負擔。</li></ul></details>
           <details class="rule-card"><summary><i>D</i><span>活動、照顧與回報</span></summary><ul><li>一次只接待一組，參觀／入住／拜訪都先預約。</li><li>共同活動須家長同意，且吃喝排泄正常、願意出房、無明顯緊張或攻擊。</li><li>不適合共同活動則安排單獨活動。</li><li>刷牙、梳毛、塞藥、針筒灌水若引起強烈情緒，可依現場狀況拒絕或轉介。</li><li>嚴重不適應或影響其他貓咪住宿權益時，可調整活動時間、範圍，必要時拒絕住宿。</li><li>以照片、影片、文字回報吃喝、排泄、便便與活動狀況。</li></ul></details>
           <details class="rule-card"><summary><i>E</i><span>就醫與緊急應變</span></summary><ul><li>需要就醫時先通知委託人。</li><li>送往家長指定醫院或鄰近醫院。</li><li>醫療費與交通費由委託人負擔。</li><li>住宿期滿後 24 小時未退房且未告知續住，視為棄養並依法處理。</li></ul></details>
-          <details class="rule-card"><summary><i>F</i><span>優惠與一般連假</span></summary><ul><li>所有房價、加貓費、長住優惠、連假與春節價格，統一到「價格」分頁查。</li><li>連假前一晚視為連假第一天。</li><li>連假期間不開放參觀或安親，須按規定時間入住、退房。</li><li>一般連假優惠說法不一致，不可自行承諾；先查當期公告或詢問夥伴。</li><li>連假取消原則上不退訂金、可於一年內改期；實際退款仍先確認當期規則。</li></ul></details>
         </div>
 
           </div>
@@ -418,17 +420,18 @@
 
     </main>
 
-    <footer><img src="assets/logo.png" alt=""><div><b>做貓的好室友</b><p>SOP 更新 2026-10-13・供新人上班複習與現場速查</p><a href="previous-version/">開啟改版前舊版網站</a></div></footer>
+    <footer><img src="assets/logo.png" alt=""><div><b>做貓的好室友</b><p>內容更新 2026-10-14・供新人上班複習與現場速查</p><a href="previous-version/">開啟改版前舊版網站</a></div></footer>
   </div>
   <nav class="mobile-nav" aria-label="手機主題切換">
     <button class="active" type="button" data-view="numbers"><span class="mobile-nav-icon">01</span><span class="mobile-nav-label">上手</span></button>
     <button type="button" data-view="rooms"><span class="mobile-nav-icon">⌂</span><span class="mobile-nav-label">房型</span></button>
     <button type="button" data-view="prices"><span class="mobile-nav-icon">元</span><span class="mobile-nav-label">價格</span></button>
     <button type="button" data-view="roommap"><span class="mobile-nav-icon">▦</span><span class="mobile-nav-label">房號</span></button>
+    <button type="button" data-view="catinfo"><span class="mobile-nav-icon">🐾</span><span class="mobile-nav-label">貓咪</span></button>
     <button type="button" data-view="rules"><span class="mobile-nav-icon"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg></span><span class="mobile-nav-label">工作</span></button>
     <button type="button" data-view="faq"><span class="mobile-nav-icon">Q</span><span class="mobile-nav-label">話術</span></button>
     <button type="button" data-view="quiz"><span class="mobile-nav-icon">?</span><span class="mobile-nav-label">複習</span></button>
   </nav>
-  <script src="data.js?v=20261013-flow-waterwipe1"></script><script src="app.js?v=20261013-flow-waterwipe1"></script>
+  <script src="data.js?v=20261014-catinfo-search1"></script><script src="app.js?v=20261014-catinfo-search1"></script>
 </body>
 </html>
