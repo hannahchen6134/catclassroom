@@ -21,15 +21,18 @@ roomGrid.addEventListener('click', (event) => {
 });
 
 const priceRoomGrid = document.querySelector('#priceRoomGrid');
+const springRoomPrices = { CLS: 1500, SUN: 1800, SPC: 2400, LUX: 4200 };
+const springRoomExtras = { CLS: '第 2 隻起每隻 +300 元', SUN: '第 2 隻起每隻 +300 元', SPC: '第 3 隻起每隻 +300 元', LUX: '第 3 隻起每隻 +300 元' };
 priceRoomGrid.innerHTML = data.rooms.map((room) => `
-  <article class="price-room-card">
-    <small>${room.name}</small>
-    <p><strong>${formatPrice(room.price)}</strong><span>元／晚</span></p>
-    <dl><div><dt>入住上限</dt><dd>${room.capacity} 隻</dd></div><div><dt>加貓</dt><dd>${room.extra}</dd></div></dl>
-  </article>`).join('');
+  <tr>
+    <th scope="row">${room.name}<small>上限 ${room.capacity} 隻</small></th>
+    <td><strong>${formatPrice(room.price)} 元／晚</strong><small>加貓：${room.extra}</small></td>
+    <td class="spring-rate"><strong>${formatPrice(springRoomPrices[room.id])} 元／晚</strong><small>加貓：${springRoomExtras[room.id]}</small></td>
+  </tr>`).join('');
 
 const calcMethod = document.querySelector('#calcMethod');
 const calcRoom = document.querySelector('#calcRoom');
+const calcRoomCount = document.querySelector('#calcRoomCount');
 const calcCats = document.querySelector('#calcCats');
 const calcCheckinDate = document.querySelector('#calcCheckinDate');
 const calcCheckinTime = document.querySelector('#calcCheckinTime');
@@ -43,16 +46,17 @@ const calcNotice = document.querySelector('#calcNotice');
 const calcDateStatus = document.querySelector('#calcDateStatus');
 const calcBreakdown = document.querySelector('#calcBreakdown');
 const calcTotal = document.querySelector('#calcTotal');
-const springRoomPrices = { CLS: 1500, SUN: 1800, SPC: 2400, LUX: 4200 };
 const currency = value => `${formatPrice(Math.round(value))} 元`;
 calcRoom.innerHTML = data.rooms.map(room => `<option value="${room.id}">${room.name}</option>`).join('');
-const holidayRanges = [['2026-10-23','2026-10-26'],['2026-12-24','2026-12-27'],['2026-12-31','2027-01-03'],['2027-02-26','2027-03-01']];
+const holidayRanges = [['2026-10-07','2026-10-11'],['2026-10-23','2026-10-26'],['2026-12-24','2026-12-27'],['2026-12-31','2027-01-03'],['2027-02-02','2027-02-10'],['2027-02-26','2027-03-01']];
 const springStart = '2027-02-03';
+const springPriceStart = '2027-02-02';
 const springEnd = '2027-02-10';
+const springCheckoutEnd = '2027-02-11';
 const dateMs = date => new Date(`${date}T00:00:00Z`).getTime();
 const dateOffset = (date, days) => new Date(dateMs(date) + days * 86400000).toISOString().slice(0,10);
 const dateLabel = date => date.replaceAll('-', '/');
-const isSpring = date => date >= springStart && date <= springEnd;
+const isSpring = date => date >= springPriceStart && date <= springEnd;
 const isHoliday = date => holidayRanges.some(([start,end]) => date >= start && date <= end);
 const isHolidayFirstDay = date => holidayRanges.some(([start]) => date === start);
 const isHolidayLastDay = date => holidayRanges.some(([,end]) => date === end);
@@ -86,24 +90,32 @@ function showStayDateStatus(dates, checkout) {
   setDateStatus(title, `${dates.length} 個住宿夜`, rows, tone);
 }
 const normalNightPrice = room => room.price;
-function perNight(room, cats, date) {
+function perNight(room, cats, date, roomCount = 1) {
   const spring = isSpring(date);
   const roomPrice = spring ? springRoomPrices[room.id] : normalNightPrice(room);
   const firstExtraCat = spring && ['CLS','SUN'].includes(room.id) ? 2 : Number(room.extra.match(/第\s*(\d+)/)?.[1] || 2);
-  const extraCatCount = Math.max(0, cats - firstExtraCat + 1);
+  const includedCats = roomCount * (firstExtraCat - 1);
+  const extraCatCount = Math.max(0, cats - includedCats);
   const catRate = spring ? 300 : 150;
-  return { roomPrice, extraCatCount, catRate, total: roomPrice + extraCatCount * catRate };
+  return { roomPrice: roomPrice * roomCount, roomCount, extraCatCount, catRate, total: roomPrice * roomCount + extraCatCount * catRate };
 }
 
-function fillCatOptions() {
+function fillRoomAndCatOptions() {
   const room = data.rooms.find(item => item.id === calcRoom.value) || data.rooms[0];
-  const current = Math.min(Number(calcCats.value) || 1, room.capacity);
-  calcCats.innerHTML = Array.from({ length: room.capacity }, (_, index) => `<option value="${index + 1}">${index + 1} 隻</option>`).join('');
-  calcCats.value = String(current);
+  const rows = data.multiRoom[room.name] || [];
+  const maxRooms = Math.max(1, rows.length);
+  const oldRooms = Number(calcRoomCount.value) || 1;
+  const currentCats = Math.min(Math.max(Number(calcCats.value) || 1, 1), 6);
+  calcCats.innerHTML = Array.from({ length: 6 }, (_, index) => `<option value="${index + 1}">${index + 1} 隻</option>`).join('');
+  calcCats.value = String(currentCats);
+  const minRooms = Math.min(maxRooms, Math.max(1, Math.ceil(currentCats / room.capacity)));
+  calcRoomCount.innerHTML = Array.from({ length: maxRooms - minRooms + 1 }, (_, index) => `<option value="${minRooms + index}">${minRooms + index} 間</option>`).join('');
+  calcRoomCount.value = String(Math.max(minRooms, Math.min(oldRooms, maxRooms)));
 }
 
 function updatePriceEstimate() {
   const room = data.rooms.find(item => item.id === calcRoom.value) || data.rooms[0];
+  const roomCount = Number(calcRoomCount.value) || 1;
   const cats = Number(calcCats.value) || 1;
   const stayMode = calcMethod.value === 'stay';
   document.querySelectorAll('.calc-stay-only').forEach(el => { el.hidden = !stayMode; });
@@ -114,7 +126,7 @@ function updatePriceEstimate() {
   let discountFee = 0;
   const steps = [];
   const notes = [];
-  steps.push(`步驟 1｜房型與貓數：${room.name}，${cats} 隻（房型上限 ${room.capacity} 隻）；每晚按所選日期套用房價與加貓規則。`);
+  steps.push(`步驟 1｜房型與貓數：${room.name} × ${roomCount} 間，共 ${cats} 隻（本計算表最多列 6 隻）；依房間數與總貓數計算加貓費。`);
   if (!stayMode) {
     const date = calcDaycareDate.value;
     const start = calcDaycareStart.value;
@@ -136,12 +148,12 @@ function updatePriceEstimate() {
     }
     const duration = (Number(end.slice(0,2)) * 60 + Number(end.slice(3)) - Number(start.slice(0,2)) * 60 - Number(start.slice(3))) / 60;
     const billableHours = Math.max(6, duration);
-    const rate = perNight(room, cats, date);
+    const rate = perNight(room, cats, date, roomCount);
     const hourRate = rate.total * .10;
     baseFee = hourRate * billableHours;
     total = baseFee;
     steps.push(`步驟 4｜安親時段：${start}–${end}，實際 ${duration} 小時；計費時數 max(${duration}, 6) = ${billableHours} 小時。`);
-    steps.push(`安親基準：${currency(rate.roomPrice)} 房型價 + ${rate.extraCatCount} 隻 × ${currency(rate.catRate)} 加貓費 = ${currency(rate.total)}／晚。`);
+    steps.push(`安親基準：${roomCount} 間房合計 ${currency(rate.roomPrice)} + ${rate.extraCatCount} 隻 × ${currency(rate.catRate)} 加貓費 = ${currency(rate.total)}／晚。`);
     steps.push(`安親費＝${currency(rate.total)} × 10% × ${billableHours} 小時 = ${currency(baseFee)}。安親沒有住宿折扣；日期不合規時不估價。`);
     calcNotice.textContent = duration < 6 ? `未滿 6 小時，依最低 6 小時計；依官網規則，安親限一般日營業時段，仍須預約確認。` : '安親以實際時數計，最低 6 小時；須預約確認。';
   } else {
@@ -161,30 +173,50 @@ function updatePriceEstimate() {
     const hasSpecial = dates.some(date => category(date) !== '一般日');
     showStayDateStatus(dates, checkout);
     const nights = dates.length;
+    const springNights = dates.filter(isSpring).length;
+    const springHolidayNights = dates.filter(date => date >= springStart && date <= springEnd).length;
+    if (springNights > 0 && springHolidayNights < 5) {
+      calcNotice.textContent = `春節連續假期只住 ${springHolidayNights} 晚；公告要求至少住滿 5 晚（春節價含前一日），這筆不符合預約門檻。`;
+      calcBreakdown.innerHTML = '<li>未達春節最低入住晚數，暫不提供費用報價。</li>';
+      calcTotal.textContent = '不符合門檻'; return;
+    }
+    const springCheckin = isSpring(start);
+    const springCheckout = checkout >= springPriceStart && checkout <= springCheckoutEnd;
+    const allowedEarlySpringCheckin = start === springStart && checkinTime >= '10:00' && checkinTime < '14:00';
+    if (springCheckin && (checkinTime > '18:00' || (checkinTime < '14:00' && !allowedEarlySpringCheckin))) {
+      calcNotice.textContent = '春節入住時間為 14:00–18:00；只有 2/3 可預約提早入住，最早 10:00。此時間不符合公告，請先聯絡店家，暫不報價。';
+      calcBreakdown.innerHTML = '<li>入住時間超出春節公告範圍，暫不報價。</li>';
+      calcTotal.textContent = '請先確認'; return;
+    }
+    if (springCheckout && (checkoutTime < '10:00' || checkoutTime > '12:00')) {
+      calcNotice.textContent = '春節退房時間為 10:00–12:00，春節期間不提供延後安親。此時間請先聯絡店家，暫不報價。';
+      calcBreakdown.innerHTML = '<li>退房時間超出春節公告範圍，暫不報價。</li>';
+      calcTotal.textContent = '請先確認'; return;
+    }
     steps.push(`步驟 2｜服務方式：住宿（過夜）。`);
     steps.push(`步驟 3｜入住 ${dateLabel(start)}，退房 ${dateLabel(checkout)}；入住日計入、退房日不計，共 ${nights} 晚。系統已逐晚判別一般日／連假／春節。`);
-    const priceRows = dates.map(date => { const rate = perNight(room, cats, date); baseFee += rate.total; return { date, rate }; });
+    const priceRows = dates.map(date => { const rate = perNight(room, cats, date, roomCount); baseFee += rate.total; return { date, rate }; });
     total = baseFee;
     priceRows.forEach(({date, rate}) => {
-      steps.push(`${dateLabel(date)}｜${categoryName(category(date))}：${currency(rate.roomPrice)} 房費 + ${rate.extraCatCount} 隻 × ${currency(rate.catRate)} 加貓費 = ${currency(rate.total)}／晚。`);
+      steps.push(`${dateLabel(date)}｜${categoryName(category(date))}：${roomCount} 間房 ${currency(rate.roomPrice)} + ${rate.extraCatCount} 隻 × ${currency(rate.catRate)} 加貓費 = ${currency(rate.total)}／晚。`);
     });
     steps.push(`住宿小計＝各晚房費與加貓費相加 = ${currency(baseFee)}。`);
     let timeAdjust = 0;
-    const startRate = perNight(room, cats, start);
-    const endRate = perNight(room, cats, dateOffset(checkout, -1));
-    const extraNightRate = perNight(room, cats, checkout);
+    const startRate = perNight(room, cats, start, roomCount);
+    const endRate = perNight(room, cats, dateOffset(checkout, -1), roomCount);
+    const extraNightRate = perNight(room, cats, checkout, roomCount);
     const holidayCheckin = isHolidayFirstDay(start);
-    const springCheckin = isSpring(start);
     steps.push(`步驟 4｜時段：入住 ${checkinTime}；退房 ${checkoutTime}。正常時段入住 15:00–19:00、退房 12:00–14:00。`);
     if (checkinTime > '19:00') notes.push('入住晚於 19:00，超出一般入住時段；請先問夥伴，不以本工具自動報價。');
     if (checkinTime < '12:00') notes.push('入住早於 12:00，屬營業時間外安排；請先問夥伴，本工具未估營業外費用。');
-    if (checkoutTime < '12:00') notes.push('退房早於 12:00，屬營業時間外安排；請先問夥伴，本工具未估營業外費用。');
-    if (checkinTime < '15:00') {
+    if (checkoutTime < '12:00' && !springCheckout) notes.push('退房早於 12:00，屬營業時間外安排；請先問夥伴，本工具未估營業外費用。');
+    const normalCheckinTime = springCheckin ? '14:00' : '15:00';
+    if (checkinTime < normalCheckinTime) {
       if (springCheckin) {
         if (start === springStart && checkinTime >= '10:00') {
-          const hours = (15 * 60 - (Number(checkinTime.slice(0,2))*60 + Number(checkinTime.slice(3)))) / 60;
+          const hours = (14 * 60 - (Number(checkinTime.slice(0,2))*60 + Number(checkinTime.slice(3)))) / 60;
           timeAdjust += startRate.total * .10 * hours;
-          steps.push(`春節 2/3 提前入住 ${hours} 小時：${currency(startRate.total)} × 10% × ${hours} = ${currency(startRate.total * .10 * hours)}。`);
+          steps.push(`春節 2/3 提前入住 ${hours} 小時（提前至 14:00 開始入住）：${currency(startRate.total)} × 10% × ${hours} = ${currency(startRate.total * .10 * hours)}。`);
         } else notes.push('春節非 2/3 提前入住，或早於 10:00：不符合公告可試算條件，請問夥伴。');
       } else if (holidayCheckin) {
         timeAdjust += startRate.total;
@@ -197,15 +229,15 @@ function updatePriceEstimate() {
       }
     }
     if (checkoutTime > '14:00') {
-      if (isSpring(checkout)) notes.push('春節延後退房不在公告可試算安排內，請問夥伴。');
+      if (springCheckout) notes.push('春節公告退房時段為 10:00–12:00，延後不自動計價。');
       else if (isHolidayLastDay(checkout)) {
         timeAdjust += extraNightRate.total;
         steps.push(`連假時段延後退房（須夥伴核准）：以退房日期 ${dateLabel(checkout)} 的房價加 1 晚 ${currency(extraNightRate.total)}。`);
       } else {
         const lateMinutes = Number(checkoutTime.slice(0,2))*60 + Number(checkoutTime.slice(3)) - 14*60;
         if (checkoutTime > '19:00') {
-          timeAdjust += perNight(room, cats, checkout).total;
-          steps.push(`超過 19:00 退房：以多住 1 晚計 ${currency(perNight(room,cats,checkout).total)}。`);
+          timeAdjust += perNight(room, cats, checkout, roomCount).total;
+          steps.push(`超過 19:00 退房：以多住 1 晚計 ${currency(perNight(room,cats,checkout,roomCount).total)}。`);
         } else {
           const halfHours = Math.floor(lateMinutes / 30);
           const fee = endRate.total * .05 * halfHours;
@@ -220,10 +252,14 @@ function updatePriceEstimate() {
     else steps.push('時段費：入住與退房都在正常時段，本次為 0 元。');
     const discountRate = calcOldRoommate.checked ? .20 : nights >= 30 ? .30 : nights >= 20 ? .25 : nights >= 10 ? .20 : 0;
     const discountLabel = calcOldRoommate.checked ? '老室友 8 折' : nights >= 30 ? '長住 7 折' : nights >= 20 ? '長住 75 折' : nights >= 10 ? '長住 8 折' : '';
-    if (!hasSpecial && discountRate) {
-      discountFee = priceRows.reduce((sum,row) => sum + row.rate.total, 0) * discountRate;
+    const discountEligibleSubtotal = springNights > 0
+      ? priceRows.filter(row => !isSpring(row.date) && !isHoliday(row.date)).reduce((sum,row) => sum + row.rate.total, 0)
+      : hasSpecial ? 0 : baseFee;
+    if (discountRate && discountEligibleSubtotal > 0) {
+      discountFee = discountEligibleSubtotal * discountRate;
       total -= discountFee;
-      steps.push(`步驟 5｜優惠：符合${discountLabel}；住宿小計 ${currency(baseFee)} × ${discountRate*100}% = 折 ${currency(discountFee)}。時間費與其他加價不折。`);
+      steps.push(`步驟 5｜優惠：符合${discountLabel}；僅對非連假、非春節且符合資格的住宿夜折扣：${currency(discountEligibleSubtotal)} × ${discountRate*100}% = 折 ${currency(discountFee)}。春節夜與一般連假夜不折；時間費與其他加價不折。`);
+      if (springNights > 0) notes.push('春節檔期不適用折扣；春節檔期前後的一般住宿日可依資格使用長住／老室友優惠。2/2 是春節連續假日前一日，依春節價計算。');
     } else if (hasSpecial) {
       steps.push('步驟 5｜優惠：住宿含連假／春節夜；依保守規則不自動套用折扣。連假老室友折扣的官網說法互有衝突，請問夥伴。');
     } else if (nights >= 10) {
@@ -231,16 +267,29 @@ function updatePriceEstimate() {
     } else {
       steps.push(`步驟 5｜優惠：${nights} 晚未達長住 10 晚門檻，且未勾選老室友資格，折扣 0 元。`);
     }
-    if (nights >= 10) notes.push('長住優惠：10 晚 8 折、20 晚 75 折、30 晚 7 折；不能與老室友優惠合併。連假／春節折扣規則依官網公告，請夥伴覆核。');
-    if (dates.some(isSpring) && nights < 5) notes.push('春節公告最低入住 5 晚；目前未達門檻，請先問夥伴。');
-    calcNotice.textContent = notes.length ? notes.join(' ') : '日期已逐晚分類；本結果為單房估算，特殊時段仍須先經夥伴確認。';
+    if (nights >= 10) notes.push('長住優惠：10 晚 8 折、20 晚 75 折、30 晚 7 折；不能與老室友優惠合併。');
+    if (springNights > 0) {
+      const springLodgingDue = Math.max(0, baseFee - discountFee);
+      const deposit = springLodgingDue * .5;
+      steps.push(`春節訂金：折扣後住宿費 ${currency(springLodgingDue)} × 50% = ${currency(deposit)}（預付訂金，入住當天結清尾款；確認後 3 日內完成付款）。`);
+      notes.push('春節訂房需支付住宿費 50% 訂金，確認後 3 日內（不含通知當日）付款、入住當天結清。取消：2026/11/30（含）前退全額訂金；12/1–12/31 退 50% 訂金；2027/1/1 起不退訂金。');
+      notes.push('春節期間不可延長／縮短日期，且不開放參觀或家人探訪；完整住滿春節與老室友享優先受理，仍須等店家確認空房及面談時段。');
+      if (roomCount > 1) notes.push('春節官網未公布多房合併計價表；目前按單房公告加總推算，正式報價需店家覆核。');
+    } else if (stayMode) {
+      steps.push(`一般訂金：住宿費 ${currency(baseFee)} × 30% = ${currency(baseFee * .3)}（預收款，非額外費用）。`);
+    }
+    calcNotice.textContent = notes.length ? notes.join(' ') : roomCount > 1 ? '一般日多房按官網多房價表規則試算；請核對各房貓咪分配及空房。' : '日期已逐晚分類；特殊時段仍須先經夥伴確認。';
   }
   const addOns = [];
   if (document.querySelector('#calcAddPurchase')?.checked) addOns.push(['代購服務費', 100]);
   if (document.querySelector('#calcAddVetTrip')?.checked) addOns.push(['就醫車馬費', 200]);
   const approvedOutOfHours = Math.min(24, Math.max(0, Number(document.querySelector('#calcOutOfHours')?.value) || 0));
   if (approvedOutOfHours > 0) addOns.push([`已核准營業外安排 ${approvedOutOfHours} 小時`, 300 * approvedOutOfHours]);
-  if (stayMode && document.querySelector('#calcAddCleaning')?.checked) addOns.push(['特殊清潔（每間）', 2000]);
+  const cleaningInput = document.querySelector('#calcAddCleaning');
+  const cleaningRoomsInput = document.querySelector('#calcCleaningRooms');
+  if (cleaningRoomsInput) { cleaningRoomsInput.max = String(roomCount); cleaningRoomsInput.hidden = !cleaningInput?.checked; }
+  const cleaningRooms = Math.min(roomCount, Math.max(1, Number(cleaningRoomsInput?.value) || 1));
+  if (stayMode && cleaningInput?.checked) addOns.push([`特殊清潔（${cleaningRooms} 間）`, 2000 * cleaningRooms]);
   const addOnTotal = addOns.reduce((sum, [, amount]) => sum + amount, 0);
   total += addOnTotal;
   if (addOns.length) steps.push(`步驟 6｜已確認加價：${addOns.map(([label, amount]) => `${label} + ${currency(amount)}`).join('；')}；合計 + ${currency(addOnTotal)}。商品、診療與實際交通費另計。`);
@@ -253,9 +302,19 @@ function updatePriceEstimate() {
 
 document.querySelectorAll('#prices input, #prices select').forEach(input => input.addEventListener('input', updatePriceEstimate));
 document.querySelectorAll('#prices input, #prices select').forEach(input => input.addEventListener('change', updatePriceEstimate));
-calcRoom.addEventListener('change', () => { fillCatOptions(); updatePriceEstimate(); });
-fillCatOptions();
+calcRoom.addEventListener('change', () => { fillRoomAndCatOptions(); updatePriceEstimate(); });
+calcRoomCount.addEventListener('change', () => { fillRoomAndCatOptions(); updatePriceEstimate(); });
+calcCats.addEventListener('change', () => { fillRoomAndCatOptions(); updatePriceEstimate(); });
+fillRoomAndCatOptions();
 updatePriceEstimate();
+document.querySelectorAll('[data-spring-preset]').forEach(button => button.addEventListener('click', () => {
+  calcMethod.value = 'stay';
+  calcCheckinDate.value = springStart;
+  calcCheckinTime.value = '14:00';
+  calcCheckoutTime.value = '12:00';
+  calcCheckoutDate.value = button.dataset.springPreset === 'full' ? springCheckoutEnd : '2027-02-08';
+  updatePriceEstimate();
+}));
 
 const priceTabs = document.querySelector('#priceTabs');
 const priceBody = document.querySelector('#priceBody');
@@ -483,8 +542,10 @@ const catInfoSearch = document.querySelector('#catInfoSearch');
 const catInfoCards = [...document.querySelectorAll('[data-cat-card]')];
 const catInfoCount = document.querySelector('#catInfoCount');
 const catInfoEmpty = document.querySelector('#catInfoEmpty');
+const catInfoDirectory = document.querySelector('#catInfoDirectory');
 function filterCatInfo() {
   const query = catInfoSearch.value.trim().toLocaleLowerCase().replace(/\s+/g, '');
+  if (query) catInfoDirectory.open = true;
   let visibleCount = 0;
   catInfoCards.forEach(card => {
     const searchableText = card.textContent.toLocaleLowerCase().replace(/\s+/g, '');
@@ -496,6 +557,15 @@ function filterCatInfo() {
   catInfoEmpty.hidden = visibleCount !== 0;
 }
 catInfoSearch.addEventListener('input', filterCatInfo);
+document.querySelectorAll('[data-cat-jump]').forEach(link => link.addEventListener('click', event => {
+  event.preventDefault();
+  const card = document.querySelector(link.getAttribute('href'));
+  if (!card) return;
+  catInfoDirectory.open = true;
+  catInfoSearch.value = '';
+  filterCatInfo();
+  requestAnimationFrame(() => card.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+}));
 
 const mobileQuery=window.matchMedia('(max-width: 699px)');
 const viewButtons=[...document.querySelectorAll('.jump-nav [data-view], .mobile-nav [data-view]')];

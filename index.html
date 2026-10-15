@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261014-catinfo-search1">
+  <link rel="stylesheet" href="styles.css?v=20261015-price-flow1">
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true">
@@ -119,25 +119,26 @@
         <aside class="price-holiday-map" aria-label="連假日期與時段加價圖解">
           <strong>連假日期與加價，一張圖看懂</strong>
           <ol class="price-holiday-timeline">
-            <li><span class="holiday-map-mark">起</span><div><b>連假前一天</b><small>從這天開始算連假價<br>就是連假計價第 1 天</small></div></li>
+            <li><span class="holiday-map-mark">起</span><div><b>假日前一天就起算</b><small>例如 10/7、10/23<br>當天開始算連假價</small></div></li>
             <li><span class="holiday-map-mark">早</span><div><b>連假第 1 天提早入住</b><small>夥伴核准後<br>加收 1 晚房費</small></div></li>
             <li><span class="holiday-map-mark">延</span><div><b>連假最後一天延後退房</b><small>夥伴核准後<br>加收 1 晚房費</small></div></li>
           </ol>
         </aside>
 
-        <h3 class="price-subheading">一般房型每晚價格</h3>
-        <div class="price-room-grid" id="priceRoomGrid" aria-label="一般房型每晚價格"></div>
+        <h3 class="price-subheading">① 房價總表｜一般日 vs 春節</h3>
+        <p class="price-compare-intro">看同一房型的每晚價格與加貓費；春節連續假日及前一日（2027/2/2–2/10）按春節價。</p>
+        <div class="price-table-scroll" role="region" aria-label="一般日與春節房價總表" tabindex="0"><table class="price-comparison-table"><thead><tr><th scope="col">房型／入住上限</th><th scope="col">一般日<br>每間每晚</th><th scope="col">春節檔期<br>每間每晚</th></tr></thead><tbody id="priceRoomGrid"></tbody></table></div>
 
-        <h3 class="price-subheading">完整計價規則</h3>
-        <details class="table-drawer" open><summary>多間房完整價格表</summary><div class="tabs" id="priceTabs" role="tablist"></div><div class="table-scroll"><table><thead><tr><th>房間數</th><th>1 隻</th><th>2 隻</th><th>3 隻</th><th>4 隻</th><th>5 隻</th><th>6 隻</th></tr></thead><tbody id="priceBody"></tbody></table></div><p class="fine-print">一般日依房型、房間數與入住貓咪數量查表；春節另依公告特別價。</p></details>
+        <details class="table-drawer"><summary>多房價格表｜一般日（選看）</summary><div class="tabs" id="priceTabs" role="tablist"></div><div class="table-scroll"><table><thead><tr><th>房間數</th><th>1 隻</th><th>2 隻</th><th>3 隻</th><th>4 隻</th><th>5 隻</th><th>6 隻</th></tr></thead><tbody id="priceBody"></tbody></table></div><p class="fine-print">本表只查一般日多房總價。春節多房由計算器估算，需夥伴覆核。</p></details>
 
+        <h3 class="price-subheading">② 計算步驟</h3>
         <details class="price-policy-drawer" id="pricePolicyRules" open>
-          <summary>完整規則｜照順序看</summary>
+          <summary>照順序計算｜點開看細節</summary>
           <div class="price-policy-content">
             <ol class="price-rule-list">
-              <li><div class="price-rule-label"><span aria-hidden="true">1</span><h3>先選房型與貓數</h3></div><div><ul><li>先依入住貓數選房型；不可超過房型上限，多房間請另外看上方價格表。</li><li>一般日每晚：經典 750、陽光 900、太空 1,200、豪華 2,100 元。</li><li>一般日加貓：經典／陽光第 2 隻起每隻 +150 元；太空／豪華第 3 隻起每隻 +150 元。</li><li>春節每晚：經典 1,500、陽光 1,800、太空 2,400、豪華 4,200 元；加貓改為符合門檻後每隻 +300 元。</li></ul></div></li>
+              <li><div class="price-rule-label"><span aria-hidden="true">1</span><h3>先選房型、房間數與貓數</h3></div><div><ul><li>依貓咪數量選房型和房間數；同一筆試算選一種房型，可選多間。不同房型混住請分開試算，再向店家確認。</li></ul></div></li>
               <li><div class="price-rule-label"><span aria-hidden="true">2</span><h3>選住宿或安親</h3></div><div><ul><li>住宿（過夜）要填入住、退房日期與時間。</li><li>安親（不過夜）是另一種算法：填單日日期、開始與結束時間；不能當成住宿費以外再加一筆。</li><li>連假期間不開放參觀；遇到連假或春節日期，特殊安排先問夥伴，不自行估價。</li></ul></div></li>
-              <li><div class="price-rule-label"><span aria-hidden="true">3</span><h3>算日期與住宿晚數</h3></div><div><ul><li>入住日計入，退房日不計；逐晚判定一般日、連假或春節，再把每晚房價相加。</li><li>連假前一天就算連假第一天：2026/10/23–10/26、12/24–12/27、12/31–2027/1/3、2027/2/26–3/1。</li><li>春節特別價期間為 2027/2/3–2/10，至少入住 5 晚。試算範圍：2026/10/12–2027/3/31。</li><li>只有 2/3 可預約提早入住，最早 10:00、每小時一晚房價 10%；其他春節日期提前／延後安排請問夥伴。</li></ul><p class="price-rule-source">日期依<a href="https://www.dgpa.gov.tw/information?pid=12574&uid=82" target="_blank" rel="noopener noreferrer">2026 行事曆</a>、<a href="https://www.dgpa.gov.tw/information?pid=12983&uid=2" target="_blank" rel="noopener noreferrer">2027 行事曆</a>；春節依<a href="https://www.cat-roommate.com/SpringFestival.html" target="_blank" rel="noopener noreferrer">官網公告</a>。</p></div></li>
+              <li><div class="price-rule-label"><span aria-hidden="true">3</span><h3>算日期與住宿晚數</h3></div><div><ul><li>入住日計入、退房日不計；逐晚判定一般日、連假或春節，再把每晚房價相加。</li><li>檔期定義：國定假日及其前一日按連假價；春節連續假日及其前一日按春節價。例：2026/10/7–10/11、10/23–10/26；12/24–12/27、12/31–2027/1/3；2027/2/2–2/10、2/26–3/1。</li><li>試算範圍：2026/10/12–2027/3/31。春節住宿日期、預約及取消規定收在本步驟下方，可展開查看。</li></ul><details class="spring-inline-rules"><summary>春節規則｜日期、時段、訂金與取消</summary><ul><li>春節住宿日期為 2027/2/3–2/10，共 8 晚；入住至少須住滿其中 5 晚。春節前一日 2/2 也按春節價格計算，價格看上方「房價對照」。</li><li>營業時間 10:00–19:00（除夕 9:00–18:00）；入住 14:00–18:00、退房 10:00–12:00。僅 2/3 可預約提早入住，最早 10:00，按一晚住宿費每小時 10% 計；春節不提供其他提前／延後安親。</li><li>訂房需付住宿費 50% 訂金；確認後 3 日內付款（不含通知當日），入住當天結清尾款，並配合安排入住面談。</li><li>取消：2026/11/30（含）前全退訂金；12/1–12/31 退訂金 50%；2027/1/1 起不退。只可取消，不可延長或縮短日期；不開放參觀或家人探訪。</li><li>春節檔期不適用折扣；春節檔期前後的一般住宿日可依資格計長住／老室友優惠。優先受理住滿整個春節及老室友，仍以空房、店家確認與面談為準。</li></ul><p class="price-rule-source">來源：<a href="https://www.cat-roommate.com/SpringFestival.html" target="_blank" rel="noopener noreferrer">春節官網公告</a>、<a href="https://www.surveycake.com/s/r9X07" target="_blank" rel="noopener noreferrer">春節預約表</a>；日期另參考<a href="https://www.dgpa.gov.tw/information?pid=12983&uid=2" target="_blank" rel="noopener noreferrer">2027 行事曆</a>。</p><div class="calc-spring-actions"><span>試算器會依日期自動切換春節價格：</span><button type="button" data-spring-preset="five">帶入 5 晚範例</button><button type="button" data-spring-preset="full">帶入完整 8 晚</button></div></details></div></li>
               <li><div class="price-rule-label"><span aria-hidden="true">4</span><h3>算時段費</h3></div><div><ul><li>正常入住 15:00–19:00；正常退房 12:00–14:00。</li><li>一般日提早入住／延後退房須預約：每小時一晚定價 10%；內部 SOP 補充，滿 30 分鐘 5%，未滿 30 分鐘不計。</li><li>連假第一天核准提早入住、最後一天核准延後退房，各加收 1 晚房價。</li><li>超過 19:00 尚未辦理退房，以多住 1 日計；營業時間外安排須問夥伴。</li></ul></div></li>
               <li><div class="price-rule-label"><span aria-hidden="true">5</span><h3>分開算安親費</h3></div><div><ul><li>公式：房型單晚定價 × 10% × 計費時數；不足 6 小時仍按 6 小時計。</li><li>安親只適用一般日並須先預約；連假期間不提供安親。</li></ul></div></li>
               <li><div class="price-rule-label"><span aria-hidden="true">6</span><h3>確認住宿優惠</h3></div><div><ul><li>長住：連續 10 晚 8 折、20 晚 75 折、30 晚 7 折；連假含前一天不適用。</li><li>老室友：累計住滿 10 晚取得 1 年資格；官網房型價格頁寫一般日 8 折、連假 9 折，春節不適用，且不可與其他優惠合併。</li><li>住宿須知另寫連假期間不適用任何住宿優惠，與房型價格頁對老室友連假 9 折的說明衝突；遇連假老室友資格先問夥伴，不自動折價。</li></ul></div></li>
@@ -146,23 +147,17 @@
           </div>
         </details>
 
-        <details class="table-drawer" open><summary>一般取消退訂比例</summary><div class="table-scroll"><table class="cancel-table"><thead><tr><th>距離入住日</th><th>退還訂金</th></tr></thead><tbody id="cancelBody"></tbody></table></div><p class="fine-print">連續假期原則上不退訂金，可在 1 年內改期；跨行退款手續費由家長負擔。</p></details>
-
-        <h3 class="price-subheading">計算公式</h3>
-        <div class="price-formula-card" aria-label="住宿費計算公式">
-          <small>住宿費用怎麼算</small>
-          <div class="price-formula-equation"><b>住宿小計</b><i>＋</i><b>時段加費</b><i>＋</i><b>其他費用</b><i>−</i><b>核准優惠</b><i>＝</i><strong>預估應收</strong></div>
-          <p><b>住宿：</b>逐晚（房型價＋加貓費）相加＋時段費＋已確認加價−符合資格的住宿折扣。<b>安親：</b>房型單晚定價×10%×計費時數（最低 6 小時）；安親是獨立服務，不與住宿費併算。訂金為住宿費 30%，是預收款，不是新增費用。</p>
-        </div>
+        <details class="table-drawer"><summary>一般取消退訂比例（選看）</summary><div class="table-scroll"><table class="cancel-table"><thead><tr><th>距離入住日</th><th>退還訂金</th></tr></thead><tbody id="cancelBody"></tbody></table></div><p class="fine-print">連續假期原則上不退訂金，可在 1 年內改期；跨行退款手續費由家長負擔。</p></details>
 
         <section class="price-calculator" aria-labelledby="priceCalculatorTitle">
-          <header class="price-calculator-head"><h3 id="priceCalculatorTitle">價格試算</h3></header>
+          <header class="price-calculator-head"><h3 id="priceCalculatorTitle">③ 價格計算機</h3></header>
           <div class="price-calculator-fields">
             <section class="calc-field-group calc-step-choice">
-              <h4><span>1</span>先選房型與貓咪數量</h4>
+              <h4><span>1</span>先選貓咪數量，再選房型與房間數</h4>
               <div class="calc-field-grid">
-                <label>房型<select id="calcRoom"></select></label>
                 <label class="calc-cats-field">入住貓咪數量<select id="calcCats"></select></label>
+                <label>房型<select id="calcRoom"></select></label>
+                <label>房間數<select id="calcRoomCount"></select></label>
               </div>
             </section>
             <section class="calc-field-group calc-step-mode">
@@ -172,22 +167,21 @@
               </div>
             </section>
             <section class="calc-field-group calc-step-dates calc-stay-only">
-              <h4><span>3</span>選日期、算住宿晚數</h4>
+              <h4><span>3</span>依序選入住、退房日期與時間</h4>
               <div class="calc-stay-date-grid">
-                <label>入住日期<input id="calcCheckinDate" type="date" min="2026-10-12" max="2027-03-31" value="2026-10-12"></label>
-                <label>退房日期<input id="calcCheckoutDate" type="date" min="2026-10-13" max="2027-03-31" value="2026-10-13"></label>
+                <fieldset class="calc-date-pair"><legend>入住</legend>
+                  <label>入住日期<input id="calcCheckinDate" type="date" min="2026-10-12" max="2027-03-31" value="2026-10-12"></label>
+                  <label>入住時間<input id="calcCheckinTime" type="time" step="1800" value="15:00"></label>
+                </fieldset>
+                <fieldset class="calc-date-pair"><legend>退房</legend>
+                  <label>退房日期<input id="calcCheckoutDate" type="date" min="2026-10-13" max="2027-03-31" value="2026-10-13"></label>
+                  <label>退房時間<input id="calcCheckoutTime" type="time" step="1800" value="12:00"></label>
+                </fieldset>
               </div>
             </section>
             <section class="calc-field-group calc-step-daycare calc-daycare-only" hidden>
               <h4><span>3</span>選安親日期</h4>
               <label>安親日期<input id="calcDaycareDate" type="date" min="2026-10-12" max="2027-03-31" value="2026-10-12"></label>
-            </section>
-            <section class="calc-field-group calc-step-time calc-stay-only">
-              <h4><span>4</span>選時段，計算提早／延後費</h4>
-              <div class="calc-stay-date-grid">
-                <label>入住時間<input id="calcCheckinTime" type="time" step="1800" value="15:00"></label>
-                <label>退房時間<input id="calcCheckoutTime" type="time" step="1800" value="12:00"></label>
-              </div>
             </section>
             <section class="calc-field-group calc-step-daycare-time calc-daycare-only" hidden>
               <h4><span>4</span>選安親時段，計算時數</h4>
@@ -197,24 +191,24 @@
               </div>
             </section>
             <section class="calc-field-group calc-step-discount calc-stay-only">
-              <h4><span>5</span>確認住宿優惠資格</h4>
+              <h4><span>4</span>確認住宿優惠資格</h4>
               <label class="calc-eligibility"><input id="calcOldRoommate" type="checkbox"><span>已確認有老室友優惠資格</span></label>
             </section>
             <section class="calc-field-group calc-step-addons">
-              <h4><span>6</span>勾選已確認的額外費用</h4>
+              <h4><span>5</span>勾選已確認的額外費用</h4>
               <div class="calc-addon-list">
                 <label><input id="calcAddPurchase" type="checkbox"><span>代購服務費 <b>+100 元</b><small>商品費另計</small></span></label>
                 <label><input id="calcAddVetTrip" type="checkbox"><span>就醫車馬費 <b>+200 元</b><small>診療與交通實支另計</small></span></label>
                 <label><input id="calcOutOfHours" type="number" min="0" max="24" step="1" value="0"><span>已核准的營業外時數 <b>每小時 +300 元</b><small>12:00 前／19:00 後；先確認不與時段費重複</small></span></label>
-                <label class="calc-stay-only"><input id="calcAddCleaning" type="checkbox"><span>特殊清潔 <b>+2,000 元／間</b><small>頻繁噴尿且經確認才勾選</small></span></label>
+                <label class="calc-stay-only"><input id="calcAddCleaning" type="checkbox"><span>特殊清潔 <b>每間 +2,000 元</b><small>頻繁噴尿且經確認才勾選；填實際需清潔間數</small><input id="calcCleaningRooms" type="number" min="1" max="1" step="1" value="1" aria-label="特殊清潔房間數"></span></label>
               </div>
             </section>
           </div>
-          <div class="calc-result-step-heading"><span>7</span>查看費用明細與總額</div>
+          <div class="calc-result-step-heading"><span>6</span>查看費用明細與總額</div>
           <aside class="calc-date-status" id="calcDateStatus" aria-live="polite" aria-atomic="true"></aside>
           <div class="calc-notice" id="calcNotice" role="status" aria-live="polite"></div>
           <div class="price-calculator-result" aria-live="polite">
-            <div class="calc-breakdown"><h4>計算明細（按順序）</h4><ol id="calcBreakdown"></ol></div>
+            <details class="calc-breakdown"><summary>查看計算明細（按順序）</summary><ol id="calcBreakdown"></ol></details>
             <p class="calc-total"><span>預估費用</span><strong id="calcTotal">—</strong></p>
           </div>
         </section>
@@ -250,40 +244,62 @@
         <aside class="room-map-detail" id="roomMapDetail" aria-live="polite"><small>點一個房號</small><strong>查看放大的房號與貓咪名字</strong><span>空房只會顯示房號。</span></aside>
       </section>
 
-      <section id="catinfo" data-view-panel="catinfo" data-search-section="貓咪資訊 名字 個性 餵食 中飯 午飯 晚飯 身體狀況 備註 普羅 漿果 小七 小八 帥哥 黑黑 Bear 奶糖">
+      <section id="catinfo" data-view-panel="catinfo" data-search-section="貓咪資訊 名字 個性 餵食 中飯 午飯 晚飯 身體狀況 備註 普羅 漿果 小七 小八 帥哥 黑黑 Bear 奶糖 千杯 不醉 不歸 koroke 乾乾">
         <div class="section-head"><span>貓咪</span><div><h2>貓咪資訊</h2><p>依名字查個別照護；「合計／分開計」沿用交代方式</p></div></div>
-        <div class="cat-info-search"><label for="catInfoSearch">搜尋貓咪資訊</label><input id="catInfoSearch" type="search" placeholder="輸入名字、食物或備註" autocomplete="off"><span id="catInfoCount" aria-live="polite">共 7 隻貓咪</span></div>
+        <details class="cat-info-directory" id="catInfoDirectory">
+          <summary><span><strong>貓咪目錄</strong><small>點開搜尋或查看各貓咪資料</small></span><b>11 隻</b></summary>
+          <nav class="cat-info-index" aria-label="貓咪資料快速索引">
+            <a href="#cat-pro" data-cat-jump>普羅</a><a href="#cat-berry" data-cat-jump>漿果</a><a href="#cat-seven" data-cat-jump>小七</a><a href="#cat-eight" data-cat-jump>小八</a><a href="#cat-shuai" data-cat-jump>帥哥</a><a href="#cat-bear" data-cat-jump>黑黑／Bear</a><a href="#cat-milk" data-cat-jump>奶糖</a><a href="#cat-qianbei" data-cat-jump>千杯</a><a href="#cat-buzui" data-cat-jump>不醉</a><a href="#cat-bugui" data-cat-jump>不歸</a><a href="#cat-koroke" data-cat-jump>koroke</a>
+          </nav>
+        <div class="cat-info-search"><label for="catInfoSearch">搜尋貓咪資訊</label><input id="catInfoSearch" type="search" placeholder="輸入名字、食物或備註" autocomplete="off"><span id="catInfoCount" aria-live="polite">共 11 隻貓咪</span></div>
         <p class="cat-info-empty" id="catInfoEmpty" hidden>找不到符合的貓咪，試試其他名字或關鍵字。</p>
         <div class="cat-info-grid" id="catInfoGrid">
-          <article class="cat-info-card" data-cat-card>
+          <article class="cat-info-card" id="cat-pro" data-cat-card>
             <header><div class="cat-info-photo" role="img" aria-label="普羅照片尚未提供"><span>待補照片</span></div><div class="cat-info-title"><h3>普羅</h3><span class="cat-info-badge">合計</span></div></header>
-            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd>尚未提供</dd></div><div><dt>晚飯</dt><dd>尚未提供</dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>濕食、凍乾都先暫停。活動時拉開自家房門，讓牠能回房上廁所。</dd></div></dl>
+            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>尚未提供</span><span><b>調整後</b>尚未提供</span></dd></div><div><dt>晚飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>尚未提供</span><span><b>調整後</b>尚未提供</span></dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>濕食、凍乾都先暫停。活動時拉開自家房門，讓牠能回房上廁所。</dd></div></dl>
           </article>
-          <article class="cat-info-card" data-cat-card>
+          <article class="cat-info-card" id="cat-berry" data-cat-card>
             <header><div class="cat-info-photo" role="img" aria-label="漿果照片尚未提供"><span>待補照片</span></div><div class="cat-info-title"><h3>漿果</h3><span class="cat-info-badge">合計</span></div></header>
-            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd>尚未提供</dd></div><div><dt>晚飯</dt><dd>尚未提供</dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>目前暫停濕食。活動時拉開自家房門，讓牠能回房上廁所。</dd></div></dl>
+            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>尚未提供</span><span><b>調整後</b>尚未提供</span></dd></div><div><dt>晚飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>尚未提供</span><span><b>調整後</b>尚未提供</span></dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>目前暫停濕食。活動時拉開自家房門，讓牠能回房上廁所。</dd></div></dl>
           </article>
-          <article class="cat-info-card" data-cat-card>
+          <article class="cat-info-card" id="cat-seven" data-cat-card>
             <header><div class="cat-info-photo" role="img" aria-label="小七照片尚未提供"><span>待補照片</span></div><div class="cat-info-title"><h3>小七</h3><span class="cat-info-badge">分開計</span></div></header>
-            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd>乾糧 25 g</dd></div><div><dt>晚飯</dt><dd>乾糧 48 g</dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>濕食＋5 顆凍乾；肉泥與水拌勻，水碗放最下層。</dd></div></dl>
+            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>乾糧 25 g</span><span><b>調整後</b>尚未提供</span></dd></div><div><dt>晚飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>乾糧 48 g</span><span><b>調整後</b>尚未提供</span></dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>乾乾用大顆乾乾並加凍乾；原有餵食提醒：濕食＋5 顆凍乾、肉泥與水拌勻，水碗放最下層。與小八共用一個大碗（黑碗／藍白碗）。</dd></div></dl>
           </article>
-          <article class="cat-info-card" data-cat-card>
+          <article class="cat-info-card" id="cat-eight" data-cat-card>
             <header><div class="cat-info-photo" role="img" aria-label="小八照片尚未提供"><span>待補照片</span></div><div class="cat-info-title"><h3>小八</h3><span class="cat-info-badge">分開計</span></div></header>
-            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd>乾糧 20 g</dd></div><div><dt>晚飯</dt><dd>乾糧 37 g</dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>肉泥與水拌勻；水碗放最下層。</dd></div></dl>
+            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>乾糧 20 g</span><span><b>調整後</b>尚未提供</span></dd></div><div><dt>晚飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>乾糧 37 g</span><span><b>調整後</b>尚未提供</span></dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>早上要吃藥；乾乾用小顆乾乾。與小七共用一個大碗（黑碗／藍白碗）。肉泥與水拌勻，水碗放最下層。</dd></div></dl>
           </article>
-          <article class="cat-info-card" data-cat-card>
+          <article class="cat-info-card" id="cat-shuai" data-cat-card>
             <header><div class="cat-info-photo" role="img" aria-label="帥哥照片尚未提供"><span>待補照片</span></div><div class="cat-info-title"><h3>帥哥</h3><span class="cat-info-badge">個別照護</span></div></header>
-            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd>尚未提供</dd></div><div><dt>晚飯</dt><dd>尚未提供</dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>使用高腳食物碗；近期都吃罐頭。</dd></div></dl>
+            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>尚未提供</span><span><b>調整後</b>尚未提供</span></dd></div><div><dt>晚飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>尚未提供</span><span><b>調整後</b>尚未提供</span></dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>使用高腳食物碗；近期都吃罐頭。</dd></div></dl>
           </article>
-          <article class="cat-info-card" data-cat-card>
+          <article class="cat-info-card" id="cat-bear" data-cat-card>
             <header><div class="cat-info-photo" role="img" aria-label="黑黑與 Bear 照片尚未提供"><span>待補照片</span></div><div class="cat-info-title"><h3>黑黑／Bear</h3><span class="cat-info-badge">合計</span></div></header>
-            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd>尚未提供</dd></div><div><dt>晚飯</dt><dd>尚未提供</dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>肉與水合計 120 g；黑黑與 Bear 的肉碗分開擺放，不要放在一起。</dd></div></dl>
+            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>尚未提供</span><span><b>調整後</b>尚未提供</span></dd></div><div><dt>晚飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>尚未提供</span><span><b>調整後</b>尚未提供</span></dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>肉與水合計 120 g；黑黑與 Bear 的肉碗分開擺放，不要放在一起。比較不愛吃乾糧，會被 Hei Hei 搶食；身體可以觸摸，玩耍時可能會輕輕含咬人的手。</dd></div></dl>
           </article>
-          <article class="cat-info-card" data-cat-card>
+          <article class="cat-info-card" id="cat-milk" data-cat-card>
             <header><div class="cat-info-photo" role="img" aria-label="奶糖照片尚未提供"><span>待補照片</span></div><div class="cat-info-title"><h3>奶糖</h3><span class="cat-info-badge">個別照護</span></div></header>
-            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd>尚未提供</dd></div><div><dt>晚飯</dt><dd>尚未提供</dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>不可和其他貓一起活動；放風需單獨安排。</dd></div></dl>
+            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>尚未提供</span><span><b>調整後</b>尚未提供</span></dd></div><div><dt>晚飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>尚未提供</span><span><b>調整後</b>尚未提供</span></dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>不可和其他貓一起活動；放風需單獨安排。</dd></div></dl>
+          </article>
+          <article class="cat-info-card" id="cat-qianbei" data-cat-card>
+            <header><div class="cat-info-photo" role="img" aria-label="千杯照片尚未提供"><span>待補照片</span></div><div class="cat-info-title"><h3>千杯</h3><span class="cat-info-badge">資料待補</span></div></header>
+            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>尚未提供</span><span><b>調整後</b>尚未提供</span></dd></div><div><dt>晚飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>尚未提供</span><span><b>調整後</b>尚未提供</span></dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>吃完飯後，飯碗要收起來。喜歡綠色、咖啡色包裝的罐頭；不吃含番茄的罐頭。</dd></div></dl>
+          </article>
+          <article class="cat-info-card" id="cat-buzui" data-cat-card>
+            <header><div class="cat-info-photo" role="img" aria-label="不醉照片尚未提供"><span>待補照片</span></div><div class="cat-info-title"><h3>不醉</h3><span class="cat-info-badge">資料待補</span></div></header>
+            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>尚未提供</span><span><b>調整後</b>尚未提供</span></dd></div><div><dt>晚飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>尚未提供</span><span><b>調整後</b>尚未提供</span></dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>吃完飯後，飯碗要收起來。喜歡綠色、咖啡色包裝的罐頭；不吃含番茄的罐頭。</dd></div></dl>
+          </article>
+          <article class="cat-info-card" id="cat-bugui" data-cat-card>
+            <header><div class="cat-info-photo" role="img" aria-label="不歸照片尚未提供"><span>待補照片</span></div><div class="cat-info-title"><h3>不歸</h3><span class="cat-info-badge">資料待補</span></div></header>
+            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>尚未提供</span><span><b>調整後</b>尚未提供</span></dd></div><div><dt>晚飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>尚未提供</span><span><b>調整後</b>尚未提供</span></dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>吃完飯後，飯碗要收起來。喜歡綠色、咖啡色包裝的罐頭；不吃含番茄的罐頭。</dd></div></dl>
+          </article>
+          <article class="cat-info-card" id="cat-koroke" data-cat-card>
+            <header><div class="cat-info-photo" role="img" aria-label="koroke 照片尚未提供"><span>待補照片</span></div><div class="cat-info-title"><h3>koroke</h3><span class="cat-info-badge">資料待補</span></div></header>
+            <dl><div><dt>個性</dt><dd>尚未提供</dd></div><div><dt>中飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>乾乾 35 g；加水量未提供；添加／營養品：無</span><span><b>調整後</b>未提供</span></dd></div><div><dt>晚飯</dt><dd class="cat-meal-columns"><span><b>系統訂</b>乾乾 35 g；加水量未提供；添加／營養品：無</span><span><b>調整後</b>未提供</span></dd></div><div><dt>身體狀況</dt><dd>尚未提供</dd></div><div><dt>備註</dt><dd>圖片中的加水量欄位空白，尚待確認；不代表加水量為 0。</dd></div></dl>
           </article>
         </div>
+        </details>
       </section>
 
       <section id="quiz" data-view-panel="quiz" data-search-section="抽考 測驗 背誦 題庫 房型 時間 健康 照顧 取消 優惠 春節 SOP 接待 清潔 入住 退房 參觀">
@@ -432,6 +448,6 @@
     <button type="button" data-view="faq"><span class="mobile-nav-icon">Q</span><span class="mobile-nav-label">話術</span></button>
     <button type="button" data-view="quiz"><span class="mobile-nav-icon">?</span><span class="mobile-nav-label">複習</span></button>
   </nav>
-  <script src="data.js?v=20261014-catinfo-search1"></script><script src="app.js?v=20261014-catinfo-search1"></script>
+  <script src="data.js?v=20261015-feed-notes1"></script><script src="app.js?v=20261015-price-flow1"></script>
 </body>
 </html>
