@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261015-price-flow1">
+  <link rel="stylesheet" href="styles.css?v=20261015-calc-firstuse2">
 </head>
 <body>
   <svg class="icon-sprite" aria-hidden="true">
@@ -116,33 +116,27 @@
 
       <section id="prices" data-view-panel="prices" data-search-section="價格 房價 經典 陽光 太空 豪華 加貓 多間房 安親 提早入住 延後退房 連假 春節 訂金 優惠 取消 代購 就醫 車馬費">
         <div class="section-head"><div><h2>價格</h2></div></div>
-        <aside class="price-holiday-map" aria-label="連假日期與時段加價圖解">
-          <strong>連假日期與加價，一張圖看懂</strong>
-          <ol class="price-holiday-timeline">
-            <li><span class="holiday-map-mark">起</span><div><b>假日前一天就起算</b><small>例如 10/7、10/23<br>當天開始算連假價</small></div></li>
-            <li><span class="holiday-map-mark">早</span><div><b>連假第 1 天提早入住</b><small>夥伴核准後<br>加收 1 晚房費</small></div></li>
-            <li><span class="holiday-map-mark">延</span><div><b>連假最後一天延後退房</b><small>夥伴核准後<br>加收 1 晚房費</small></div></li>
-          </ol>
-        </aside>
-
-        <h3 class="price-subheading">① 房價總表｜一般日 vs 春節</h3>
-        <p class="price-compare-intro">看同一房型的每晚價格與加貓費；春節連續假日及前一日（2027/2/2–2/10）按春節價。</p>
-        <div class="price-table-scroll" role="region" aria-label="一般日與春節房價總表" tabindex="0"><table class="price-comparison-table"><thead><tr><th scope="col">房型／入住上限</th><th scope="col">一般日<br>每間每晚</th><th scope="col">春節檔期<br>每間每晚</th></tr></thead><tbody id="priceRoomGrid"></tbody></table></div>
+        <details class="price-policy-drawer price-rate-drawer" id="priceRateTable">
+          <summary>① 房價總表｜一般日 vs 春節</summary>
+          <div class="price-rate-content">
+            <p class="price-compare-intro">看同一房型的每晚價格與加貓費；春節連續假日及前一日（2027/2/2–2/10）按春節價。</p>
+            <div class="price-table-scroll" role="region" aria-label="一般日與春節房價總表" tabindex="0"><table class="price-comparison-table"><thead><tr><th scope="col">房型／入住上限</th><th scope="col">一般日<br>每間每晚</th><th scope="col">春節檔期<br>每間每晚</th></tr></thead><tbody id="priceRoomGrid"></tbody></table></div>
+          </div>
+        </details>
 
         <details class="table-drawer"><summary>多房價格表｜一般日（選看）</summary><div class="tabs" id="priceTabs" role="tablist"></div><div class="table-scroll"><table><thead><tr><th>房間數</th><th>1 隻</th><th>2 隻</th><th>3 隻</th><th>4 隻</th><th>5 隻</th><th>6 隻</th></tr></thead><tbody id="priceBody"></tbody></table></div><p class="fine-print">本表只查一般日多房總價。春節多房由計算器估算，需夥伴覆核。</p></details>
 
-        <h3 class="price-subheading">② 計算步驟</h3>
-        <details class="price-policy-drawer" id="pricePolicyRules" open>
-          <summary>照順序計算｜點開看細節</summary>
+        <details class="price-policy-drawer" id="pricePolicyRules">
+          <summary>② 計算步驟｜按順序閱讀</summary>
           <div class="price-policy-content">
             <ol class="price-rule-list">
-              <li><div class="price-rule-label"><span aria-hidden="true">1</span><h3>先選房型、房間數與貓數</h3></div><div><ul><li>依貓咪數量選房型和房間數；同一筆試算選一種房型，可選多間。不同房型混住請分開試算，再向店家確認。</li></ul></div></li>
-              <li><div class="price-rule-label"><span aria-hidden="true">2</span><h3>選住宿或安親</h3></div><div><ul><li>住宿（過夜）要填入住、退房日期與時間。</li><li>安親（不過夜）是另一種算法：填單日日期、開始與結束時間；不能當成住宿費以外再加一筆。</li><li>連假期間不開放參觀；遇到連假或春節日期，特殊安排先問夥伴，不自行估價。</li></ul></div></li>
-              <li><div class="price-rule-label"><span aria-hidden="true">3</span><h3>算日期與住宿晚數</h3></div><div><ul><li>入住日計入、退房日不計；逐晚判定一般日、連假或春節，再把每晚房價相加。</li><li>檔期定義：國定假日及其前一日按連假價；春節連續假日及其前一日按春節價。例：2026/10/7–10/11、10/23–10/26；12/24–12/27、12/31–2027/1/3；2027/2/2–2/10、2/26–3/1。</li><li>試算範圍：2026/10/12–2027/3/31。春節住宿日期、預約及取消規定收在本步驟下方，可展開查看。</li></ul><details class="spring-inline-rules"><summary>春節規則｜日期、時段、訂金與取消</summary><ul><li>春節住宿日期為 2027/2/3–2/10，共 8 晚；入住至少須住滿其中 5 晚。春節前一日 2/2 也按春節價格計算，價格看上方「房價對照」。</li><li>營業時間 10:00–19:00（除夕 9:00–18:00）；入住 14:00–18:00、退房 10:00–12:00。僅 2/3 可預約提早入住，最早 10:00，按一晚住宿費每小時 10% 計；春節不提供其他提前／延後安親。</li><li>訂房需付住宿費 50% 訂金；確認後 3 日內付款（不含通知當日），入住當天結清尾款，並配合安排入住面談。</li><li>取消：2026/11/30（含）前全退訂金；12/1–12/31 退訂金 50%；2027/1/1 起不退。只可取消，不可延長或縮短日期；不開放參觀或家人探訪。</li><li>春節檔期不適用折扣；春節檔期前後的一般住宿日可依資格計長住／老室友優惠。優先受理住滿整個春節及老室友，仍以空房、店家確認與面談為準。</li></ul><p class="price-rule-source">來源：<a href="https://www.cat-roommate.com/SpringFestival.html" target="_blank" rel="noopener noreferrer">春節官網公告</a>、<a href="https://www.surveycake.com/s/r9X07" target="_blank" rel="noopener noreferrer">春節預約表</a>；日期另參考<a href="https://www.dgpa.gov.tw/information?pid=12983&uid=2" target="_blank" rel="noopener noreferrer">2027 行事曆</a>。</p><div class="calc-spring-actions"><span>試算器會依日期自動切換春節價格：</span><button type="button" data-spring-preset="five">帶入 5 晚範例</button><button type="button" data-spring-preset="full">帶入完整 8 晚</button></div></details></div></li>
-              <li><div class="price-rule-label"><span aria-hidden="true">4</span><h3>算時段費</h3></div><div><ul><li>正常入住 15:00–19:00；正常退房 12:00–14:00。</li><li>一般日提早入住／延後退房須預約：每小時一晚定價 10%；內部 SOP 補充，滿 30 分鐘 5%，未滿 30 分鐘不計。</li><li>連假第一天核准提早入住、最後一天核准延後退房，各加收 1 晚房價。</li><li>超過 19:00 尚未辦理退房，以多住 1 日計；營業時間外安排須問夥伴。</li></ul></div></li>
-              <li><div class="price-rule-label"><span aria-hidden="true">5</span><h3>分開算安親費</h3></div><div><ul><li>公式：房型單晚定價 × 10% × 計費時數；不足 6 小時仍按 6 小時計。</li><li>安親只適用一般日並須先預約；連假期間不提供安親。</li></ul></div></li>
-              <li><div class="price-rule-label"><span aria-hidden="true">6</span><h3>確認住宿優惠</h3></div><div><ul><li>長住：連續 10 晚 8 折、20 晚 75 折、30 晚 7 折；連假含前一天不適用。</li><li>老室友：累計住滿 10 晚取得 1 年資格；官網房型價格頁寫一般日 8 折、連假 9 折，春節不適用，且不可與其他優惠合併。</li><li>住宿須知另寫連假期間不適用任何住宿優惠，與房型價格頁對老室友連假 9 折的說明衝突；遇連假老室友資格先問夥伴，不自動折價。</li></ul></div></li>
-              <li><div class="price-rule-label"><span aria-hidden="true">7</span><h3>最後加已確認費用</h3></div><div><ul><li>營業時間外接送（12:00 前／19:00 後）原則不接；夥伴核准才可按每小時 +300 元。SOP 未說明是否與一般時段費疊加，不能自行決定。</li><li>代購用品：商品費 + 100 元代購費。</li><li>帶貓就醫：診療／計程車實支費用 + 200 元車馬費。</li><li>頻繁噴尿需特殊清潔：經確認可酌收 2,000 元／間。</li><li>一般住宿訂金為住宿費 30%，是預收款，不是額外加價。</li></ul></div></li>
+              <li><div class="price-rule-label"><span aria-hidden="true">1</span><h3>先選貓咪數量，再選房型與房間數</h3></div><div><ul><li>同一筆試算限同房型，可選多間；不同房型請分開試算，再向店家確認。</li></ul></div></li>
+              <li><div class="price-rule-label"><span aria-hidden="true">2</span><h3>選住宿或安親</h3></div><div><ul><li>住宿：填入住、退房日期與時間。</li><li>安親：填單日與起訖時間，費用另算，不與住宿費併計。</li><li>連假不開放參觀；連假／春節特殊安排先問夥伴，不自行估價。</li></ul></div></li>
+              <li><div class="price-rule-label"><span aria-hidden="true">3</span><h3>算日期與住宿晚數</h3></div><div><ul><li>入住日計費、退房日不計；依每晚日別加總房價。</li><li>連假價＝國定假日及前一天；春節價＝春節連續假日及前一天。</li><li>目前檔期：2026/10/7–11、10/23–26、12/24–27、12/31–2027/1/3；2027/2/2–10、2/26–3/1。</li><li>更早日期可試算；未列入檔期按一般日價。春節細則見下方。</li></ul><details class="spring-inline-rules"><summary>春節規則｜日期、時段、訂金與取消</summary><ul><li>春節住宿日期為 2027/2/3–2/10，共 8 晚；入住至少須住滿其中 5 晚。春節前一日 2/2 也按春節價格計算，價格看上方「房價對照」。</li><li>營業時間 10:00–19:00（除夕 9:00–18:00）；入住 14:00–18:00、退房 10:00–12:00。僅 2/3 可預約提早入住，最早 10:00，按一晚住宿費每小時 10% 計；春節不提供其他提前／延後安親。</li><li>訂房需付住宿費 50% 訂金；確認後 3 日內付款（不含通知當日），入住當天結清尾款，並配合安排入住面談。</li><li>取消：2026/11/30（含）前全退訂金；12/1–12/31 退訂金 50%；2027/1/1 起不退。只可取消，不可延長或縮短日期；不開放參觀或家人探訪。</li><li>春節檔期不適用折扣；春節檔期前後的一般住宿日可依資格計長住／老室友優惠。優先受理住滿整個春節及老室友，仍以空房、店家確認與面談為準。</li></ul><p class="price-rule-source">來源：<a href="https://www.cat-roommate.com/SpringFestival.html" target="_blank" rel="noopener noreferrer">春節官網公告</a>、<a href="https://www.surveycake.com/s/r9X07" target="_blank" rel="noopener noreferrer">春節預約表</a>；日期另參考<a href="https://www.dgpa.gov.tw/information?pid=12983&uid=2" target="_blank" rel="noopener noreferrer">2027 行事曆</a>。</p><div class="calc-spring-actions"><span>試算器會依日期自動切換春節價格：</span><button type="button" data-spring-preset="five">帶入 5 晚範例</button><button type="button" data-spring-preset="full">帶入完整 8 晚</button></div></details></div></li>
+              <li><div class="price-rule-label"><span aria-hidden="true">4</span><h3>算時段費</h3></div><div><ul><li>正常時段：入住 15:00–19:00；退房 12:00–14:00。</li><li>一般日提早入住／延後退房須預約：每小時一晚房價 10%；滿 30 分鐘按 5% 計。</li><li>連假首日提前入住、末日延後退房：核准後各加 1 晚房費。19:00 後未退房按多住 1 日。</li></ul></div></li>
+              <li><div class="price-rule-label"><span aria-hidden="true">5</span><h3>另算安親費</h3></div><div><ul><li>公式：單晚房價 × 10% × 計費時數；最低 6 小時。</li><li>限一般日且須預約；連假／春節不提供。</li></ul></div></li>
+              <li><div class="price-rule-label"><span aria-hidden="true">6</span><h3>套用住宿優惠</h3></div><div><ul><li>長住看整段連續住宿晚數：10 晚 8 折、20 晚 75 折、30 晚 7 折；折在符合資格的一般日住宿晚，連假（含前一天）與春節價住宿晚不折。</li><li>老室友資格滿 10 晚取得、效期 1 年；房價頁列一般日 8 折、連假 9 折、春節不適用，且不與長住合併。連假 9 折與住宿須知文字有差異，試算先依房價頁，正式報價由夥伴確認。</li></ul></div></li>
+              <li><div class="price-rule-label"><span aria-hidden="true">7</span><h3>加已確認費用</h3></div><div><ul><li>營業外接送（12:00 前／19:00 後）原則不接；核准後 +300 元／小時，是否與時段費併計先問。</li><li>代購：商品費 +100 元；就醫：實支費用 +200 元車馬費。</li><li>特殊清潔：確認後 2,000 元／間。一般訂金 30% 為預收款，非額外費用。</li></ul></div></li>
             </ol>
           </div>
         </details>
@@ -153,35 +147,38 @@
           <header class="price-calculator-head"><h3 id="priceCalculatorTitle">③ 價格計算機</h3></header>
           <div class="price-calculator-fields">
             <section class="calc-field-group calc-step-choice">
-              <h4><span>1</span>先選貓咪數量，再選房型與房間數</h4>
+              <h4><span>1</span>選貓咪和房間</h4>
               <div class="calc-field-grid">
-                <label class="calc-cats-field">入住貓咪數量<select id="calcCats"></select></label>
+                <label class="calc-cats-field">幾隻貓？<select id="calcCats"></select></label>
                 <label>房型<select id="calcRoom"></select></label>
-                <label>房間數<select id="calcRoomCount"></select></label>
+                <label>要幾間房？<select id="calcRoomCount"></select></label>
               </div>
+              <p class="calc-choice-hint" id="calcChoiceHint" aria-live="polite"></p>
             </section>
             <section class="calc-field-group calc-step-mode">
-              <h4><span>2</span>再選計算方式</h4>
+              <h4><span>2</span>選服務</h4>
               <div class="calc-field-grid">
                 <label>服務方式<select id="calcMethod"><option value="stay">住宿（過夜）</option><option value="daycare">安親（不過夜）</option></select></label>
               </div>
+              <p class="calc-field-hint">住宿要填入住與退房；安親是當日接送，請填單日和起訖時間，兩種費用分開計算。</p>
             </section>
             <section class="calc-field-group calc-step-dates calc-stay-only">
-              <h4><span>3</span>依序選入住、退房日期與時間</h4>
+              <h4><span>3</span>選入住和退房日期、時間</h4>
               <div class="calc-stay-date-grid">
                 <fieldset class="calc-date-pair"><legend>入住</legend>
-                  <label>入住日期<input id="calcCheckinDate" type="date" min="2026-10-12" max="2027-03-31" value="2026-10-12"></label>
+                  <label>入住日期<input id="calcCheckinDate" type="date" max="2027-03-30" value="2026-10-12"></label>
                   <label>入住時間<input id="calcCheckinTime" type="time" step="1800" value="15:00"></label>
                 </fieldset>
                 <fieldset class="calc-date-pair"><legend>退房</legend>
-                  <label>退房日期<input id="calcCheckoutDate" type="date" min="2026-10-13" max="2027-03-31" value="2026-10-13"></label>
+                  <label>退房日期<input id="calcCheckoutDate" type="date" max="2027-03-31" value="2026-10-13"></label>
                   <label>退房時間<input id="calcCheckoutTime" type="time" step="1800" value="12:00"></label>
                 </fieldset>
               </div>
+              <p class="calc-field-hint">入住日計入房費，退房日不計住宿晚數。系統會依日期判斷連假、春節與長住優惠。</p>
             </section>
             <section class="calc-field-group calc-step-daycare calc-daycare-only" hidden>
-              <h4><span>3</span>選安親日期</h4>
-              <label>安親日期<input id="calcDaycareDate" type="date" min="2026-10-12" max="2027-03-31" value="2026-10-12"></label>
+              <h4><span>3</span>選安親日期和時間</h4>
+              <label>安親日期<input id="calcDaycareDate" type="date" max="2027-03-31" value="2026-10-12"></label>
             </section>
             <section class="calc-field-group calc-step-daycare-time calc-daycare-only" hidden>
               <h4><span>4</span>選安親時段，計算時數</h4>
@@ -191,11 +188,12 @@
               </div>
             </section>
             <section class="calc-field-group calc-step-discount calc-stay-only">
-              <h4><span>4</span>確認住宿優惠資格</h4>
+              <h4><span>4</span>確認老室友優惠資格</h4>
               <label class="calc-eligibility"><input id="calcOldRoommate" type="checkbox"><span>已確認有老室友優惠資格</span></label>
+              <p class="calc-field-hint">連假、春節和長住優惠由系統按入住日期自動判斷，不用手動勾選。</p>
             </section>
             <section class="calc-field-group calc-step-addons">
-              <h4><span>5</span>勾選已確認的額外費用</h4>
+              <h4><span>5</span>加上已確認的額外費用</h4>
               <div class="calc-addon-list">
                 <label><input id="calcAddPurchase" type="checkbox"><span>代購服務費 <b>+100 元</b><small>商品費另計</small></span></label>
                 <label><input id="calcAddVetTrip" type="checkbox"><span>就醫車馬費 <b>+200 元</b><small>診療與交通實支另計</small></span></label>
@@ -204,14 +202,29 @@
               </div>
             </section>
           </div>
-          <div class="calc-result-step-heading"><span>6</span>查看費用明細與總額</div>
-          <aside class="calc-date-status" id="calcDateStatus" aria-live="polite" aria-atomic="true"></aside>
-          <div class="calc-notice" id="calcNotice" role="status" aria-live="polite"></div>
-          <div class="price-calculator-result" aria-live="polite">
-            <details class="calc-breakdown"><summary>查看計算明細（按順序）</summary><ol id="calcBreakdown"></ol></details>
-            <p class="calc-total"><span>預估費用</span><strong id="calcTotal">—</strong></p>
-          </div>
+          <div class="calc-confirm-row"><button class="calc-confirm-button" id="calcConfirm" type="button" aria-controls="calcResults">確定計算</button><span id="calcConfirmHint">按下後才會開始試算</span></div>
+          <p class="calc-pending-message" id="calcPendingMessage" role="status" aria-live="polite">條件已準備好；按「確定計算」查看實際房價、長住折扣與總額。</p>
+          <section id="calcResults" hidden aria-label="試算結果">
+            <div class="calc-result-step-heading"><span>6</span>計算結果</div>
+            <aside class="calc-date-status" id="calcDateStatus" aria-live="polite" aria-atomic="true"></aside>
+            <div class="calc-notice" id="calcNotice" role="status" aria-live="polite"></div>
+            <details class="calc-sum-details"><summary>查看費用如何加總</summary><section class="calc-daily-summary" id="calcDailySummary" aria-live="polite" aria-label="費用明細"></section><p class="calc-total-equation" id="calcTotalEquation" aria-live="polite"></p></details>
+            <details class="calc-breakdown"><summary>查看完整計算步驟</summary><ol id="calcBreakdown"></ol></details>
+            <div class="calc-result-hero" aria-live="polite"><span>優惠判定後總價</span><strong id="calcTotal">—</strong><small id="calcStaySummary"></small></div>
+          </section>
         </section>
+        <details class="price-holiday-drawer">
+          <summary>連假優惠｜展開查看</summary>
+          <aside class="price-holiday-map" aria-label="連假日期與時段加價圖解">
+            <strong>假日前一天、提早入住與延後退房</strong>
+            <p class="price-holiday-dates"><b>計算機自動判定：</b>連假 2026/10/7–11、10/23–26、12/24–27、12/31–2027/1/3、2027/2/26–3/1；春節價 2027/2/2–10。</p>
+            <ol class="price-holiday-timeline">
+              <li><span class="holiday-map-mark">起</span><div><b>假日前一天就起算</b><small>例如 10/7、10/23<br>當天開始算連假價</small></div></li>
+              <li><span class="holiday-map-mark">早</span><div><b>連假第 1 天提早入住</b><small>夥伴核准後<br>加收 1 晚房費</small></div></li>
+              <li><span class="holiday-map-mark">延</span><div><b>連假最後一天延後退房</b><small>夥伴核准後<br>加收 1 晚房費</small></div></li>
+            </ol>
+          </aside>
+        </details>
       </section>
 
       <section id="roommap" data-view-panel="roommap" data-search-section="房號 房間 位置 地圖 100 101 102 103 104 105 106 107 108 201 202 203 204 205 206 207 208 209 210 211 212 213 214 301 302 303 304 305 306 501 502">
@@ -448,6 +461,6 @@
     <button type="button" data-view="faq"><span class="mobile-nav-icon">Q</span><span class="mobile-nav-label">話術</span></button>
     <button type="button" data-view="quiz"><span class="mobile-nav-icon">?</span><span class="mobile-nav-label">複習</span></button>
   </nav>
-  <script src="data.js?v=20261015-feed-notes1"></script><script src="app.js?v=20261015-price-flow1"></script>
+  <script src="data.js?v=20261015-feed-notes1"></script><script src="app.js?v=20261015-calc-firstuse2"></script>
 </body>
 </html>
