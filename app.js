@@ -47,6 +47,9 @@ const calcDaycareDate = document.querySelector('#calcDaycareDate');
 const calcDaycareStart = document.querySelector('#calcDaycareStart');
 const calcDaycareEnd = document.querySelector('#calcDaycareEnd');
 const calcOldRoommate = document.querySelector('#calcOldRoommate');
+const calcOutOfHoursField = document.querySelector('#calcOutOfHoursField');
+const calcOutOfHoursSummary = document.querySelector('#calcOutOfHoursSummary');
+const calcOutOfHoursDecision = document.querySelector('#calcOutOfHoursDecision');
 const calcNotice = document.querySelector('#calcNotice');
 const calcDateStatus = document.querySelector('#calcDateStatus');
 const calcBreakdown = document.querySelector('#calcBreakdown');
@@ -58,6 +61,7 @@ const calcConfirmHint = document.querySelector('#calcConfirmHint');
 const calcResults = document.querySelector('#calcResults');
 const calcPendingMessage = document.querySelector('#calcPendingMessage');
 const calcStaySummary = document.querySelector('#calcStaySummary');
+const calcTotalLabel = document.querySelector('#calcTotalLabel');
 const currency = value => `${formatPrice(Math.round(value))} 元`;
 calcRoom.innerHTML = data.rooms.map(room => `<option value="${room.id}">${room.name}</option>`).join('');
 const holidayRanges = [['2026-10-07','2026-10-11'],['2026-10-23','2026-10-26'],['2026-12-24','2026-12-27'],['2026-12-31','2027-01-03'],['2027-02-02','2027-02-10'],['2027-02-26','2027-03-01']];
@@ -74,6 +78,39 @@ const isHolidayFirstDay = date => holidayRanges.some(([start]) => date === start
 const isHolidayLastDay = date => holidayRanges.some(([,end]) => date === end);
 const category = date => isSpring(date) ? '春節' : isHoliday(date) ? '連假' : '一般日';
 const categoryName = type => type === '一般日' ? '非連續假期（一般日）' : type === '連假' ? '連續假期' : '春節特別價';
+const minutesOfDay = time => Number(time.slice(0, 2)) * 60 + Number(time.slice(3));
+function getOutOfHoursInfo(stayMode = calcMethod.value === 'stay') {
+  const events = stayMode
+    ? [
+        { date: calcCheckinDate.value, time: calcCheckinTime.value, label: '入住' },
+        { date: calcCheckoutDate.value, time: calcCheckoutTime.value, label: '退房' }
+      ]
+    : [
+        { date: calcDaycareDate.value, time: calcDaycareStart.value, label: '安親送達' },
+        { date: calcDaycareDate.value, time: calcDaycareEnd.value, label: '安親接回' }
+      ];
+  const outside = [];
+  for (const event of events) {
+    if (!event.date || !event.time) continue;
+    // 19:00 後仍未完成退房依規定計多住一晚，不重複加營業外接送費。
+    if (stayMode && event.label === '退房' && event.time > '19:00') continue;
+    // 春節期間營業時間為 10:00–19:00；一般日為 12:00–19:00。
+    const opening = event.date >= springStart && event.date <= springEnd ? 10 * 60 : 12 * 60;
+    const minute = minutesOfDay(event.time);
+    const extraMinutes = minute < opening ? opening - minute : minute > 19 * 60 ? minute - 19 * 60 : 0;
+    if (extraMinutes > 0) outside.push({ ...event, minutes: extraMinutes });
+  }
+  const minutes = outside.reduce((sum, event) => sum + event.minutes, 0);
+  return { events: outside, minutes, hours: minutes / 60 };
+}
+function refreshOutOfHoursPreview() {
+  if (!calcOutOfHoursField) return;
+  const info = getOutOfHoursInfo();
+  calcOutOfHoursField.hidden = info.minutes === 0;
+  if (!info.minutes) return;
+  const breakdown = info.events.map(event => `${event.label} ${event.time}（${(event.minutes / 60).toLocaleString('zh-TW')} 小時）`).join('、');
+  calcOutOfHoursSummary.textContent = `系統依時間判定：${breakdown}；共 ${(info.minutes / 60).toLocaleString('zh-TW')} 小時，參考費 ${currency(300 * info.hours)}。原則不接，核准後才收；未核准前不加進總價。未滿 1 小時按實際時間比例估算，正式收費請夥伴確認。`;
+}
 function setDateStatus(title, badge, rows, tone = 'regular') {
   calcDateStatus.className = `calc-date-status is-${tone}`;
   calcDateStatus.innerHTML = `<div class="calc-date-status-head"><b>系統判定</b><strong>${title}</strong><span>${badge}</span></div><ul>${rows.map(row => `<li>${row}</li>`).join('')}</ul>`;
@@ -155,6 +192,7 @@ function fillRoomAndCatOptions() {
 function updatePriceEstimate() {
   calcDateStatus.innerHTML = '';
   calcNotice.textContent = '';
+  calcTotalLabel.textContent = '優惠判定後總價';
   calcBreakdown.innerHTML = '';
   calcStaySummary.textContent = '';
   calcTotal.textContent = '—';
@@ -278,9 +316,9 @@ function updatePriceEstimate() {
     const extraNightRate = perNight(room, cats, checkout, roomCount);
     const holidayCheckin = isHolidayFirstDay(start);
     steps.push(`步驟 4｜時段：入住 ${checkinTime}；退房 ${checkoutTime}。正常時段入住 15:00–19:00、退房 12:00–14:00。`);
-    if (checkinTime > '19:00') notes.push('入住晚於 19:00，超出一般入住時段；請先問夥伴，不以本工具自動報價。');
-    if (checkinTime < '12:00') notes.push('入住早於 12:00，屬營業時間外安排；請先問夥伴，本工具未估營業外費用。');
-    if (checkoutTime < '12:00' && !springCheckout) notes.push('退房早於 12:00，屬營業時間外安排；請先問夥伴，本工具未估營業外費用。');
+    if (checkinTime > '19:00') notes.push('入住晚於 19:00，屬營業時間外安排；營業外費另依下方自動判定，須先取得夥伴核准。');
+    if (checkinTime < '12:00') notes.push('入住早於 12:00，屬營業時間外安排；營業外費另依下方自動判定，須先取得夥伴核准。');
+    if (checkoutTime < '12:00' && !springCheckout) notes.push('退房早於 12:00，屬營業時間外安排；營業外費另依下方自動判定，須先取得夥伴核准。');
     const normalCheckinTime = springCheckin ? '14:00' : '15:00';
     if (checkinTime < normalCheckinTime) {
       if (springCheckin) {
@@ -296,11 +334,13 @@ function updatePriceEstimate() {
         specialTimeFee += startRate.total;
         steps.push(`連假時段提前入住（須夥伴核准）：加 1 晚 ${currency(startRate.total)}。`);
       } else {
-        const halfHours = Math.floor((15*60 - (Number(checkinTime.slice(0,2))*60 + Number(checkinTime.slice(3)))) / 30);
+        // 營業外的 12:00 前時數另依 +300 元規則處理；10% 安親費從 12:00 才開始。
+        const billableEarlyStart = Math.max(minutesOfDay(checkinTime), 12 * 60);
+        const halfHours = Math.floor((15 * 60 - billableEarlyStart) / 30);
         const fee = startRate.total * .05 * halfHours;
         timeAdjust += fee;
         daycareFee += fee;
-        steps.push(`一般日提早 ${halfHours/2} 小時：${currency(startRate.total)} × 5% × ${halfHours} 個半小時 = ${currency(fee)}。`);
+        if (halfHours > 0) steps.push(`一般日營業時間內提早入住：12:00 起算至 15:00，共 ${halfHours / 2} 小時；${currency(startRate.total)} × 5% × ${halfHours} 個半小時 = ${currency(fee)}。`);
       }
     }
     if (checkoutTime > '14:00') {
@@ -389,8 +429,22 @@ function updatePriceEstimate() {
   const addOns = [];
   if (document.querySelector('#calcAddPurchase')?.checked) addOns.push(['代購服務費', 100]);
   if (document.querySelector('#calcAddVetTrip')?.checked) addOns.push(['就醫車馬費', 200]);
-  const approvedOutOfHours = Math.min(24, Math.max(0, Number(document.querySelector('#calcOutOfHours')?.value) || 0));
-  if (approvedOutOfHours > 0) addOns.push([`已核准營業外安排 ${approvedOutOfHours} 小時`, 300 * approvedOutOfHours]);
+  const outOfHours = getOutOfHoursInfo(stayMode);
+  const outOfHoursAmount = 300 * outOfHours.hours;
+  const outOfHoursDecision = calcOutOfHoursDecision?.value || 'pending';
+  let pendingOutOfHoursFee = false;
+  if (outOfHours.hours > 0) {
+    const hoursLabel = Number(outOfHours.hours.toFixed(2)).toLocaleString('zh-TW');
+    if (outOfHoursDecision === 'add') {
+      addOns.push([`已核准營業外接送（${hoursLabel} 小時 × 300 元）`, outOfHoursAmount]);
+      steps.push(`營業外接送：${hoursLabel} 小時 × 300 元 = ${currency(outOfHoursAmount)}（夥伴已核准承接）。`);
+    } else {
+      pendingOutOfHoursFee = true;
+      notes.push(`營業外接送由系統依時段判定共 ${hoursLabel} 小時，參考費 ${currency(outOfHoursAmount)}；原則不接，尚未核准承接，暫不納入總價。`);
+      steps.push(`營業外接送：系統判定 ${hoursLabel} 小時 × 300 元 = 參考 ${currency(outOfHoursAmount)}；尚未核准承接，暫不納入總價。`);
+    }
+  }
+  if (notes.length) calcNotice.textContent = notes.join(' ');
   const cleaningInput = document.querySelector('#calcAddCleaning');
   const cleaningRoomsInput = document.querySelector('#calcCleaningRooms');
   if (cleaningRoomsInput) { cleaningRoomsInput.max = String(roomCount); cleaningRoomsInput.hidden = !cleaningInput?.checked; }
@@ -406,9 +460,10 @@ function updatePriceEstimate() {
     ? `住宿 ${currency(baseFee)} + 時段費 ${currency(timeFee)} − 折扣 ${currency(discountFee)} + 加價 ${currency(addOnTotal)} = ${currency(Math.max(0, total))}`
     : `安親 ${currency(baseFee)} + 加價 ${currency(addOnTotal)} = ${currency(Math.max(0, total))}`;
   calcTotalEquation.textContent = totalFormula;
-  calcDailySummary.innerHTML = `<h4>${stayMode ? '房價怎麼加總' : '安親費怎麼算'}</h4><ul>${dailyBreakdownMarkup}${stayMode ? `<li><span>安親／特殊時段費</span><b>${currency(timeFee)}</b></li><li><span>優惠折抵</span><b class="calc-deduction">−${currency(discountFee)}</b></li>` : ''}<li><span>已確認額外費用</span><b>${currency(addOnTotal)}</b></li>${springDepositSummary ? `<li class="calc-info-row"><span>春節訂金（預付，非額外費）</span><b>${currency(Math.max(0, baseFee - discountFee) * .5)}</b></li>` : ''}</ul>`;
+  calcDailySummary.innerHTML = `<h4>${stayMode ? '房價怎麼加總' : '安親費怎麼算'}</h4><ul>${dailyBreakdownMarkup}${stayMode ? `<li><span>安親／特殊時段費</span><b>${currency(timeFee)}</b></li><li><span>優惠折抵</span><b class="calc-deduction">−${currency(discountFee)}</b></li>` : ''}${pendingOutOfHoursFee ? `<li class="calc-info-row"><span>營業外接送（待核准／確認，未納入）</span><b>${currency(outOfHoursAmount)}</b></li>` : ''}<li><span>已確認額外費用</span><b>${currency(addOnTotal)}</b></li>${springDepositSummary ? `<li class="calc-info-row"><span>春節訂金（預付，非額外費）</span><b>${currency(Math.max(0, baseFee - discountFee) * .5)}</b></li>` : ''}</ul>`;
   calcBreakdown.innerHTML = steps.map(step => `<li>${step}</li>`).join('');
   calcTotal.textContent = currency(Math.max(0, total));
+  calcTotalLabel.textContent = pendingOutOfHoursFee ? '暫估總價（未含待確認營業外費）' : '優惠判定後總價';
 }
 
 function markPriceEstimatePending() {
@@ -424,10 +479,13 @@ function markPriceEstimatePending() {
 document.querySelectorAll('.price-calculator-fields input, .price-calculator-fields select').forEach(input => {
   input.addEventListener('input', markPriceEstimatePending);
   input.addEventListener('change', () => {
+    if ([calcMethod, calcCheckinDate, calcCheckinTime, calcCheckoutDate, calcCheckoutTime, calcDaycareDate, calcDaycareStart, calcDaycareEnd].includes(input) && calcOutOfHoursDecision) calcOutOfHoursDecision.value = 'pending';
     if ([calcRoom, calcRoomCount, calcCats].includes(input)) fillRoomAndCatOptions();
+    refreshOutOfHoursPreview();
     markPriceEstimatePending();
   });
 });
+refreshOutOfHoursPreview();
 calcConfirm.addEventListener('click', () => {
   calcResults.hidden = false;
   calcPendingMessage.hidden = true;
@@ -444,6 +502,8 @@ document.querySelectorAll('[data-spring-preset]').forEach(button => button.addEv
   calcCheckinTime.value = '14:00';
   calcCheckoutTime.value = '12:00';
   calcCheckoutDate.value = button.dataset.springPreset === 'full' ? springCheckoutEnd : '2027-02-08';
+  if (calcOutOfHoursDecision) calcOutOfHoursDecision.value = 'pending';
+  refreshOutOfHoursPreview();
   markPriceEstimatePending();
 }));
 

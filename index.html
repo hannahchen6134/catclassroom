@@ -136,7 +136,7 @@
               <li><div class="price-rule-label"><span aria-hidden="true">4</span><h3>算時段費</h3></div><div><ul><li>正常時段：入住 15:00–19:00；退房 12:00–14:00。</li><li>一般日提早入住／延後退房須預約：每小時一晚房價 10%；滿 30 分鐘按 5% 計。</li><li>連假首日提前入住、末日延後退房：核准後各加 1 晚房費。19:00 後未退房按多住 1 日。</li></ul></div></li>
               <li><div class="price-rule-label"><span aria-hidden="true">5</span><h3>另算安親費</h3></div><div><ul><li>公式：單晚房價 × 10% × 計費時數；最低 6 小時。</li><li>限一般日且須預約；連假／春節不提供。</li></ul></div></li>
               <li><div class="price-rule-label"><span aria-hidden="true">6</span><h3>套用住宿優惠</h3></div><div><ul><li>長住看整段連續住宿晚數：10 晚 8 折、20 晚 75 折、30 晚 7 折；折在符合資格的一般日住宿晚，連假（含前一天）與春節價住宿晚不折。</li><li>老室友資格滿 10 晚取得、效期 1 年；房價頁列一般日 8 折、連假 9 折、春節不適用，且不與長住合併。連假 9 折與住宿須知文字有差異，試算先依房價頁，正式報價由夥伴確認。</li></ul></div></li>
-              <li><div class="price-rule-label"><span aria-hidden="true">7</span><h3>加已確認費用</h3></div><div><ul><li>營業外接送（12:00 前／19:00 後）原則不接；核准後 +300 元／小時，是否與時段費併計先問。</li><li>代購：商品費 +100 元；就醫：實支費用 +200 元車馬費。</li><li>特殊清潔：確認後 2,000 元／間。一般訂金 30% 為預收款，非額外費用。</li></ul></div></li>
+              <li><div class="price-rule-label"><span aria-hidden="true">7</span><h3>加已確認費用</h3></div><div><ul><li>營業外接送（12:00 前／19:00 後）原則不接；夥伴核准承接後，每小時 +300 元。19:00 後未完成退房依多住 1 晚計算，不另加營業外接送費。</li><li>代購：商品費 +100 元；就醫：實支費用 +200 元車馬費。</li><li>特殊清潔：確認後 2,000 元／間。一般訂金 30% 為預收款，非額外費用。</li></ul></div></li>
             </ol>
           </div>
         </details>
@@ -197,7 +197,16 @@
               <div class="calc-addon-list">
                 <label><input id="calcAddPurchase" type="checkbox"><span>代購服務費 <b>+100 元</b><small>商品費另計</small></span></label>
                 <label><input id="calcAddVetTrip" type="checkbox"><span>就醫車馬費 <b>+200 元</b><small>診療與交通實支另計</small></span></label>
-                <label><input id="calcOutOfHours" type="number" min="0" max="24" step="1" value="0"><span>已核准的營業外時數 <b>每小時 +300 元</b><small>12:00 前／19:00 後；先確認不與時段費重複</small></span></label>
+                <div class="calc-out-of-hours" id="calcOutOfHoursField" hidden>
+                  <b>營業外接送｜每小時 +300 元</b>
+                  <p id="calcOutOfHoursSummary" aria-live="polite">系統會依入住／退房時間自動計算，不必填時數。</p>
+                  <label for="calcOutOfHoursDecision">夥伴是否核准營業外接送
+                    <select id="calcOutOfHoursDecision">
+                      <option value="pending">尚未核准（暫不加進總價）</option>
+                      <option value="add">已核准承接（加計營業外費）</option>
+                    </select>
+                  </label>
+                </div>
                 <label class="calc-stay-only"><input id="calcAddCleaning" type="checkbox"><span>特殊清潔 <b>每間 +2,000 元</b><small>頻繁噴尿且經確認才勾選；填實際需清潔間數</small><input id="calcCleaningRooms" type="number" min="1" max="1" step="1" value="1" aria-label="特殊清潔房間數"></span></label>
               </div>
             </section>
@@ -210,7 +219,7 @@
             <div class="calc-notice" id="calcNotice" role="status" aria-live="polite"></div>
             <details class="calc-sum-details"><summary>查看費用如何加總</summary><section class="calc-daily-summary" id="calcDailySummary" aria-live="polite" aria-label="費用明細"></section><p class="calc-total-equation" id="calcTotalEquation" aria-live="polite"></p></details>
             <details class="calc-breakdown"><summary>查看完整計算步驟</summary><ol id="calcBreakdown"></ol></details>
-            <div class="calc-result-hero" aria-live="polite"><span>優惠判定後總價</span><strong id="calcTotal">—</strong><small id="calcStaySummary"></small></div>
+            <div class="calc-result-hero" aria-live="polite"><span id="calcTotalLabel">優惠判定後總價</span><strong id="calcTotal">—</strong><small id="calcStaySummary"></small></div>
           </section>
         </section>
         <details class="price-holiday-drawer">
