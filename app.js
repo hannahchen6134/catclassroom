@@ -21,6 +21,10 @@ roomGrid.addEventListener('click', (event) => {
 });
 
 const priceRoomGrid = document.querySelector('#priceRoomGrid');
+const priceSection = document.querySelector('#prices');
+const priceCalculator = priceSection?.querySelector('.price-calculator');
+const priceSectionHeading = priceSection?.querySelector('.section-head');
+if (priceCalculator && priceSectionHeading) priceSectionHeading.after(priceCalculator);
 const springRoomPrices = { CLS: 1500, SUN: 1800, SPC: 2400, LUX: 4200 };
 const springRoomExtras = { CLS: '第 2 隻起每隻 +300 元', SUN: '第 2 隻起每隻 +300 元', SPC: '第 3 隻起每隻 +300 元', LUX: '第 3 隻起每隻 +300 元' };
 priceRoomGrid.innerHTML = data.rooms.map((room) => `

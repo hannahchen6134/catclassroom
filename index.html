@@ -115,9 +115,9 @@
       </section>
 
       <section id="prices" data-view-panel="prices" data-search-section="價格 房價 經典 陽光 太空 豪華 加貓 多間房 安親 提早入住 延後退房 連假 春節 訂金 優惠 取消 代購 就醫 車馬費">
-        <div class="section-head"><div><h2>價格</h2></div></div>
+        <div class="section-head"><div><h2>住宿費怎麼算</h2><p>輸入貓數、房型和住宿／安親時間，按「確定計算」；先看優惠與費用判定，再看最下方總價。房價表與完整規則放在下方，需要時再展開。</p></div></div>
         <details class="price-policy-drawer price-rate-drawer" id="priceRateTable">
-          <summary>① 房價總表｜一般日 vs 春節</summary>
+          <summary>房價對照｜一般日 vs 春節</summary>
           <div class="price-rate-content">
             <p class="price-compare-intro">看同一房型的每晚價格與加貓費；春節連續假日及前一日（2027/2/2–2/10）按春節價。</p>
             <div class="price-table-scroll" role="region" aria-label="一般日與春節房價總表" tabindex="0"><table class="price-comparison-table"><thead><tr><th scope="col">房型／入住上限</th><th scope="col">一般日<br>每間每晚</th><th scope="col">春節檔期<br>每間每晚</th></tr></thead><tbody id="priceRoomGrid"></tbody></table></div>
@@ -127,7 +127,7 @@
         <details class="table-drawer"><summary>多房價格表｜一般日（選看）</summary><div class="tabs" id="priceTabs" role="tablist"></div><div class="table-scroll"><table><thead><tr><th>房間數</th><th>1 隻</th><th>2 隻</th><th>3 隻</th><th>4 隻</th><th>5 隻</th><th>6 隻</th></tr></thead><tbody id="priceBody"></tbody></table></div><p class="fine-print">本表只查一般日多房總價。春節多房由計算器估算，需夥伴覆核。</p></details>
 
         <details class="price-policy-drawer" id="pricePolicyRules">
-          <summary>② 計算步驟｜按順序閱讀</summary>
+          <summary>完整計價規則｜展開查看</summary>
           <div class="price-policy-content">
             <ol class="price-rule-list">
               <li><div class="price-rule-label"><span aria-hidden="true">1</span><h3>先選貓咪數量，再選房型與房間數</h3></div><div><ul><li>同一筆試算限同房型，可選多間；不同房型請分開試算，再向店家確認。</li></ul></div></li>
@@ -144,7 +144,7 @@
         <details class="table-drawer"><summary>一般取消退訂比例（選看）</summary><div class="table-scroll"><table class="cancel-table"><thead><tr><th>距離入住日</th><th>退還訂金</th></tr></thead><tbody id="cancelBody"></tbody></table></div><p class="fine-print">連續假期原則上不退訂金，可在 1 年內改期；跨行退款手續費由家長負擔。</p></details>
 
         <section class="price-calculator" aria-labelledby="priceCalculatorTitle">
-          <header class="price-calculator-head"><h3 id="priceCalculatorTitle">③ 價格計算機</h3></header>
+          <header class="price-calculator-head"><h3 id="priceCalculatorTitle">價格計算機</h3></header>
           <div class="price-calculator-fields">
             <section class="calc-field-group calc-step-choice">
               <h4><span>1</span>選貓咪和房間</h4>
@@ -193,7 +193,7 @@
               <p class="calc-field-hint">連假、春節和長住優惠由系統按入住日期自動判斷，不用手動勾選。</p>
             </section>
             <section class="calc-field-group calc-step-addons">
-              <h4><span>5</span>加上已確認的額外費用</h4>
+              <h4><span>5</span>加上已確認的額外費用（沒有就略過）</h4>
               <div class="calc-addon-list">
                 <label><input id="calcAddPurchase" type="checkbox"><span>代購服務費 <b>+100 元</b><small>商品費另計</small></span></label>
                 <label><input id="calcAddVetTrip" type="checkbox"><span>就醫車馬費 <b>+200 元</b><small>診療與交通實支另計</small></span></label>
@@ -462,6 +462,6 @@
     <button type="button" data-view="faq"><span class="mobile-nav-icon">Q</span><span class="mobile-nav-label">話術</span></button>
     <button type="button" data-view="quiz"><span class="mobile-nav-icon">?</span><span class="mobile-nav-label">複習</span></button>
   </nav>
-  <script src="data.js?v=20261015-cat-activity1"></script><script src="app.js?v=20261015-calc-firstuse2"></script>
+  <script src="data.js?v=20261015-cat-activity1"></script><script src="app.js?v=20261015-firsttime-price1"></script>
 </body>
 </html>
