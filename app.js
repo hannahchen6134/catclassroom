@@ -2,6 +2,18 @@ const data = window.CATROOMMATE_DATA;
 const formatPrice = (value) => new Intl.NumberFormat('zh-TW').format(value);
 const roomGrid = document.querySelector('#roomGrid');
 
+document.querySelectorAll('.cat-meal-columns .cat-note-list > li').forEach((item) => {
+  if (!/水/.test(item.textContent)) return;
+  const icon = document.createElement('span');
+  icon.className = 'cat-water-drop';
+  icon.setAttribute('aria-hidden', 'true');
+  icon.textContent = '💧';
+  item.prepend(icon, ' ');
+});
+document.querySelectorAll('.cat-info-card dd.cat-meal-columns').forEach((meal) => {
+  meal.parentElement.classList.add('cat-meal-row');
+});
+
 roomGrid.innerHTML = data.rooms.map((room) => `
   <article class="room-card" data-room="${room.name}">
     <div class="room-photo"><img src="${room.image}" alt="${room.name}官方房型照片" loading="lazy"><span class="room-id">${room.id}</span></div>
@@ -734,18 +746,38 @@ const catInfoCards = [...document.querySelectorAll('[data-cat-card]')];
 const catInfoCount = document.querySelector('#catInfoCount');
 const catInfoEmpty = document.querySelector('#catInfoEmpty');
 const catInfoDirectory = document.querySelector('#catInfoDirectory');
+const catInfoPrompt = document.querySelector('#catInfoPrompt');
+const catInfoGroups = [
+  ['cat-pro', 'cat-berry'],
+  ['cat-seven', 'cat-eight'],
+  ['cat-qianbei', 'cat-buzui', 'cat-bugui']
+];
+const catInfoGroupById = new Map(catInfoGroups.flatMap(group => group.map(id => [id, group])));
+let selectedCatGroup = null;
+const groupForCat = id => catInfoGroupById.get(id) || [id];
 function filterCatInfo() {
   const query = catInfoSearch.value.trim().toLocaleLowerCase().replace(/\s+/g, '');
   if (query) catInfoDirectory.open = true;
+  const visibleIds = new Set();
+  if (query) {
+    catInfoCards.forEach(card => {
+      const searchableText = card.textContent.toLocaleLowerCase().replace(/\s+/g, '');
+      if (searchableText.includes(query)) groupForCat(card.id).forEach(id => visibleIds.add(id));
+    });
+  } else {
+    selectedCatGroup?.forEach(id => visibleIds.add(id));
+  }
   let visibleCount = 0;
   catInfoCards.forEach(card => {
-    const searchableText = card.textContent.toLocaleLowerCase().replace(/\s+/g, '');
-    const matches = !query || searchableText.includes(query);
-    card.hidden = !matches;
-    if (matches) visibleCount += 1;
+    const visible = visibleIds.has(card.id);
+    card.hidden = !visible;
+    if (visible) visibleCount += 1;
   });
-  catInfoCount.textContent = query ? `找到 ${visibleCount} 隻` : `共 ${visibleCount} 隻貓咪`;
-  catInfoEmpty.hidden = visibleCount !== 0;
+  catInfoCount.textContent = query
+    ? `顯示 ${visibleCount} 隻（同組一起顯示）`
+    : selectedCatGroup ? `顯示 ${visibleCount} 隻` : `共 ${catInfoCards.length} 隻，點選查看`;
+  catInfoEmpty.hidden = !query || visibleCount !== 0;
+  if (catInfoPrompt) catInfoPrompt.hidden = Boolean(query || selectedCatGroup);
 }
 catInfoSearch.addEventListener('input', filterCatInfo);
 document.querySelectorAll('[data-cat-jump]').forEach(link => link.addEventListener('click', event => {
@@ -753,10 +785,12 @@ document.querySelectorAll('[data-cat-jump]').forEach(link => link.addEventListen
   const card = document.querySelector(link.getAttribute('href'));
   if (!card) return;
   catInfoDirectory.open = true;
+  selectedCatGroup = groupForCat(card.id);
   catInfoSearch.value = '';
   filterCatInfo();
   requestAnimationFrame(() => card.scrollIntoView({ behavior: 'smooth', block: 'start' }));
 }));
+filterCatInfo();
 
 const mobileQuery=window.matchMedia('(max-width: 699px)');
 const viewButtons=[...document.querySelectorAll('.jump-nav [data-view], .mobile-nav [data-view]')];
